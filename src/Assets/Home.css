@@ -1,0 +1,23 @@
+.container {
+    height: 100vh;
+    width: 100vw;
+}
+
+#logoutButton{
+    margin-top: 1vh;
+    margin-right: 1vw;
+    position:absolute;
+    top:0;
+    right:0;
+}
+
+.homeHeader {
+    height: 7vh;
+    background-color: lightgray;
+    align-items: center;
+}
+
+#homeTitle {
+    margin: 0;
+    text-align: center;
+}
