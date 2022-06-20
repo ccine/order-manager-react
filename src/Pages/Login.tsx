@@ -14,8 +14,8 @@ function Login() {
     event.preventDefault();
 
     let formData = new FormData(event.currentTarget);
-    let username = formData.get("username_input") as string;
-    let password = formData.get("password_input") as string;
+    let username = formData.get("usernameInput") as string;
+    let password = formData.get("passwordInput") as string;
 
     auth.signin(
       username,
@@ -46,32 +46,34 @@ function Login() {
           {/* Login form */}
           <form onSubmit={handleSubmit}>
             {/* Username */}
-            <label htmlFor="username_input">Username</label>
+            <label htmlFor="usernameInput">Username</label>
             <br />
             <input
               type="text"
-              id="username_input"
-              name="username_input"
+              id="usernameInput"
+              name="usernameInput"
               placeholder="Enter your username"
+              autoComplete="username"
               ref={usernameRef}
               required
             />
             <br />
             {/* Password */}
-            <label htmlFor="password_input">Password</label>
+            <label htmlFor="passwordInput">Password</label>
             <br />
             <input
               type="password"
-              id="password_input"
-              name="password_input"
+              id="passwordInput"
+              name="passwordInput"
               placeholder="Enter your password"
+              autoComplete="current-password"
               ref={passwordRef}
               required
             />
             <br />
             <br />
             {/* Submit button */}
-            <button type="submit">Log in</button>
+            <button type="submit" id="submitButton">Log in</button>
           </form>
         </div>
       </>

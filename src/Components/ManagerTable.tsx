@@ -5,7 +5,7 @@ import { IoCaretUp, IoCaretDown } from "react-icons/io5";
 import { gql, useLazyQuery, useQuery } from "@apollo/client";
 
 const GET_ORDERS = gql`
-  query getOrders($breed: String!) {
+  query getOrders {
     getAllOrders {
       ordNum
       ordAmount
@@ -57,13 +57,8 @@ function ManagerTable() {
   const [order, setOrder] = useState({ column: 0, asc: true });
   const { loading, error, data } = useQuery(GET_ORDERS);
 
-  function showArrow(col: number) {
-    if (order) {
-      if (col === order.column)
-        if (order.asc) return <p>asc</p>;
-        else return <p>desc</p>;
-    }
-  }
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error loading data</p>;
 
   // Sort the table
   // n: wich column to sort by
@@ -96,8 +91,6 @@ function ManagerTable() {
   }
 
   function OrderList() {
-    if (loading) return null;
-    if (error) return <tr><p>{`Error! ${error}`}</p></tr>;
     return (
       <>
         {dataExample.map((element) => (
@@ -112,28 +105,26 @@ function ManagerTable() {
     );
   }
 
+  function changeOrder(col: number) {
+    setOrder({ column: col, asc: order.column === col ? !order.asc : true });
+    sortTable();
+  }
+
+  function showArrow(col: number) {
+    return order?.column === col ? (order.asc ? <IoCaretUp /> : <IoCaretDown />) : null;
+  }
+
   return (
     <table id="orderList" border={2} align="center">
       <thead>
         <tr>
-          <th
-            onClick={() =>
-              setOrder({
-                column: 0,
-                asc: false,
-              })
-            }
-          >
-            Order number{showArrow(0)}
-          </th>
-          <th>Order amount</th>
-          <th>Order date</th>
-          <th>Order description</th>
+          <th onClick={() => changeOrder(0)}>Order number {showArrow(0)}</th>
+          <th onClick={() => changeOrder(1)}>Order amount {showArrow(1)}</th>
+          <th onClick={() => changeOrder(2)}>Order date {showArrow(2)}</th>
+          <th onClick={() => changeOrder(3)}>Order description {showArrow(3)}</th>
         </tr>
       </thead>
-      <tbody>
-        <OrderList />
-      </tbody>
+      <tbody>{data && <OrderList />}</tbody>
     </table>
   );
 }

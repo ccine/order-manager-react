@@ -6,7 +6,7 @@ import { useAuth } from "../Auth";
 function Home() {
   const navigate = useNavigate();
   let auth = useAuth();
-  console.log(auth);
+  
   return (
     <div className="contanier">
       <div className="homeHeader">
@@ -23,7 +23,7 @@ function Home() {
 
       <label>List of orders</label>
       <div>
-        <ManagerTable />
+        {auth.user?.role === 'manager' && <ManagerTable />}
       </div>
     </div>
   );
