@@ -2,20 +2,35 @@ import React, { useRef } from "react";
 import "../Assets/Login.css";
 import { useNavigate } from "react-router-dom";
 import { gql, useLazyQuery } from "@apollo/client";
+import { useAuth } from "../auth";
 
 function Login() {
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+
+  let navigate = useNavigate();
+  let auth = useAuth();
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    let formData = new FormData(event.currentTarget);
+    let username = formData.get("username_input") as string;
+
+    auth.signin(username, () => {
+      navigate("/Home", { replace: true });
+    });
+  }
+
   const ENTERHOME = gql`
     query userLogin($username: String!, $password: String!) {
-      checkUser(username: $username, party_code: $party) {
+      checkUser(username: $username, password: $password) {
         authentication
         role
       }
     }
   `;
   const [login, { loading, error, data }] = useLazyQuery(ENTERHOME);
-  const navigate = useNavigate();
 
   function submit() {
     if (!usernameRef.current || !passwordRef.current) return;
@@ -31,9 +46,8 @@ function Login() {
     <div className="container">
       <>
         {
-          data?.authentication
-            && navigate("/home")
-            /** TODO SHOW NOT VALID USER */
+          data?.authentication && navigate("/home")
+          /** TODO SHOW NOT VALID USER */
         }
         {error && console.log(`Error! ${error}`) /** TODO SHOW ERROR ON PAGE */}
         {/* Box */}
@@ -45,7 +59,7 @@ function Login() {
           <h2 id="loginHeader">LOGIN</h2>
 
           {/* Login form */}
-          <form>
+          <form onSubmit={handleSubmit}>
             {/* Username */}
             <label htmlFor="username_input">Username</label>
             <br />
@@ -71,11 +85,9 @@ function Login() {
             />
             <br />
             <br />
+            {/* Submit button */}
+            <button type="submit">Log in</button>
           </form>
-          {/* Submit button */}
-          <button id="submitButton" onClick={() => submit()}>
-            Log in
-          </button>
         </div>
       </>
     </div>
