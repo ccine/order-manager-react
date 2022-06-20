@@ -41,7 +41,7 @@ function Login() {
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-          <h2 id="loginHeader">LOGIN</h2>
+          <h2 id="loginHeader" className="marginBottom">LOGIN</h2>
 
           {/* Login form */}
           <form onSubmit={handleSubmit}>
@@ -49,6 +49,7 @@ function Login() {
             <label htmlFor="usernameInput">Username</label>
             <br />
             <input
+              className="marginBottom"
               type="text"
               id="usernameInput"
               name="usernameInput"
