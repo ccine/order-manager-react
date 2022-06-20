@@ -41,7 +41,7 @@ function Login() {
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-          <h2 id="loginHeader" className="marginBottom">LOGIN</h2>
+          <h1 id="loginHeader" className="marginBottom">LOGIN</h1>
 
           {/* Login form */}
           <form onSubmit={handleSubmit}>

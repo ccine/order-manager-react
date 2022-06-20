@@ -1,44 +1,94 @@
-.container {                    /* container of the whole page */
-    height: 100%;
-    width: 100%;
-    display: flex;              /* enables a flex context*/
-    align-items: center;        /* vertically center */
-    justify-content: center;    /* horizontally center ??*/
+/* container of the whole page */
+.container {
+    display: table-cell;          /* let the element behave like a <td> element */
+    vertical-align: middle;       /* certically center */
+
+    /*display: flex;              /* enables a flex context*/
+    /*align-items: center;        /* vertically center */
+    /*justify-content: center;    /* horizontally center */
+    
 }
 
+/* box of the login */
 .loginBox {
-    height: 35%;
-    width: 30%;
-
-    display: flex;                                                /* enables a flex context*/
-    flex-direction: column;                                       /* direction flex item are placed */  
-    align-items: center;                                          /* vertically center */
-    justify-content: center;                                      /* horizontally center */
-    text-align: center;                                           /* specifies the horizontal alignment of text */
+    width: 400px;
+    height: 380px;
+    display: block;                                                 /* displays the element as a block element, takes up the whole width */
+    margin: auto;                                                   /* horizontally center the element within its container */
 
     border-radius: 5px;
-    box-shadow: 1px 2px 3px 4px rgba(12, 12, 12, 0.2);          /* horizontal length, vertical length, blur radius, spread, color*/
+    box-shadow: 1px 2px 3px 4px rgba(12, 12, 12, 0.2);            /* horizontal length, vertical length, blur radius, spread, color */
 
-    overflow-x: auto;                                             /* horizontal scrollbar (appear when needed)*/
-    overflow-y: auto;                                             /* vertical scrollbar (hidden)*/
+    overflow-x: auto;                                               /* horizontal scrollbar (appear when needed) */
+    overflow-y: auto;                                               /* vertical scrollbar (appear when needed) */
+
+    /*display: flex;                                                /* enables a flex context */
+    /*flex-direction: column;                                       /* direction flex item are placed */  
+    /*align-items: center;                                          /* vertically center */
+    /*justify-content: center;                                      /* horizontally center */
+    /*text-align: center;                                           /* specifies the horizontal alignment of text */
 }
 
-/* css class for set margin-bottom*/
+/* loginBox title */
+#loginHeader{
+    text-align: center;
+}
+
+form{
+    display: block;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    /*
+    height: 60%;
+    width: 50%;
+    */
+}
+
+input{
+    width: 100%;
+    height: 42px;
+    box-sizing: border-box;                                        /* take count of padding and border when setting dimensions */
+}
+
+
+input, label, button{
+    font-size: large;
+}
+
+/* css class for setting margin-bottom*/
 .marginBottom {
     margin-bottom: 10px;
 }
 
 /* css for submit buttom*/
-#submitButton {
+#submitButton{
     width: 100%;
-    flex-grow: 4;
+    height: 55px;
 }
+
+/* media query that starts when screen width goes below 450px*/
+/* the container will take up the whole width and loginBox will hide its box-shadow*/
+@media only screen and (max-width: 450px){
+    .container{
+        display: block;
+    }
+
+    .loginBox{
+        padding-top: 5vh;
+        box-shadow: none;
+    }
+
+}
+
 
 /* media query that starts when screen width goes below 800px*/
 /* sets dimensions of the loginBox to the entire screen*/
+/*
 @media only screen and (max-width: 800px) {
     .loginBox{
         height: 100%;
         width: 100%;
     }
 }
+*/
