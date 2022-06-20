@@ -1,30 +1,32 @@
-import React, { useState } from "react";
 import "../Assets/Home.css";
 import { useNavigate } from "react-router-dom";
-import { IoCaretUp, IoCaretDown } from "react-icons/io5";
-import { gql, useLazyQuery } from "@apollo/client";
-import { AuthStatus } from "../auth";
 import ManagerTable from "../Components/ManagerTable";
+import { useAuth } from "../Auth";
 
 function Home() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  let auth = useAuth();
+  console.log(auth);
+  return (
+    <div className="contanier">
+      <div className="homeHeader">
+        <h2 id="homeTitle">WELCOME {auth.user?.username}</h2>
+        <button
+          id="logoutButton"
+          onClick={() => {
+            auth.signout(() => navigate("/"));
+          }}
+        >
+          Log out
+        </button>
+      </div>
 
-    return (
-        <div className="contanier">
-            <AuthStatus />
-            <div className="homeHeader">
-                <h2 id="homeTitle">WELCOME</h2>
-                <button id="logoutButton" onClick={() => navigate("/Login")}>
-                    Log out
-                </button>
-            </div>
-
-            <label>List of orders</label>
-            <div>
-                <ManagerTable />
-            </div>
-        </div>
-    );
+      <label>List of orders</label>
+      <div>
+        <ManagerTable />
+      </div>
+    </div>
+  );
 }
 
 export default Home;

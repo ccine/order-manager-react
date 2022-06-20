@@ -3,7 +3,6 @@ import "../Assets/Home.css";
 import { useNavigate } from "react-router-dom";
 import { IoCaretUp, IoCaretDown } from "react-icons/io5";
 import { gql, useLazyQuery, useQuery } from "@apollo/client";
-import { AuthStatus } from "../auth";
 
 const GET_ORDERS = gql`
   query getOrders($breed: String!) {
@@ -98,7 +97,7 @@ function ManagerTable() {
 
   function OrderList() {
     if (loading) return null;
-    if (error) return <p>{`Error! ${error}`}</p>;
+    if (error) return <tr><p>{`Error! ${error}`}</p></tr>;
     return (
       <>
         {dataExample.map((element) => (

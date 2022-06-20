@@ -1,8 +1,7 @@
 import React, { useRef } from "react";
 import "../Assets/Login.css";
 import { useNavigate } from "react-router-dom";
-import { gql, useLazyQuery } from "@apollo/client";
-import { useAuth } from "../auth";
+import { useAuth } from "../Auth";
 
 function Login() {
   const usernameRef = useRef<HTMLInputElement>(null);
@@ -16,40 +15,26 @@ function Login() {
 
     let formData = new FormData(event.currentTarget);
     let username = formData.get("username_input") as string;
+    let password = formData.get("password_input") as string;
 
-    auth.signin(username, () => {
-      navigate("/Home", { replace: true });
-    });
-  }
-
-  const ENTERHOME = gql`
-    query userLogin($username: String!, $password: String!) {
-      checkUser(username: $username, password: $password) {
-        authentication
-        role
-      }
-    }
-  `;
-  const [login, { loading, error, data }] = useLazyQuery(ENTERHOME);
-
-  function submit() {
-    if (!usernameRef.current || !passwordRef.current) return;
-    login({
-      variables: {
-        username: usernameRef.current.value,
-        password: passwordRef.current.value,
+    auth.signin(
+      username,
+      password,
+      () => {
+        navigate("/Home", { replace: true });
       },
-    });
+      () => {
+        alert("Login failed");
+      },
+      () => {
+        alert("Server error");
+      }
+    );
   }
 
   return (
     <div className="container">
       <>
-        {
-          data?.authentication && navigate("/home")
-          /** TODO SHOW NOT VALID USER */
-        }
-        {error && console.log(`Error! ${error}`) /** TODO SHOW ERROR ON PAGE */}
         {/* Box */}
         <div className="loginBox">
           <meta
