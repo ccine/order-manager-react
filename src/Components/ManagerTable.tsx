@@ -36,32 +36,39 @@ const GET_ORDERS = gql`
 `;
 
 function ManagerTable() {
-  const [order, setOrder] = useState({ column: 0, asc: true });
+  const [order, setOrder] = useState({ key: "ordNum", asc: true });
   const { loading, error, data } = useQuery(GET_ORDERS);
+
+  const sortedItems = React.useMemo(() => {
+    if (!data) return [];
+    let sortableItems = [...data.getAllOrders];
+    let elementKey = (element: any) =>
+      order.key === "custCode"
+        ? element.custCode.custCode
+        : order.key === "agentCode"
+        ? element.agentCode.agentCode
+        : element[order.key];
+    sortableItems.sort((a, b) => {
+      if (elementKey(a) < elementKey(b)) {
+        return order.asc ? -1 : 1;
+      }
+      if (elementKey(a) > elementKey(b)) {
+        return order.asc ? 1 : -1;
+      }
+      return 0;
+    });
+    return sortableItems;
+  }, [data, order]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading data</p>;
 
-  /*function sortTable() {
-    if (!data || !orderList) return;
-    let obj = [...orderList];
-    if (order.asc)
-      obj.sort((a: any, b: any) => {
-        return b.ordNum - a.ordNum;
-      });
-    else
-      obj.sort((a: any, b: any) => {
-        return a.ordNum - b.ordNum;
-      });
-    setOrderList(obj);
-  }*/
-
-  function changeOrder(col: number) {
-    setOrder({ column: col, asc: order.column === col ? !order.asc : true });
+  function changeOrder(key: string) {
+    setOrder({ key: key, asc: order.key === key ? !order.asc : true });
   }
 
-  function showArrow(col: number) {
-    return order?.column === col ? (
+  function showArrow(key: string) {
+    return order?.key === key ? (
       order.asc ? (
         <IoCaretUp />
       ) : (
@@ -75,24 +82,37 @@ function ManagerTable() {
       <table id="orderList" border={2} align="center">
         <thead>
           <tr>
-            <th onClick={() => changeOrder(0)}>Order number {showArrow(0)}</th>
-            <th onClick={() => changeOrder(1)}>Order amount {showArrow(1)}</th>
-            <th onClick={() => changeOrder(2)}>Order date {showArrow(2)}</th>
-            <th onClick={() => changeOrder(3)}>
-              Order description {showArrow(3)}
+            <th onClick={() => changeOrder("ordNum")}>
+              Order number {showArrow("ordNum")}
+            </th>
+            <th onClick={() => changeOrder("ordAmount")}>
+              Order amount {showArrow("ordAmount")}
+            </th>
+            <th onClick={() => changeOrder("ordDate")}>
+              Order date {showArrow("ordDate")}
+            </th>
+            <th onClick={() => changeOrder("custCode")}>
+              Customer {showArrow("custCode")}
+            </th>
+            <th onClick={() => changeOrder("agentCode")}>
+              Agent {showArrow("agentCode")}
+            </th>
+            <th onClick={() => changeOrder("ordDescription")}>
+              Order description {showArrow("ordDescription")}
             </th>
           </tr>
         </thead>
         <tbody>
-          {data &&
-            data.getAllOrders.map((element: any) => (
-              <tr key={element.ordNum}>
-                <td>{element.ordNum}</td>
-                <td>{element.ordAmount}</td>
-                <td>{element.ordDate}</td>
-                <td>{element.ordDescription}</td>
-              </tr>
-            ))}
+          {sortedItems.map((element: any) => (
+            <tr key={element.ordNum}>
+              <td>{element.ordNum}</td>
+              <td>{element.ordAmount}</td>
+              <td>{element.ordDate}</td>
+              <td>{element.custCode.custCode}</td>
+              <td>{element.agentCode.agentCode}</td>
+              <td>{element.ordDescription}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </>
