@@ -2,18 +2,6 @@ import { gql, useLazyQuery } from "@apollo/client";
 import * as React from "react";
 import { Navigate } from "react-router-dom";
 
-const fakeAuthProvider = {
-  isAuthenticated: false,
-  signin(callback: VoidFunction) {
-    fakeAuthProvider.isAuthenticated = true;
-    setTimeout(callback, 3000);
-  },
-  signout(callback: VoidFunction) {
-    fakeAuthProvider.isAuthenticated = false;
-    setTimeout(callback, 3000);
-  },
-};
-
 type LoggedUser = null | {
   username: string;
   role: string;
