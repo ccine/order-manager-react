@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../Assets/Home.css";
 import { IoCaretUp, IoCaretDown } from "react-icons/io5";
 import { gql, useQuery } from "@apollo/client";
+import { Order } from "../types";
 
 const GET_ORDERS = gql`
   query getOrders {
@@ -16,6 +17,7 @@ const GET_ORDERS = gql`
         custCity
         workingArea
         custCountry
+        grade
         openingAmt
         receiveAmt
         paymentAmt
@@ -36,13 +38,21 @@ const GET_ORDERS = gql`
 `;
 
 function ManagerTable() {
-  const [order, setOrder] = useState({ key: "ordNum", asc: true });
+  const [order, setOrder] = useState<{ key: keyof Order; asc: boolean }>({
+    key: "ordNum",
+    asc: true,
+  });
+  const [viewDetails, setViewDetails] = useState<{
+    id: Number;
+    agent?: boolean;
+    customer?: boolean;
+  }>({ id: -1 });
   const { loading, error, data } = useQuery(GET_ORDERS);
 
   const sortedItems = React.useMemo(() => {
     if (!data) return [];
     let sortableItems = [...data.getAllOrders];
-    let elementKey = (element: any) =>
+    let elementKey = (element: Order) =>
       order.key === "custCode"
         ? element.custCode.custCode
         : order.key === "agentCode"
@@ -63,7 +73,7 @@ function ManagerTable() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading data</p>;
 
-  function changeOrder(key: string) {
+  function changeOrder(key: keyof Order) {
     setOrder({ key: key, asc: order.key === key ? !order.asc : true });
   }
 
@@ -75,6 +85,70 @@ function ManagerTable() {
         <IoCaretDown />
       )
     ) : null;
+  }
+
+  function TableRow(props: { element: Order }) {
+    return (
+      <>
+        <tr>
+          <td>{String(props.element.ordNum)}</td>
+          <td>{String(props.element.ordAmount)}</td>
+          <td>{props.element.ordDate}</td>
+          <td
+            onClick={() =>
+              setViewDetails({ id: props.element.ordNum, customer: true })
+            }
+          >
+            {props.element.custCode.custCode}
+          </td>
+          <td
+            onClick={() =>
+              setViewDetails({ id: props.element.ordNum, agent: true })
+            }
+          >
+            {props.element.agentCode.agentCode}
+          </td>
+          <td>{props.element.ordDescription}</td>
+        </tr>
+        {viewDetails.id === props.element.ordNum && viewDetails.agent && (
+          <tr>
+            <td colSpan={6}>
+              <h2>Agent Details</h2>
+              <ul>
+                <li>Code: {props.element.agentCode.agentCode}</li>
+                <li>Name: {props.element.agentCode.agentName}</li>
+                <li>
+                  Commission: {String(props.element.agentCode.commission)}
+                </li>
+                <li>Country: {props.element.agentCode.country}</li>
+                <li>Phone Number: {props.element.agentCode.phoneNo}</li>
+                <li>Working Area: {props.element.agentCode.workingArea}</li>
+              </ul>
+            </td>
+          </tr>
+        )}
+        {viewDetails.id === props.element.ordNum && viewDetails.customer && (
+          <tr>
+            <td colSpan={6}>
+              <h2>Customer Details</h2>
+              <ul>
+                <li>Code: {props.element.custCode.custCode}</li>
+                <li>Name: {props.element.custCode.custName}</li>
+                <li>City: {props.element.custCode.custCity}</li>
+                <li>Working Area: {props.element.custCode.workingArea}</li>
+                <li>Country: {props.element.custCode.custCountry}</li>
+                <li>Grade: {String(props.element.custCode.grade)}</li>
+                <li>Opening Amount: {String(props.element.custCode.openingAmt)}</li>
+                <li>Receive Amount: {String(props.element.custCode.receiveAmt)}</li>
+                <li>Payment Amount: {String(props.element.custCode.paymentAmt)}</li>
+                <li>Outstanding Amount: {String(props.element.custCode.outstandingAmt)}</li>
+                <li>Phone Number: {props.element.custCode.phoneNo}</li>
+              </ul>
+            </td>
+          </tr>
+        )}
+      </>
+    );
   }
 
   return (
@@ -103,15 +177,8 @@ function ManagerTable() {
           </tr>
         </thead>
         <tbody>
-          {sortedItems.map((element: any) => (
-            <tr key={element.ordNum}>
-              <td>{element.ordNum}</td>
-              <td>{element.ordAmount}</td>
-              <td>{element.ordDate}</td>
-              <td>{element.custCode.custCode}</td>
-              <td>{element.agentCode.agentCode}</td>
-              <td>{element.ordDescription}</td>
-            </tr>
+          {sortedItems.map((element: Order) => (
+            <TableRow key={String(element.ordNum)} element={element} />
           ))}
         </tbody>
       </table>
