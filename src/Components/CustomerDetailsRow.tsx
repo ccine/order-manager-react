@@ -10,12 +10,12 @@ function CustomerDetailsRow(props: { customer: Customer }) {
           <li>City: {props.customer.custCity}</li>
           <li>Working Area: {props.customer.workingArea}</li>
           <li>Country: {props.customer.custCountry}</li>
-          <li>Grade: {String(props.customer.grade)}</li>
-          <li>Opening Amount: {String(props.customer.openingAmt)}</li>
-          <li>Receive Amount: {String(props.customer.receiveAmt)}</li>
-          <li>Payment Amount: {String(props.customer.paymentAmt)}</li>
+          <li>Grade: {props.customer.grade}</li>
+          <li>Opening Amount: {props.customer.openingAmt}</li>
+          <li>Receive Amount: {props.customer.receiveAmt}</li>
+          <li>Payment Amount: {props.customer.paymentAmt}</li>
           <li>
-            Outstanding Amount: {String(props.customer.outstandingAmt)}
+            Outstanding Amount: {props.customer.outstandingAmt}
           </li>
           <li>Phone Number: {props.customer.phoneNo}</li>
         </ul>

@@ -8,7 +8,7 @@ function AgentDetailsRow(props: { agent: Agent }) {
                 <li>Code: {props.agent.agentCode}</li>
                 <li>Name: {props.agent.agentName}</li>
                 <li>
-                  Commission: {String(props.agent.commission)}
+                  Commission: {props.agent.commission}
                 </li>
                 <li>Country: {props.agent.country}</li>
                 <li>Phone Number: {props.agent.phoneNo}</li>

@@ -81,8 +81,8 @@ function OrderTable(props: { username: string; role: Role }) {
     return (
       <>
         <tr>
-          <td>{String(props.element.ordNum)}</td>
-          <td>{String(props.element.ordAmount)}</td>
+          <td>{props.element.ordNum}</td>
+          <td>{props.element.ordAmount}</td>
           <td>{props.element.ordDate}</td>
           {props.role !== "customer" && (
             <td
@@ -157,7 +157,7 @@ function OrderTable(props: { username: string; role: Role }) {
         </thead>
         <tbody>
           {sortedItems.map((element: Order) => (
-            <TableRow key={String(element.ordNum)} element={element}  role={props.role}/>
+            <TableRow key={element.ordNum} element={element}  role={props.role}/>
           ))}
         </tbody>
       </table>

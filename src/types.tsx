@@ -1,35 +1,35 @@
 export type Agent = {
-  agentCode: String;
-  agentName: String;
-  workingArea: String;
-  commission: Number;
-  phoneNo: String;
-  country: String;
+  agentCode: string;
+  agentName: string;
+  workingArea: string;
+  commission: number;
+  phoneNo: string;
+  country: string;
 };
 
 export type Customer = {
-  custCode: String;
-  custName: String;
-  custCity: String;
-  workingArea: String;
-  custCountry: String;
-  grade: Number;
-  openingAmt: Number;
-  receiveAmt: Number;
-  paymentAmt: Number;
-  outstandingAmt: Number;
-  phoneNo: String;
+  custCode: string;
+  custName: string;
+  custCity: string;
+  workingArea: string;
+  custCountry: string;
+  grade: number;
+  openingAmt: number;
+  receiveAmt: number;
+  paymentAmt: number;
+  outstandingAmt: number;
+  phoneNo: string;
   agentCode: Agent;
 };
 
 export type Order = {
-  ordNum: Number;
-  ordAmount: Number;
-  advanceAmount: Number;
-  ordDate: String;
+  ordNum: number;
+  ordAmount: number;
+  advanceAmount: number;
+  ordDate: string;
   custCode: Customer;
   agentCode: Agent;
-  ordDescription: String;
+  ordDescription: string;
 };
 
 export type Role = "manager" | "agent" | "customer";

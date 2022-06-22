@@ -1,4 +1,4 @@
-import { gql, useLazyQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import * as React from "react";
 import { Navigate } from "react-router-dom";
 import { CHECK_USER } from "./query";
