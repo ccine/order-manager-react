@@ -1,9 +1,7 @@
 import "../Assets/Home.css";
 import { useNavigate } from "react-router-dom";
-import ManagerTable from "../Components/ManagerTable";
 import { useAuth } from "../Auth";
-import AgentTable from "../Components/AgentTable";
-import CustomerTable from "../Components/CustomerTable";
+import OrderTable from "../Components/OrderTable";
 
 function Home() {
   const navigate = useNavigate();
@@ -25,9 +23,7 @@ function Home() {
 
       <label>List of orders</label>
       <div>
-        {auth.user?.role === 'manager' && <ManagerTable />}
-        {auth.user?.role === 'agent' && <AgentTable agentCode={auth.user.username} />}
-        {auth.user?.role === 'customer' && <CustomerTable custCode={auth.user.username} />}
+        {auth.user && <OrderTable username={auth.user.username} role={auth.user.role}/>}
       </div>
     </div>
   );

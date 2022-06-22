@@ -1,10 +1,12 @@
 import { gql, useLazyQuery } from "@apollo/client";
 import * as React from "react";
 import { Navigate } from "react-router-dom";
+import { CHECK_USER } from "./query";
+import { Role } from "./types";
 
 type LoggedUser = null | {
   username: string;
-  role: string;
+  role: Role;
 };
 
 interface AuthContextType {
@@ -20,20 +22,12 @@ interface AuthContextType {
 }
 
 let AuthContext = React.createContext<AuthContextType>(null!);
-const LOGINQUERY = gql`
-  query userLogin($username: String!, $password: String!) {
-    checkUser(username: $username, password: $password) {
-      authentication
-      role
-    }
-  }
-`;
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   let savedUserNull = localStorage.getItem("user");
   let savedUser = savedUserNull ? JSON.parse(savedUserNull) : null;
   let [user, setUser] = React.useState<LoggedUser>(savedUser);
-  const [login] = useLazyQuery(LOGINQUERY);
+  const [login] = useLazyQuery(CHECK_USER);
 
   let signin = (
     username: string,

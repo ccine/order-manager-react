@@ -1,45 +1,17 @@
 import React, { useState } from "react";
 import "../Assets/Home.css";
 import { IoCaretUp, IoCaretDown } from "react-icons/io5";
-import { gql, useQuery } from "@apollo/client";
-import { Order } from "../types";
+import { useQuery } from "@apollo/client";
+import { Order, Role } from "../types";
 import AgentDetailsRow from "./AgentDetailsRow";
 import CustomerDetailsRow from "./CustomerDetailsRow";
+import {
+  GET_ALL_ORDERS,
+  GET_ORDERS_BY_AGENT,
+  GET_ORDERS_BY_CUSTOMER,
+} from "../query";
 
-const GET_ORDERS = gql`
-  query getOrders {
-    getAllOrders {
-      ordNum
-      ordAmount
-      advanceAmount
-      ordDate
-      custCode {
-        custCode
-        custName
-        custCity
-        workingArea
-        custCountry
-        grade
-        openingAmt
-        receiveAmt
-        paymentAmt
-        outstandingAmt
-        phoneNo
-      }
-      agentCode {
-        agentCode
-        agentName
-        workingArea
-        commission
-        phoneNo
-        country
-      }
-      ordDescription
-    }
-  }
-`;
-
-function ManagerTable() {
+function OrderTable(props: { username: string; role: Role }) {
   const [order, setOrder] = useState<{ key: keyof Order; asc: boolean }>({
     key: "ordNum",
     asc: true,
@@ -49,11 +21,26 @@ function ManagerTable() {
     agent?: boolean;
     customer?: boolean;
   }>({ id: -1 });
-  const { loading, error, data } = useQuery(GET_ORDERS);
+  const { loading, error, data } = useQuery(
+    props.role === "manager"
+      ? GET_ALL_ORDERS
+      : props.role === "agent"
+      ? GET_ORDERS_BY_AGENT
+      : GET_ORDERS_BY_CUSTOMER,
+    {
+      variables: { customer: props.username, agent: props.username },
+    }
+  );
 
   const sortedItems = React.useMemo(() => {
-    if (!data || !data.getAllOrders) return [];
-    let sortableItems = [...data.getAllOrders];
+    if (
+      !data ||
+      (!data.getAllOrders && !data.getCustomerOrders && !data.getAgentOrders)
+    )
+      return [];
+    let listItem =
+      data.getAllOrders || data.getCustomerOrders || data.getAgentOrders;
+    let sortableItems = [...listItem];
     let elementKey = (element: Order) =>
       order.key === "custCode"
         ? element.custCode.custCode
@@ -89,27 +76,31 @@ function ManagerTable() {
     ) : null;
   }
 
-  function TableRow(props: { element: Order }) {
+  function TableRow(props: { element: Order, role: Role }) {
     return (
       <>
         <tr>
           <td>{String(props.element.ordNum)}</td>
           <td>{String(props.element.ordAmount)}</td>
           <td>{props.element.ordDate}</td>
-          <td
-            onClick={() =>
-              setViewDetails({ id: props.element.ordNum, customer: true })
-            }
-          >
-            {props.element.custCode.custCode}
-          </td>
-          <td
-            onClick={() =>
-              setViewDetails({ id: props.element.ordNum, agent: true })
-            }
-          >
-            {props.element.agentCode.agentCode}
-          </td>
+          {props.role !== "customer" && (
+            <td
+              onClick={() =>
+                setViewDetails({ id: props.element.ordNum, customer: true })
+              }
+            >
+              {props.element.custCode.custCode}
+            </td>
+          )}
+          {props.role !== "agent" && (
+            <td
+              onClick={() =>
+                setViewDetails({ id: props.element.ordNum, agent: true })
+              }
+            >
+              {props.element.agentCode.agentCode}
+            </td>
+          )}
           <td>{props.element.ordDescription}</td>
         </tr>
         {viewDetails.id === props.element.ordNum && viewDetails.agent && (
@@ -144,12 +135,16 @@ function ManagerTable() {
             <th onClick={() => changeOrder("ordDate")}>
               Order date {showArrow("ordDate")}
             </th>
-            <th onClick={() => changeOrder("custCode")}>
-              Customer {showArrow("custCode")}
-            </th>
-            <th onClick={() => changeOrder("agentCode")}>
-              Agent {showArrow("agentCode")}
-            </th>
+            {props.role !== "customer" && (
+              <th onClick={() => changeOrder("custCode")}>
+                Customer {showArrow("custCode")}
+              </th>
+            )}
+            {props.role !== "agent" && (
+              <th onClick={() => changeOrder("agentCode")}>
+                Agent {showArrow("agentCode")}
+              </th>
+            )}
             <th onClick={() => changeOrder("ordDescription")}>
               Order description {showArrow("ordDescription")}
             </th>
@@ -157,7 +152,7 @@ function ManagerTable() {
         </thead>
         <tbody>
           {sortedItems.map((element: Order) => (
-            <TableRow key={String(element.ordNum)} element={element} />
+            <TableRow key={String(element.ordNum)} element={element}  role={props.role}/>
           ))}
         </tbody>
       </table>
@@ -165,4 +160,4 @@ function ManagerTable() {
   );
 }
 
-export default ManagerTable;
+export default OrderTable;
