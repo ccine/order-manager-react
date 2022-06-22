@@ -30,7 +30,9 @@ const LOGINQUERY = gql`
 `;
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  let [user, setUser] = React.useState<LoggedUser>(null);
+  let savedUserNull = localStorage.getItem("user");
+  let savedUser = savedUserNull ? JSON.parse(savedUserNull) : null;
+  let [user, setUser] = React.useState<LoggedUser>(savedUser);
   const [login] = useLazyQuery(LOGINQUERY);
 
   let signin = (
@@ -56,6 +58,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             username: username,
             role: res.data.checkUser.role,
           });
+          localStorage.setItem(
+            "user",
+            JSON.stringify({
+              username: username,
+              role: res.data.checkUser.role,
+            })
+          );
           onSuccess();
         } else {
           onFail();
@@ -66,6 +75,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   let signout = (callback: VoidFunction) => {
     setUser(null);
+    localStorage.removeItem("user");
     callback();
   };
 
