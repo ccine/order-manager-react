@@ -1,15 +1,24 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "../Assets/Login.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Auth";
 
 function Login() {
-  const usernameRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
+  document.querySelector('title')!.textContent = "LoginPage";                         // Change the page's title
+  const usernameRef = useRef<HTMLInputElement>(null);                                 // Reference to usernameInput          
+  const passwordRef = useRef<HTMLInputElement>(null);                                 // Reference to passwordInput
+  const [error, setError] = useState<undefined | "Server error" | "The username or password is incorrect">(undefined);  // State of error
+  const [highConstrastMode, setHighContrastMode] = useState<boolean>(false);                                            // State of highContrastMode
+  const head = document.head;              // Returns the <head> element of the current document
+  var css;                                 // Variable to insert css rules
 
-  let navigate = useNavigate();
-  let auth = useAuth();
+  let navigate = useNavigate();            // Allows navigation to the next page
+  let auth = useAuth();                    // TODO
 
+  /**
+   * TODO
+   * @param event 
+   */
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -24,31 +33,54 @@ function Login() {
         navigate("/Home", { replace: true });
       },
       () => {
-        alert("Login failed");
+        setError("The username or password is incorrect");
+        passwordRef.current!.value = "";
       },
       () => {
-        alert("Server error");
+        setError("Server error");
       }
     );
   }
 
+  /**
+   * Function that changes all the colors of the page by cheching the state of highContrastMode and then changes its value
+   * highConstrastMode: false --> highContrastMode ON, !highConstrastMode
+   * highConstrastMode: true --> highContrastMode OFF, !highConstrastMode
+   */
+  function changeContrast(){
+    if(!highConstrastMode){
+      css = `html {filter: invert(100%);}`;
+    }
+    else{
+      css = `html {filter: invert(0%);}`;
+    }
+
+    const style = document.createElement('style');
+    style.type = 'text/css';
+    if (style.sheet) {
+      style.sheet.insertRule(css, 0);
+    } else {
+      style.appendChild(document.createTextNode(css));
+    }
+    head.appendChild(style);
+    setHighContrastMode(!highConstrastMode);
+  }
+  
+
   return (
     <div className="container">
-      <>
-        {/* Box */}
-        <div className="loginBox">
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-          />
-          <h1 id="loginHeader" className="marginBottom">LOGIN</h1>
-
+      {/* highContrastMode button */}
+      {/*<button id="styleSwitcher" onClick={changeContrast}>High Contrast Mode: {highConstrastMode ? "ON" : "OFF"}</button>*/}
+        {/* login Box */}
+        <div className="loginBox" role="region" aria-labelledby="loginHeader">
+          <h1 id="loginHeader" className="marginBottom" tabIndex={1}>LOGIN</h1>
           {/* Login form */}
           <form onSubmit={handleSubmit}>
             {/* Username */}
-            <label htmlFor="usernameInput">Username</label>
+            <label htmlFor="usernameInput" tabIndex={2}>Username:</label>
             <br />
             <input
+              tabIndex={3}
               className="marginBottom"
               type="text"
               id="usernameInput"
@@ -60,9 +92,10 @@ function Login() {
             />
             <br />
             {/* Password */}
-            <label htmlFor="passwordInput">Password</label>
+            <label htmlFor="passwordInput" tabIndex={4}>Password:</label>
             <br />
             <input
+              tabIndex={5}
               type="password"
               id="passwordInput"
               name="passwordInput"
@@ -74,11 +107,12 @@ function Login() {
             <br />
             <br />
             {/* Submit button */}
-            <button type="submit" id="submitButton">Log in</button>
+            <button type="submit" id="submitButton" tabIndex={6} aria-label="submit button" title="submit button"><strong>Log in</strong></button>
+            {/* Error div */}
+            {error && <div className="error" role="alert" tabIndex={7}><p><strong>Error: </strong>{error}</p></div>}
           </form>
         </div>
-      </>
-    </div>
+      </div>
   );
 }
 export default Login;

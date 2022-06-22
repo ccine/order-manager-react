@@ -10,6 +10,7 @@ import {
   GET_ORDERS_BY_AGENT,
   GET_ORDERS_BY_CUSTOMER,
 } from "../query";
+import { IoCloseSharp } from "react-icons/io5";
 
 function OrderTable(props: { username: string; role: Role }) {
   const [order, setOrder] = useState<{ key: keyof Order; asc: boolean }>({
@@ -85,6 +86,7 @@ function OrderTable(props: { username: string; role: Role }) {
           <td>{props.element.ordDate}</td>
           {props.role !== "customer" && (
             <td
+              className="handPointer"
               onClick={() =>
                 setViewDetails({ id: props.element.ordNum, customer: true })
               }
@@ -94,6 +96,7 @@ function OrderTable(props: { username: string; role: Role }) {
           )}
           {props.role !== "agent" && (
             <td
+              className="handPointer"
               onClick={() =>
                 setViewDetails({ id: props.element.ordNum, agent: true })
               }
@@ -106,6 +109,7 @@ function OrderTable(props: { username: string; role: Role }) {
         {viewDetails.id === props.element.ordNum && viewDetails.agent && (
           <tr>
             <td colSpan={6}>
+              <IoCloseSharp className="closeIcon" size="50px" onClick={() => setViewDetails({id:viewDetails.id})}/>
               <AgentDetailsRow agent={props.element.agentCode} />
             </td>
           </tr>
@@ -113,6 +117,7 @@ function OrderTable(props: { username: string; role: Role }) {
         {viewDetails.id === props.element.ordNum && viewDetails.customer && (
           <tr>
             <td colSpan={6}>
+              <IoCloseSharp className="closeIcon" size="50px" onClick={() => setViewDetails({id:viewDetails.id})}/>
               <CustomerDetailsRow customer={props.element.custCode} />
             </td>
           </tr>

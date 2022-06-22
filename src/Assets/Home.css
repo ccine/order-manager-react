@@ -1,23 +1,65 @@
-.container {
-    height: 100vh;
-    width: 100vw;
-}
-
-#logoutButton{
-    margin-top: 1vh;
-    margin-right: 1vw;
-    position:absolute;
-    top:0;
-    right:0;
-}
-
+/* HEADER */
+/* TODO */
 .homeHeader {
-    height: 7vh;
-    background-color: lightgray;
-    align-items: center;
+    height: 60px;
+    background-color: #292929;
 }
 
+/* LOGOUT BUTTTON */
+#logoutButton{
+    position: absolute;
+    top: 0;
+    right: 0;
+    float: right;
+    width: 120px;
+    height: 40px;
+    color: white;
+    background-color: #008DEB;
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+
+/* WELCOME TITLE */
 #homeTitle {
     margin: 0;
+    flex-grow: 1;
+    color: white;
+}
+
+/* BODY */
+.homeContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+/* LEFT SIDE OF THE PAGE, CONTAINS THE KEY LINE */
+.keyColumn{
+    width: 25%;
+    background-color: #00E61B;
+}
+
+/* RIGHT SIDE OF THE PAGE, CONTAINS THE TABLE */
+.tableColumn{
+    width: 100%;
+    background-color: red;
+}
+
+/* TABLE */
+table{
+    margin: 0;
+    width: 100%;
+    background-color: white;
+}
+
+
+th:hover, .handPointer:hover, .closeIcon:hover{
+    cursor: pointer;
+}
+
+.closeIcon{
+    float: right;
+}
+
+h1, h2{
     text-align: center;
 }
