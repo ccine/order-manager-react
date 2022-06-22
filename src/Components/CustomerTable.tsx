@@ -4,28 +4,14 @@ import { IoCaretUp, IoCaretDown } from "react-icons/io5";
 import { gql, useQuery } from "@apollo/client";
 import { Order } from "../types";
 import AgentDetailsRow from "./AgentDetailsRow";
-import CustomerDetailsRow from "./CustomerDetailsRow";
 
 const GET_ORDERS = gql`
-  query getOrders {
-    getAllOrders {
+  query getOrders($customer: String) {
+    getCustomerOrders(customer: $customer) {
       ordNum
       ordAmount
       advanceAmount
       ordDate
-      custCode {
-        custCode
-        custName
-        custCity
-        workingArea
-        custCountry
-        grade
-        openingAmt
-        receiveAmt
-        paymentAmt
-        outstandingAmt
-        phoneNo
-      }
       agentCode {
         agentCode
         agentName
@@ -39,25 +25,24 @@ const GET_ORDERS = gql`
   }
 `;
 
-function ManagerTable() {
+function CustomerTable(props: { custCode: String }) {
   const [order, setOrder] = useState<{ key: keyof Order; asc: boolean }>({
     key: "ordNum",
     asc: true,
   });
   const [viewDetails, setViewDetails] = useState<{
     id: Number;
-    agent?: boolean;
-    customer?: boolean;
-  }>({ id: -1 });
-  const { loading, error, data } = useQuery(GET_ORDERS);
+    agent: boolean;
+  }>({ id: -1, agent: false });
+  const { loading, error, data } = useQuery(GET_ORDERS, {
+    variables: { customer: props.custCode },
+  });
 
   const sortedItems = React.useMemo(() => {
-    if (!data || !data.getAllOrders) return [];
-    let sortableItems = [...data.getAllOrders];
+    if (!data || !data.getCustomerOrders) return [];
+    let sortableItems = [...data.getCustomerOrders];
     let elementKey = (element: Order) =>
-      order.key === "custCode"
-        ? element.custCode.custCode
-        : order.key === "agentCode"
+      order.key === "agentCode"
         ? element.agentCode.agentCode
         : element[order.key];
     sortableItems.sort((a, b) => {
@@ -98,13 +83,6 @@ function ManagerTable() {
           <td>{props.element.ordDate}</td>
           <td
             onClick={() =>
-              setViewDetails({ id: props.element.ordNum, customer: true })
-            }
-          >
-            {props.element.custCode.custCode}
-          </td>
-          <td
-            onClick={() =>
               setViewDetails({ id: props.element.ordNum, agent: true })
             }
           >
@@ -114,15 +92,8 @@ function ManagerTable() {
         </tr>
         {viewDetails.id === props.element.ordNum && viewDetails.agent && (
           <tr>
-            <td colSpan={6}>
+            <td colSpan={5}>
               <AgentDetailsRow agent={props.element.agentCode} />
-            </td>
-          </tr>
-        )}
-        {viewDetails.id === props.element.ordNum && viewDetails.customer && (
-          <tr>
-            <td colSpan={6}>
-              <CustomerDetailsRow customer={props.element.custCode} />
             </td>
           </tr>
         )}
@@ -144,9 +115,6 @@ function ManagerTable() {
             <th onClick={() => changeOrder("ordDate")}>
               Order date {showArrow("ordDate")}
             </th>
-            <th onClick={() => changeOrder("custCode")}>
-              Customer {showArrow("custCode")}
-            </th>
             <th onClick={() => changeOrder("agentCode")}>
               Agent {showArrow("agentCode")}
             </th>
@@ -165,4 +133,4 @@ function ManagerTable() {
   );
 }
 
-export default ManagerTable;
+export default CustomerTable;
