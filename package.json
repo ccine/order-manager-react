@@ -2,6 +2,7 @@
   "name": "order-manager-react",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://ccine.github.io/order-manager-react",
   "dependencies": {
     "@apollo/client": "^3.6.8",
     "@testing-library/jest-dom": "^5.16.4",
@@ -11,6 +12,7 @@
     "@types/node": "^16.11.41",
     "@types/react": "^18.0.13",
     "@types/react-dom": "^18.0.5",
+    "gh-pages": "^4.0.0",
     "graphql": "^16.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -21,6 +23,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
