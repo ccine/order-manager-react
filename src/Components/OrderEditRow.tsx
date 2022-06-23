@@ -1,12 +1,32 @@
+import { useMutation } from "@apollo/client";
 import { useState } from "react";
+import { UPDATE_ORDER } from "../Graphql/mutation";
 import { Order } from "../types";
 
-function AgentDetailsRow(props: { order: Order }) {
+function AgentDetailsRow(props: { order: Order, reloadData: VoidFunction}) {
+  const [updateOrder, { data, loading, error }] = useMutation(UPDATE_ORDER);
   const [order, setOrder] = useState<Order>(props.order);
   let tempOrder = { ...order };
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    let orderInput = {
+      ordAmount: tempOrder.ordAmount,
+      advanceAmount: tempOrder.advanceAmount,
+      ordDate: tempOrder.ordDate,
+      custCode: tempOrder.custCode.custCode,
+      agentCode: tempOrder.agentCode.agentCode,
+      ordDescription: tempOrder.ordDescription,
+    };
+    updateOrder({
+      variables: { ordNum: tempOrder.ordNum, order: orderInput },
+    }).then(() => props.reloadData());
+    
+    
+  }
+
   return (
-    <form onSubmit={() => {}}>
+    <form onSubmit={handleSubmit}>
       <input value={order.ordNum} disabled />
       <input
         value={order.ordAmount}
