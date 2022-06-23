@@ -11,8 +11,10 @@ import {
   GET_ORDERS_BY_CUSTOMER,
 } from "../query";
 import { IoCloseSharp } from "react-icons/io5";
+import OrderModifyRow from "./OrderModifyRow";
 
 function OrderTable(props: { username: string; role: Role }) {
+  const nCol = props.role === "manager" ? 8 : 6;
   const [order, setOrder] = useState<{ key: keyof Order; asc: boolean }>({
     key: "ordNum",
     asc: true,
@@ -21,6 +23,7 @@ function OrderTable(props: { username: string; role: Role }) {
     id: Number;
     agent?: boolean;
     customer?: boolean;
+    modify?: boolean;
   }>({ id: -1 });
   const { loading, error, data } = useQuery(
     props.role === "manager"
@@ -32,7 +35,6 @@ function OrderTable(props: { username: string; role: Role }) {
       variables: { customer: props.username, agent: props.username },
     }
   );
-
   const sortedItems = React.useMemo(() => {
     if (
       !data ||
@@ -77,12 +79,13 @@ function OrderTable(props: { username: string; role: Role }) {
     ) : null;
   }
 
-  function TableRow(props: { element: Order, role: Role }) {
+  function TableRow(props: { element: Order; role: Role }) {
     return (
       <>
         <tr>
           <td>{props.element.ordNum}</td>
           <td>{props.element.ordAmount}</td>
+          <td>{props.element.advanceAmount}</td>
           <td>{props.element.ordDate}</td>
           {props.role !== "customer" && (
             <td
@@ -105,23 +108,58 @@ function OrderTable(props: { username: string; role: Role }) {
             </td>
           )}
           <td>{props.element.ordDescription}</td>
+          {props.role === "manager" && (
+            <td
+              className="handPointer"
+              onClick={() =>
+                setViewDetails({ id: props.element.ordNum, modify: true })
+              }
+            >
+              Modify
+            </td>
+          )}
         </tr>
+        {/** View Agent Details in the next row */}
         {viewDetails.id === props.element.ordNum && viewDetails.agent && (
           <tr>
-            <td colSpan={6}>
-              <IoCloseSharp className="closeIcon" size="50px" onClick={() => setViewDetails({id:viewDetails.id})}/>
+            <td colSpan={nCol}>
+              <IoCloseSharp
+                className="closeIcon"
+                size="50px"
+                onClick={() => setViewDetails({ id: viewDetails.id })}
+              />
               <AgentDetailsRow agent={props.element.agentCode} />
             </td>
           </tr>
         )}
+        {/** View Customer Details in the next row */}
         {viewDetails.id === props.element.ordNum && viewDetails.customer && (
           <tr>
-            <td colSpan={6}>
-              <IoCloseSharp className="closeIcon" size="50px" onClick={() => setViewDetails({id:viewDetails.id})}/>
+            <td colSpan={nCol}>
+              <IoCloseSharp
+                className="closeIcon"
+                size="50px"
+                onClick={() => setViewDetails({ id: viewDetails.id })}
+              />
               <CustomerDetailsRow customer={props.element.custCode} />
             </td>
           </tr>
         )}
+        {/** View and modify Order Details in the next row */}
+        {viewDetails.id === props.element.ordNum &&
+          viewDetails.modify &&
+          props.role === "manager" && (
+            <tr>
+              <td colSpan={nCol}>
+                <IoCloseSharp
+                  className="closeIcon"
+                  size="50px"
+                  onClick={() => setViewDetails({ id: viewDetails.id })}
+                />
+                <OrderModifyRow order={props.element} />
+              </td>
+            </tr>
+          )}
       </>
     );
   }
@@ -136,6 +174,9 @@ function OrderTable(props: { username: string; role: Role }) {
             </th>
             <th onClick={() => changeOrder("ordAmount")}>
               Order amount {showArrow("ordAmount")}
+            </th>
+            <th onClick={() => changeOrder("advanceAmount")}>
+              Advance amount {showArrow("advanceAmount")}
             </th>
             <th onClick={() => changeOrder("ordDate")}>
               Order date {showArrow("ordDate")}
@@ -153,11 +194,16 @@ function OrderTable(props: { username: string; role: Role }) {
             <th onClick={() => changeOrder("ordDescription")}>
               Order description {showArrow("ordDescription")}
             </th>
+            {props.role === "manager" && <th>Modify</th>}
           </tr>
         </thead>
         <tbody>
           {sortedItems.map((element: Order) => (
-            <TableRow key={element.ordNum} element={element}  role={props.role}/>
+            <TableRow
+              key={element.ordNum}
+              element={element}
+              role={props.role}
+            />
           ))}
         </tbody>
       </table>
