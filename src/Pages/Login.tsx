@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import "../Assets/Login.css";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../Auth";
+import { useAuth } from "../Components/Auth";
 
 function Login() {
   document.querySelector('title')!.textContent = "LoginPage";                         // Change the page's title

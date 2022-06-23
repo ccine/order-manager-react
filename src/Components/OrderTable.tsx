@@ -9,7 +9,7 @@ import {
   GET_ALL_ORDERS,
   GET_ORDERS_BY_AGENT,
   GET_ORDERS_BY_CUSTOMER,
-} from "../query";
+} from "../Graphql/query";
 import { IoCloseSharp } from "react-icons/io5";
 import OrderModifyRow from "./OrderModifyRow";
 

@@ -1,6 +1,6 @@
 import "../Assets/Home.css";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../Auth";
+import { useAuth } from "../Components/Auth";
 import OrderTable from "../Components/OrderTable";
 
 function Home() {

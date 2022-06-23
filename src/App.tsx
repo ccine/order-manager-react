@@ -1,8 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./Pages/Login";
 import Home from "./Pages/Home";
-import "./App.css";
-import { AuthProvider, RequireAuth } from "./Auth";
+import { AuthProvider, RequireAuth } from "./Components/Auth";
 
 function App() {
   return (

@@ -1,8 +1,8 @@
 import { useLazyQuery } from "@apollo/client";
 import * as React from "react";
 import { Navigate } from "react-router-dom";
-import { CHECK_USER } from "./query";
-import { Role } from "./types";
+import { CHECK_USER } from "../Graphql/query";
+import { Role } from "../types";
 
 type LoggedUser = null | {
   username: string;
