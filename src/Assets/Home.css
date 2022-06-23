@@ -1,9 +1,14 @@
+ /* CONTAINER OF THE WHOLE PAGE */
+ .containerPageHome {
+    height: 100%;
+    width: 100%;
+}
+
 /* HEADER */
-/* TODO */
 .homeHeader {
     height: 60px;
     background-color: #292929;
-    width: 100%;
+    width: 100vw;
     position: fixed;
 }
 
@@ -11,25 +16,26 @@
 #logoutButton{
     position: absolute;
     top: 10px;
-    right: 10px;
+    right: 20px;
     width: 120px;
     height: 40px;
     color: white;
     background-color: #008DEB;
-    border: 1px solid transparent;
+    border: transparent;
     border-radius: 5px;
 }
 
 /* WELCOME TITLE */
 #homeTitle {
+    margin: 0;
+    margin-top: 10px;
     text-align: center;
-    margin: auto;
     color: white;
 }
 
 /* BODY */
 .homeContainer{
-    padding-top: 60px;
+    padding-top: 60px;                                      /* height of homeHeader */
     display: flex;
     flex-direction: row;
 }
@@ -37,20 +43,20 @@
 /* LEFT SIDE OF THE PAGE, CONTAINS THE KEY LINE */
 .keyColumn{
     width: 25%;
+    max-width: 25%;
     background-color: #00E61B;
+    word-wrap: break-word;
 }
 
 /* RIGHT SIDE OF THE PAGE, CONTAINS THE TABLE */
 .tableColumn{
-    width: 100%;
     background-color: red;
+    width: 100%;
 }
 
 /* TABLE */
 table{
-    margin: 0;
     width: 100%;
-    min-width: none;
     background-color: white;
 }
 
@@ -59,12 +65,113 @@ th:hover, .handPointer:hover, .closeIcon:hover{
     cursor: pointer;
 }
 
-/* X ICON */
+/* Cursor for modify column header */
+.modifyColumnHeader:hover{
+    cursor: default;
+}
+
+/* X icon */
 .closeIcon{
     float: right;
 }
 
-/* EVERY H2 ELEMENT */
-h2{
+/* titles of the page columns */
+.columnTitle{
     margin-left: 10px;
+}
+
+/* alternate color of table rows */
+tbody tr:nth-child(odd){
+    background-color: #C4C4C4;
+}
+
+/* style the border of the table and align text to the center */
+table, th, td {
+    border: 1px solid black;
+    border-collapse: separate; /* Don't collapse */
+    border-spacing: 0;
+    text-align: center;
+}
+
+/* put some padding on ul */
+ul{
+    padding-left: 30px;
+    padding-right: 10px;
+}
+
+.informationsDiv{
+    text-align: left;
+    background-color: white;
+}
+
+th{
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 60px;
+    background-color: white;
+}
+
+@media only screen and (max-width: 1000px) {
+    /* manage contents in column order */
+    .homeContainer{
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* keyColumn takes the entire width space */
+    .keyColumn{
+        max-width: none;
+        width: 100%;
+    }
+
+    /* table column show an horizontal scrollbar for the table */
+    .tableColumn{
+        overflow-x: auto;
+    }
+
+    /* center titles */
+    .columnTitle{
+        text-align: center;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    th{
+        top:0px
+    }
+
+}
+
+@media only screen and (max-width: 670px) {
+    /* X icon */
+    .closeIcon{
+        float: left;
+    }
+}
+
+@media only screen and (max-width: 570px){
+    .homeHeader{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
+
+    #homeTitle{
+        margin-top: 0;
+        margin-left: 10px;
+    }
+
+    #logoutButton{
+        position: relative;
+        top: 0;
+        right: 0;
+        margin-right: 10px;
+    }
+
+    .homeContainer{
+        padding-top: 80px;
+    }
 }

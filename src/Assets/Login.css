@@ -149,6 +149,7 @@ button:focus{
 
     .loginBox{
         width: 100vw;
+        height: 100vh;
         padding-top: 5vh;
         box-shadow: none;
         border-radius: 0;
@@ -158,7 +159,7 @@ button:focus{
 
 /* media query that starts when screen width goes below 450px*/
 /* the height of the container will be managed automatically */
-@media only screen and (max-height: 400px){
+@media only screen and (max-height: 480px){
     .containerPageLogin{
         height: auto;
     }
