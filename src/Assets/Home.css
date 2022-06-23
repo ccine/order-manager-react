@@ -121,12 +121,7 @@ th{
     /* keyColumn takes the entire width space */
     .keyColumn{
         max-width: none;
-        width: 100%;
-    }
-
-    /* table column show an horizontal scrollbar for the table */
-    .tableColumn{
-        overflow-x: auto;
+        width: 100vw;
     }
 
     /* center titles */
@@ -136,16 +131,22 @@ th{
         margin-bottom: 5px;
     }
 
+    .tableColumn{
+        overflow-x: auto;
+    }
+
     th{
-        top:0px
+        position: static;
+        top: 0;
     }
 
 }
 
 @media only screen and (max-width: 670px) {
-    /* X icon */
+    /* X icon fixed at right side */
     .closeIcon{
-        float: left;
+        position: sticky;
+        right: 0;
     }
 }
 
