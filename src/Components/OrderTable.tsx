@@ -14,17 +14,24 @@ import { IoCloseSharp } from "react-icons/io5";
 import OrderModifyRow from "./OrderModifyRow";
 
 function OrderTable(props: { username: string; role: Role }) {
+  /** Number of column in the table  */
   const nCol = props.role === "manager" ? 8 : 6;
+
+  /** Contains the key used to order the table and if it is ascendent or descendet order */
   const [order, setOrder] = useState<{ key: keyof Order; asc: boolean }>({
     key: "ordNum",
     asc: true,
   });
+
+  /** It is used to view the details row, it can display agent, customer or order(editable) details. */
   const [viewDetails, setViewDetails] = useState<{
     id: Number;
     agent?: boolean;
     customer?: boolean;
     modify?: boolean;
   }>({ id: -1 });
+
+  /** Fetch data from server depending on the role of the user */
   const { loading, error, data } = useQuery(
     props.role === "manager"
       ? GET_ALL_ORDERS
@@ -35,6 +42,8 @@ function OrderTable(props: { username: string; role: Role }) {
       variables: { customer: props.username, agent: props.username },
     }
   );
+
+  /** When data or order is modified this function is called. Sort the table by the specified order. */
   const sortedItems = React.useMemo(() => {
     if (
       !data ||
@@ -65,10 +74,19 @@ function OrderTable(props: { username: string; role: Role }) {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading data</p>;
 
+  /**
+   * Change the order state.
+   * @param key One of the key of Order used to sort the table
+   */
   function changeOrder(key: keyof Order) {
     setOrder({ key: key, asc: order.key === key ? !order.asc : true });
   }
 
+  /**
+   * Show the arrow icon on the focused column
+   * @param key The key that represent the column data
+   * @returns Return the icon element if the passed column is focused (the icon depends if is ascendent or descender order), null if it is not.
+   */
   function showArrow(key: string) {
     return order?.key === key ? (
       order.asc ? (
