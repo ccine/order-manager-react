@@ -8,7 +8,7 @@ function Home() {
   let auth = useAuth();
   
   return (
-    <div>
+    <div className="containerHomeLogin">
       <div className="homeHeader">
         <h2 id="homeTitle">Welcome {auth.user?.username}</h2>
         <button

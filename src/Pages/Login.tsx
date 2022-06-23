@@ -68,12 +68,18 @@ function Login() {
   
 
   return (
-    <div className="container">
-      {/* highContrastMode button */}
-      {/*<button id="styleSwitcher" onClick={changeContrast}>High Contrast Mode: {highConstrastMode ? "ON" : "OFF"}</button>*/}
-        {/* login Box */}
-        <div className="loginBox" role="region" aria-labelledby="loginHeader">
-          <h1 id="loginHeader" className="marginBottom" tabIndex={1}>LOGIN</h1>
+    <div className="containerPageLogin">
+        {/* LOGIN HEADER */}
+        <header className="loginHeader">
+          {/* highContrastMode button */}
+          <button id="styleSwitcher" onClick={changeContrast} tabIndex={8}>High Contrast Mode: {highConstrastMode ? "ON" : "OFF"}</button>
+        </header>
+
+        {/* LOGIN BODY */}
+        <div className="loginBody">
+          {/* login Box */}
+        <div className="loginBox" role="region" aria-labelledby="loginBoxTitle">
+          <h1 id="loginBoxTitle" className="marginBottom" tabIndex={1}>LOGIN</h1>
           {/* Login form */}
           <form onSubmit={handleSubmit}>
             {/* Username */}
@@ -111,6 +117,7 @@ function Login() {
             {/* Error div */}
             {error && <div className="error" role="alert" tabIndex={7}><p><strong>Error: </strong>{error}</p></div>}
           </form>
+        </div>
         </div>
       </div>
   );

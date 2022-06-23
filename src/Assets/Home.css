@@ -3,14 +3,15 @@
 .homeHeader {
     height: 60px;
     background-color: #292929;
+    width: 100%;
+    position: fixed;
 }
 
 /* LOGOUT BUTTTON */
 #logoutButton{
     position: absolute;
-    top: 0;
-    right: 0;
-    float: right;
+    top: 10px;
+    right: 10px;
     width: 120px;
     height: 40px;
     color: white;
@@ -21,13 +22,14 @@
 
 /* WELCOME TITLE */
 #homeTitle {
-    margin: 0;
-    flex-grow: 1;
+    text-align: center;
+    margin: auto;
     color: white;
 }
 
 /* BODY */
 .homeContainer{
+    padding-top: 60px;
     display: flex;
     flex-direction: row;
 }
@@ -48,18 +50,21 @@
 table{
     margin: 0;
     width: 100%;
+    min-width: none;
     background-color: white;
 }
 
-
+/* CURSOR FOR INTERACTIVE CONTENT */
 th:hover, .handPointer:hover, .closeIcon:hover{
     cursor: pointer;
 }
 
+/* X ICON */
 .closeIcon{
     float: right;
 }
 
-h1, h2{
-    text-align: center;
+/* EVERY H2 ELEMENT */
+h2{
+    margin-left: 10px;
 }
