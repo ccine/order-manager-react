@@ -82,7 +82,7 @@ form{
 /* error div, MUST BE CHANGED WHEN RESIZE THE PAGE */
 .error{
     padding-left: 10px;
-    background-color: #D13823;
+    background-color: #B7311F;
     color: white;
     border-radius: 5px;
     height: 60px;
@@ -121,7 +121,7 @@ form{
 
 /* placeholder */
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #5757FF;
+    color: #0F0FFF;
     opacity: 1; /* Firefox */
 }
 
