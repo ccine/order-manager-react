@@ -125,8 +125,9 @@ form{
     opacity: 1; /* Firefox */
 }
 
+/* WIDTH SMALL */
 /* media query that starts when screen width goes below 400px */
-/* the loginBox will take up the whole width and height, loginBox will hide its box-shadow, font will resize based on the screen width */
+/* loginBox takes up the whole width and height, loginBox hides its box-shadow, font will resize based on the screen width */
 @media only screen and (max-width: 400px){
 
     /* Resize font of all elements with some text, except loginBoxTitle */
@@ -158,7 +159,9 @@ form{
     }   
 }
 
+/* SMALL */
 /* media query that starts when screen height and width goes below 550px and 400px respectively  */
+/* highConstrastButton moved to the top-right of the screen, header with a fixed height, height of the container managed automatically */
 @media only screen and (max-height: 550px) and (max-width: 400px){
     /* the highContrastButton will move to the top right */
     #styleSwitcher{
@@ -171,11 +174,16 @@ form{
         height: 50px;
     }
 
+    .loginBody{
+        height: 100%;
+    }
+
 }
 
+/* HEIGHT SMALL, WIDE LARGE */
 /* media query that starts when screen height goes below 460px and width is over 400px */
-/* the height of the container will be managed automatically, the highconstrastbutton will be moved to the top-right of the screen */
-/* the header will take a fixed height */
+/* height of the container managed automatically, highConstrastButton moved to the top-right of the screen */
+/* header with a fixed height */
 @media (max-height: 460px) and (min-width: 400px){
 
     /* the highContrastButton will move to the top right */
@@ -203,6 +211,18 @@ form{
     /* loginBox moved to the center of the screen */
     .loginBox{
         margin: auto;
+        height: 100vh;
     }
 
+}
+
+/* HEIGHT SMALL */
+/* media query that starts when screen height goes below 430px */
+/* loginBox height managed automatically, necessary when scrolling down, it prevents seeing white screen in highContrastMode */
+@media only screen and (max-height: 430px) {
+
+    /* loginBox height managed automatically */
+    .loginBox{
+        height: auto;
+    }
 }
