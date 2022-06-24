@@ -36,14 +36,13 @@
 /* loginBox */
 .loginBox{
     width: 400px;
+    height: 370px;                                                 /* necessary for showing error correctly */
     padding-top: 10px;
     padding-bottom: 20px;
     background-color: white;
 
     border-radius: 5px;
     box-shadow: 1px 2px 3px 4px rgba(12, 12, 12, 0.2);            /* horizontal length, vertical length, blur radius, spread, color */
-    margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 /* loginBox Title */
@@ -57,10 +56,11 @@ form{
     display: block;
     padding-left: 20px;
     padding-right: 20px;
+    padding-bottom: 10px;                                           /* Necessary when screen hegiht is too short */
 }
 
 /* input */
-input{
+.inputLogin{
     padding-left: 10px;
     width: 100%;
     height: 42px;
@@ -79,10 +79,10 @@ input{
     border-radius: 5px;
 }
 
-/* error div */
+/* error div, MUST BE CHANGED WHEN RESIZE THE PAGE */
 .error{
     padding-left: 10px;
-    background-color: #DA3A25;
+    background-color: #D13823;
     color: white;
     border-radius: 5px;
     height: 60px;
@@ -94,14 +94,13 @@ input{
 }
 
 
-/* MULTIPLE CLASSES */
 /* font-size */
-input, label, button{
+.inputLogin, .labelLogin, .buttonLogin{
     font-size: large;
 }
 
 /* coloring when element is focused */
-input:focus, label:focus, h1:focus{
+.inputLogin:focus, .labelLogin:focus, h1:focus{
     background-color: #FBFF00;
 }
 
@@ -110,13 +109,13 @@ input:focus, label:focus, h1:focus{
     margin-bottom: 10px;
 }
 
-/* cursor pointer for all buttons */
-button:hover{
+/* cursor pointer for buttonLogin class */
+.buttonLogin:hover{
     cursor: pointer;
 }
 
-/* color the text of button when focused */
-button:focus{
+/* color the text of button adn error when focused */
+.buttonLogin:focus, .error:focus{
     color: #FBFF00 !important;
 }
 
@@ -126,41 +125,84 @@ button:focus{
     opacity: 1; /* Firefox */
 }
 
-/* media query that starts when screen width goes below 450px*/
-/* the container will take up the whole width, loginBox will hide its box-shadow, font will resize based on the screen width and */
-/* the height of the container will be managed automatically*/
+/* media query that starts when screen width goes below 400px */
+/* the loginBox will take up the whole width and height, loginBox will hide its box-shadow, font will resize based on the screen width */
 @media only screen and (max-width: 400px){
 
-    .containerPageLogin{
-        height: auto;
-    }
-
-    input, label, button, .error{
+    /* Resize font of all elements with some text, except loginBoxTitle */
+    .inputLogin, .labelLogin, .buttonLogin, .error{
         font-size: 5vw;
     }
 
-    h1{
+    /* Resize font of the loginbox's title, aslo apply padding-top */
+    #loginBoxTitle{
         font-size: 10vw;
+        padding-top: 10px;
     }
 
+    /* display loginBody as block and no more as flex */
     .loginBody{
         display: block;
     }
 
+    /* loginBox now takes all the screen and has no more shadow, radius, margin and padding*/
     .loginBox{
-        width: 100vw;
-        height: 100vh;
-        padding-top: 5vh;
+        width: 100%;
+        height: 100%;
         box-shadow: none;
         border-radius: 0;
         margin-bottom: 0;
+        margin-top: 0;
+        padding-bottom: 0;
+        padding-top: 0;
     }   
 }
 
-/* media query that starts when screen width goes below 450px*/
-/* the height of the container will be managed automatically */
-@media only screen and (max-height: 480px){
+/* media query that starts when screen height and width goes below 550px and 400px respectively  */
+@media only screen and (max-height: 550px) and (max-width: 400px){
+    /* the highContrastButton will move to the top right */
+    #styleSwitcher{
+        margin-top: 1px;
+        margin-right: 1px;
+    }
+
+    /* the header will take a fixed height */
+    .loginHeader{
+        height: 50px;
+    }
+
+}
+
+/* media query that starts when screen height goes below 460px and width is over 400px */
+/* the height of the container will be managed automatically, the highconstrastbutton will be moved to the top-right of the screen */
+/* the header will take a fixed height */
+@media (max-height: 460px) and (min-width: 400px){
+
+    /* the highContrastButton will move to the top right */
+    #styleSwitcher{
+        margin-top: 1px;
+        margin-right: 1px;
+    }
+
+    /* height of the container managed automatically */
     .containerPageLogin{
         height: auto;
     }
+
+    /* the header will take a fixed height */
+    .loginHeader{
+        min-height: 50px;
+    }
+
+    /* display loginBody as block and no more as flex, also add some padding-bottom */
+    .loginBody{
+        display: block;
+        padding-bottom: 10px;
+    }
+
+    /* loginBox moved to the center of the screen */
+    .loginBox{
+        margin: auto;
+    }
+
 }
