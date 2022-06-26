@@ -140,7 +140,7 @@ function OrderTable(props: { username: string; role: Role }) {
         {/** View Agent Details in the next row */}
         {viewDetails.id === props.element.ordNum && viewDetails.agent && (
           <tr>
-            <td colSpan={nCol} className="informationsDiv">
+            <td colSpan={nCol} className="interactableTd">
               <IoCloseSharp
                 className="closeIcon"
                 size="50px"
@@ -153,7 +153,7 @@ function OrderTable(props: { username: string; role: Role }) {
         {/** View Customer Details in the next row */}
         {viewDetails.id === props.element.ordNum && viewDetails.customer && (
           <tr>
-            <td colSpan={nCol} className="informationsDiv">
+            <td colSpan={nCol} className="interactableTd">
               <IoCloseSharp
                 className="closeIcon"
                 size="50px"
@@ -168,7 +168,7 @@ function OrderTable(props: { username: string; role: Role }) {
           viewDetails.edit &&
           props.role === "manager" && (
             <tr>
-              <td colSpan={nCol}>
+              <td colSpan={nCol} className="interactableTd">
                 <IoCloseSharp
                   className="closeIcon"
                   size="50px"

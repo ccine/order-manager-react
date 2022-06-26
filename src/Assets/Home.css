@@ -1,178 +1,310 @@
- /* CONTAINER OF THE WHOLE PAGE */
- .containerPageHome {
-    height: 100%;
+/* CONTAINER OF THE WHOLE PAGE */
+.containerPageHome {
+    height: 100%;          /*height: 100vh; CONFLICT*/
     width: 100%;
 }
 
 /* HEADER */
 .homeHeader {
-    height: 60px;
+    top: 0px;
+    height: 80px;
     background-color: #292929;
-    width: 100vw;
+    width: 100%;
     position: fixed;
-}
-
-/* LOGOUT BUTTTON */
-#logoutButton{
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    width: 120px;
-    height: 40px;
-    color: white;
-    background-color: #008DEB;
-    border: transparent;
-    border-radius: 5px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 20px;
+    z-index: 2;
 }
 
 /* WELCOME TITLE */
 #homeTitle {
     margin: 0;
-    margin-top: 10px;
-    text-align: center;
     color: white;
+    flex-grow: 2;
+    margin-right: 10px;
+}
+
+/* HIGH_CONTRAST_MODE BUTTON*/
+#styleSwitcherHome {
+    color: black;
+    height: 40px;
+    background-color: white;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* LOGOUT BUTTTON */
+#logoutButton {
+    width: 120px;
+    height: 40px;
+    color: white;
+    background-color: #008deb;
+    border: transparent;
+    border-radius: 5px;
 }
 
 /* BODY */
-.homeContainer{
-    padding-top: 60px;                                      /* height of homeHeader */
+.homeContainer {
+    padding-top: 80px; /* height of homeHeader */
     display: flex;
     flex-direction: row;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 /* LEFT SIDE OF THE PAGE, CONTAINS THE KEY LINE */
-.keyColumn{
+.keyColumn {
     width: 25%;
-    max-width: 25%;
-    background-color: #00E61B;
+    background-color: #2EFF46;
     word-wrap: break-word;
 }
 
 /* RIGHT SIDE OF THE PAGE, CONTAINS THE TABLE */
-.tableColumn{
-    background-color: red;
-    width: 100%;
+.tableColumn {
+    background-color: #FF8A8A;
+    width: 100%;                        /* fill the rest of the page */
 }
 
 /* TABLE */
-table{
-    width: 100%;
+table {
+    width: 100%;                        /* fill all the div width */
     background-color: white;
 }
 
-/* CURSOR FOR INTERACTIVE CONTENT */
-th:hover, .handPointer:hover, .closeIcon:hover{
+/* CURSOR FOR INTERACTIVE CONTENT (handPointer = edit column)*/
+th:hover,
+.handPointer:hover,
+.closeIcon:hover,
+#logoutButton:hover,
+#styleSwitcherHome:hover,
+#submitHomeButton:hover {
     cursor: pointer;
 }
 
 /* Cursor for modify column header */
-.modifyColumnHeader:hover{
+.modifyColumnHeader:hover {
     cursor: default;
 }
 
 /* X icon */
-.closeIcon{
+.closeIcon {
     float: right;
 }
 
 /* titles of the page columns */
-.columnTitle{
-    margin-left: 10px;
+.padding_left {
+    padding-left: 10px;
 }
 
 /* alternate color of table rows */
-tbody tr:nth-child(odd){
-    background-color: #C4C4C4;
+tbody tr:nth-child(odd) {
+    background-color: #c4c4c4;
 }
 
 /* style the border of the table and align text to the center */
-table, th, td {
+table, th
+td {
     border: 1px solid black;
     border-collapse: separate; /* Don't collapse */
     border-spacing: 0;
     text-align: center;
 }
 
+th{
+    border: 2px solid black;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 80px;
+    background-color: white;
+}
+
 /* put some padding on ul */
-ul{
+ul {
     padding-left: 30px;
     padding-right: 10px;
 }
 
-.informationsDiv{
+/* Editor div */
+.interactableTd {
     text-align: left;
     background-color: white;
 }
 
-th{
-    position: -webkit-sticky; /* Safari */
-    position: sticky;
-    top: 60px;
-    background-color: white;
+/* EditorDiv title */
+#editHeader {
+    text-align: center;
 }
 
+/* form of EditorDiv */
+.homeForm {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+}
+
+/* formLabel div */
+.formLabels {
+    width: 50%;
+}
+
+/* fomrInputs div*/
+.formInputs {
+    width: 50%;
+}
+
+/* all the label of the form */
+.formLabels > label {
+    display: block;
+    padding-left: 17vw;
+    height: 42px;
+    padding-top: 5px;
+}
+
+/* all the input of the form */
+.formInputs > input {
+    display: block;
+    padding-left: 10px;
+    width: 57%;
+    height: 42px;
+    box-sizing: border-box; /* take count of padding and border when setting dimensions */
+    border-radius: 5px;
+    border: 2px solid; /* solid border */
+    margin-bottom: 5px;
+}
+
+/* color disabled input as grey */
+.formInputs > input[disabled] {
+    background-color: #c4c4c4;
+}
+
+/* EditorDiv save button */
+#submitHomeButton {
+    margin-top: 5px;
+    width: 57%;
+    height: 55px;
+    color: white;
+    background-color: #008deb;
+    border: transparent; /* trasparent border */
+    border-radius: 5px;
+}
+
+/* media query when screen is under 1000px */
 @media only screen and (max-width: 1000px) {
     /* manage contents in column order */
-    .homeContainer{
-        display: flex;
+    .homeContainer {
         flex-direction: column;
+        /*height: 100vh;*/
+        box-sizing: border-box;
     }
 
     /* keyColumn takes the entire width space */
-    .keyColumn{
-        max-width: none;
-        width: 100vw;
+    .keyColumn {
+        width: 100%;    /* fill the rest of the page */
     }
 
-    /* center titles */
-    .columnTitle{
+    /* title of the columns moved to center */
+    #keyColumnTitle, #tableColumnTitle{
         text-align: center;
         margin-top: 5px;
         margin-bottom: 5px;
     }
 
+    /* allow to scroll horizontally the table, also no artifacts of the page*/
     .tableColumn{
         overflow-x: auto;
     }
 
-    th{
+    /* th regain default position */
+    th {
         position: static;
         top: 0;
+        border-collapse: collapse;
+    }
+
+    /* to allign all the labels with the save button */
+    .formLabels > label {
+        padding-left: 21vw;
     }
 
 }
 
-@media only screen and (max-width: 670px) {
+
+/* media query when screen is under 620px */
+/* when the table doesn't shrink anymore */
+@media only screen and (max-width: 620px) {
     /* X icon fixed at right side */
-    .closeIcon{
+    .closeIcon {
         position: sticky;
         right: 0;
     }
+
+    /* title of edit div moved to the left */
+    #editHeader{
+        text-align: left;
+    }
+
+    /* all labels padding-left return normal */
+    .formLabels > label {
+        padding-left: initial;
+    }
+
+    /* resizing formLabels */
+    .formLabels {
+        width: 30%;
+    }
+
+    /* resizing formInputs */
+    .formInputs {
+        width: 70%;
+    }
+
+    /* all inputs take the whole wodth */
+    .formInputs > input {
+        width: 100%;
+    }
+
+    /* save button take the whole width */
+    #submitHomeButton {
+        width: 100%;
+    }
 }
 
-@media only screen and (max-width: 570px){
-    .homeHeader{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding-bottom: 10px;
-        padding-top: 10px;
+/* media query when screen is under 450px */
+/* when screen is too small */
+@media only screen and (max-width: 450px) {
+
+    /* height and font managed automatically */
+    #styleSwitcherHome, #logoutButton {
+        font-size: 3vw;
+        height: 60%;
     }
 
-    #homeTitle{
-        margin-top: 0;
-        margin-left: 10px;
+    /* font-size of all h2 */
+    .divTitle {
+        font-size: 6vw;
     }
 
-    #logoutButton{
-        position: relative;
-        top: 0;
-        right: 0;
-        margin-right: 10px;
+    /* font-size of table and list */
+    ul, table, .formInputs > input, #submitHomeButton{
+        font-size: 5vw;
     }
 
-    .homeContainer{
-        padding-top: 80px;
+    /*
+    .closeIcon{
+        height: 50px;
+        width: 10vw;
     }
+    */
+
 }

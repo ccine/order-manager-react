@@ -3,7 +3,7 @@ import { Agent } from "../types";
 function AgentDetailsRow(props: { agent: Agent }) {
   return (
     <>
-      <h2>Agent Details</h2>
+      <h2 className="padding_left divTitle">Agent Details</h2>
               <ul>
                 <li>Code: {props.agent.agentCode}</li>
                 <li>Name: {props.agent.agentName}</li>

@@ -72,7 +72,7 @@ function Login() {
         {/* LOGIN HEADER */}
         <header className="loginHeader">
           {/* highContrastMode button */}
-          <button id="styleSwitcher" className="buttonLogin" onClick={changeContrast} tabIndex={8}>High Contrast Mode: {highConstrastMode ? "ON" : "OFF"}</button>
+          <button id="styleSwitcherLogin" className="buttonLogin" onClick={changeContrast} tabIndex={8}>High Contrast Mode: {highConstrastMode ? "ON" : "OFF"}</button>
         </header>
 
         {/* LOGIN BODY */}

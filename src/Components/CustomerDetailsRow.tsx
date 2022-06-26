@@ -3,7 +3,7 @@ import { Customer } from "../types";
 function CustomerDetailsRow(props: { customer: Customer }) {
     return (
       <>
-        <h2>Customer Details</h2>
+        <h2 className="padding_left divTitle">Customer Details</h2>
         <ul>
           <li>Code: {props.customer.custCode}</li>
           <li>Name: {props.customer.custName}</li>

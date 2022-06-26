@@ -14,7 +14,7 @@
 }
 
 /* High contrast button */
-#styleSwitcher{
+#styleSwitcherLogin{
     margin-top: 10px;
     margin-right: 10px;
     color: white;
@@ -164,7 +164,7 @@
 /* highConstrastButton moved to the top-right of the screen, header with a fixed height, height of the container managed automatically */
 @media only screen and (max-height: 550px) and (max-width: 400px){
     /* the highContrastButton will move to the top right */
-    #styleSwitcher{
+    #styleSwitcherLogin{
         margin-top: 1px;
         margin-right: 1px;
     }
@@ -186,7 +186,7 @@
 @media (max-height: 460px) and (min-width: 400px){
 
     /* the highContrastButton will move to the top right */
-    #styleSwitcher{
+    #styleSwitcherLogin{
         margin-top: 1px;
         margin-right: 1px;
     }
