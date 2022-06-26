@@ -81,7 +81,7 @@ function Login() {
         <div className="loginBox" role="region" aria-labelledby="loginBoxTitle">
           <h1 id="loginBoxTitle" className="marginBottom" tabIndex={1}>LOGIN</h1>
           {/* Login form */}
-          <form onSubmit={handleSubmit}>
+          <form className="loginForm" onSubmit={handleSubmit}>
             {/* Username */}
             <label htmlFor="usernameInput" className="labelLogin" tabIndex={2}>Username:</label>
             <br />
@@ -114,7 +114,7 @@ function Login() {
             <br />
             <br />
             {/* Submit button */}
-            <button type="submit" id="submitButton" className="buttonLogin" tabIndex={6} aria-label="submit button" title="submit button"><strong>Log in</strong></button>
+            <button type="submit" id="submitLoginButton" className="buttonLogin" tabIndex={6} aria-label="submit button" title="submit button"><strong>Log in</strong></button>
             {/* Error div */}
             {error && <div className="error" role="alert" tabIndex={7}><p><strong>Error: </strong>{error}</p></div>}
           </form>
