@@ -1,6 +1,6 @@
 /* CONTAINER OF THE WHOLE PAGE */
 .containerPageHome {
-    height: 100%;          /*height: 100vh; CONFLICT*/
+    height: 100%;
     width: 100%;
 }
 
@@ -52,6 +52,7 @@
 
 /* BODY */
 .homeContainer {
+    min-height: 100vh;
     padding-top: 80px; /* height of homeHeader */
     display: flex;
     flex-direction: row;
@@ -199,12 +200,21 @@ ul {
     border-radius: 5px;
 }
 
+
+#homeTitle:focus, #keyColumnTitle:focus, ul:focus, #tableColumnTitle:focus, #styleSwitcherHome:focus, .keyColumn:focus, .tableColumn:focus, table:focus{
+    background-color: #FBFF00;
+    color: black;
+}
+
+#logoutButton:focus{
+    color: #FBFF00;
+}
+
 /* media query when screen is under 1000px */
 @media only screen and (max-width: 1000px) {
     /* manage contents in column order */
     .homeContainer {
         flex-direction: column;
-        /*height: 100vh;*/
         box-sizing: border-box;
     }
 
@@ -223,6 +233,7 @@ ul {
     /* allow to scroll horizontally the table, also no artifacts of the page*/
     .tableColumn{
         overflow-x: auto;
+        flex-grow: 2;                               /* fill teh rest of the space in height */
     }
 
     /* th regain default position */
