@@ -97,16 +97,19 @@ function OrderTable(props: { username: string; role: Role }) {
     ) : null;
   }
 
-  function TableRow(props: { element: Order; role: Role }) {
+  function TableRow(props: { element: Order; role: Role; index: number }) {
     return (
       <>
         <tr>
-          <td>{props.element.ordNum}</td>
-          <td>{props.element.ordAmount}</td>
-          <td>{props.element.advanceAmount}</td>
-          <td>{props.element.ordDate}</td>
+          <td tabIndex={100 * props.index + 1}>{props.element.ordNum}</td>
+          <td tabIndex={100 * props.index + 2}>{props.element.ordAmount}</td>
+          <td tabIndex={100 * props.index + 3}>
+            {props.element.advanceAmount}
+          </td>
+          <td tabIndex={100 * props.index + 4}>{props.element.ordDate}</td>
           {props.role !== "customer" && (
             <td
+              tabIndex={100 * props.index + 5}
               className="handPointer"
               onClick={() =>
                 setViewDetails({ id: props.element.ordNum, customer: true })
@@ -117,6 +120,7 @@ function OrderTable(props: { username: string; role: Role }) {
           )}
           {props.role !== "agent" && (
             <td
+              tabIndex={100 * props.index + 6}
               className="handPointer"
               onClick={() =>
                 setViewDetails({ id: props.element.ordNum, agent: true })
@@ -125,9 +129,12 @@ function OrderTable(props: { username: string; role: Role }) {
               {props.element.agentCode.agentCode}
             </td>
           )}
-          <td>{props.element.ordDescription}</td>
+          <td tabIndex={100 * props.index + 7}>
+            {props.element.ordDescription}
+          </td>
           {props.role === "manager" && (
             <td
+              tabIndex={100 * props.index + 1}
               className="handPointer"
               onClick={() =>
                 setViewDetails({ id: props.element.ordNum, edit: true })
@@ -174,7 +181,7 @@ function OrderTable(props: { username: string; role: Role }) {
                   size="50px"
                   onClick={() => setViewDetails({ id: viewDetails.id })}
                 />
-                <OrderEditRow order={props.element} reloadData={refetch}/>
+                <OrderEditRow order={props.element} reloadData={refetch} />
               </td>
             </tr>
           )}
@@ -187,42 +194,43 @@ function OrderTable(props: { username: string; role: Role }) {
       <table id="orderList" border={2} align="center">
         <thead>
           <tr>
-            <th onClick={() => changeOrder("ordNum")}>
+            <th id="orderNumberId" role="columnheader" tabIndex={14} onClick={() => changeOrder("ordNum")} onKeyDown={(event) => {if(event.keyCode === 13) changeOrder("ordNum")}}>
               Order number {showArrow("ordNum")}
             </th>
-            <th onClick={() => changeOrder("ordAmount")}>
+            <th role="columnheader" tabIndex={15} onClick={() => changeOrder("ordAmount")} onKeyDown={(event) => {if(event.keyCode === 13) changeOrder("ordAmount")}}>
               Order amount {showArrow("ordAmount")}
             </th>
-            <th onClick={() => changeOrder("advanceAmount")}>
+            <th role="columnheader" tabIndex={16} onClick={() => changeOrder("advanceAmount")} onKeyDown={(event) => {if(event.keyCode === 13) changeOrder("advanceAmount")}}>
               Advance amount {showArrow("advanceAmount")}
             </th>
-            <th onClick={() => changeOrder("ordDate")}>
+            <th role="columnheader" tabIndex={17} onClick={() => changeOrder("ordDate")} onKeyDown={(event) => {if(event.keyCode === 13) changeOrder("ordDate")}}>
               Order date {showArrow("ordDate")}
             </th>
             {props.role !== "customer" && (
-              <th onClick={() => changeOrder("custCode")}>
+              <th role="columnheader" tabIndex={18} onClick={() => changeOrder("custCode")} onKeyDown={(event) => {if(event.keyCode === 13) changeOrder("custCode")}}>
                 Customer {showArrow("custCode")}
               </th>
             )}
             {props.role !== "agent" && (
-              <th onClick={() => changeOrder("agentCode")}>
+              <th role="columnheader" tabIndex={19} onClick={() => changeOrder("agentCode")} onKeyDown={(event) => {if(event.keyCode === 13) changeOrder("agentCode")}}>
                 Agent {showArrow("agentCode")}
               </th>
             )}
-            <th onClick={() => changeOrder("ordDescription")}>
+            <th role="columnheader" tabIndex={20} onClick={() => changeOrder("ordDescription")} onKeyDown={(event) => {if(event.keyCode === 13) changeOrder("ordDescription")}}>
               Order description {showArrow("ordDescription")}
             </th>
             {props.role === "manager" && (
-              <th className="modifyColumnHeader">Edit</th>
+              <th role="columnheader" tabIndex={21} className="modifyColumnHeader">Edit</th>
             )}
           </tr>
         </thead>
         <tbody>
-          {sortedItems.map((element: Order) => (
+        {sortedItems.map((element: Order, index: number) => (
             <TableRow
               key={element.ordNum}
               element={element}
               role={props.role}
+              index={index + 1}
             />
           ))}
         </tbody>

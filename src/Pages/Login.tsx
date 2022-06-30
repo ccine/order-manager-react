@@ -72,7 +72,7 @@ function Login() {
         {/* LOGIN HEADER */}
         <header className="loginHeader">
           {/* highContrastMode button */}
-          <button id="styleSwitcherLogin" className="buttonLogin" onClick={changeContrast} tabIndex={8}>High Contrast Mode: {highConstrastMode ? "ON" : "OFF"}</button>
+          <button id="styleSwitcherLogin" className="buttonLogin" onClick={changeContrast} tabIndex={8} aria-label="high contrast mode button">High Contrast Mode: {highConstrastMode ? "ON" : "OFF"}</button>
         </header>
 
         {/* LOGIN BODY */}
@@ -114,7 +114,7 @@ function Login() {
             <br />
             <br />
             {/* Submit button */}
-            <button type="submit" id="submitLoginButton" className="buttonLogin" tabIndex={6} aria-label="submit button" title="submit button"><strong>Log in</strong></button>
+            <button type="submit" id="submitLoginButton" className="buttonLogin" tabIndex={6} aria-label="submit button"><strong>Log in</strong></button>
             {/* Error div */}
             {error && <div className="error" role="alert" tabIndex={7}><p><strong>Error: </strong>{error}</p></div>}
           </form>

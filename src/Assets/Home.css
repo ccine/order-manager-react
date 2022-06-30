@@ -201,11 +201,13 @@ ul {
 }
 
 
-#homeTitle:focus, #keyColumnTitle:focus, ul:focus, #tableColumnTitle:focus, #styleSwitcherHome:focus, .keyColumn:focus, .tableColumn:focus, table:focus{
+/* color elementes when focused */
+#homeTitle:focus, #keyColumnTitle:focus, ul:focus, li:focus, #tableColumnTitle:focus, #styleSwitcherHome:focus, .keyColumn:focus, .tableColumn:focus, th:focus, td:focus{
     background-color: #FBFF00;
     color: black;
 }
 
+/* change text color of logout button when focused */
 #logoutButton:focus{
     color: #FBFF00;
 }
