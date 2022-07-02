@@ -96,7 +96,16 @@ function OrderTable(props: { username: string; role: Role }) {
     ) : null;
   }
 
+  function handleSpacePressed(event: React.KeyboardEvent) {
+    if (event.code === "Space" && event.target instanceof HTMLElement) {
+      event.preventDefault();
+      event.target.click();
+    }
+  }
+
   function TableRow(props: { element: Order; role: Role }) {
+    let closeIconSize = "50px";
+
     return (
       <>
         <tr>
@@ -111,10 +120,7 @@ function OrderTable(props: { username: string; role: Role }) {
               onClick={() =>
                 setViewDetails({ id: props.element.ordNum, customer: true })
               }
-              onKeyDown={(event) => {
-                if (event.code === "Space")
-                  setViewDetails({ id: props.element.ordNum, customer: true });
-              }}
+              onKeyDown={handleSpacePressed}
             >
               {props.element.custCode.custCode}
             </td>
@@ -126,10 +132,7 @@ function OrderTable(props: { username: string; role: Role }) {
               onClick={() =>
                 setViewDetails({ id: props.element.ordNum, agent: true })
               }
-              onKeyDown={(event) => {
-                if (event.code === "Space")
-                  setViewDetails({ id: props.element.ordNum, agent: true });
-              }}
+              onKeyDown={handleSpacePressed}
             >
               {props.element.agentCode.agentCode}
             </td>
@@ -142,10 +145,7 @@ function OrderTable(props: { username: string; role: Role }) {
               onClick={() =>
                 setViewDetails({ id: props.element.ordNum, edit: true })
               }
-              onKeyDown={(event) => {
-                if (event.code === "Space")
-                  setViewDetails({ id: props.element.ordNum, edit: true });
-              }}
+              onKeyDown={handleSpacePressed}
             >
               Edit
             </td>
@@ -157,12 +157,10 @@ function OrderTable(props: { username: string; role: Role }) {
             <td colSpan={nCol} className="interactableTd">
               <IoCloseSharp
                 className="closeIcon"
-                size="50px"
+                size={closeIconSize}
+                tabIndex={0}
                 onClick={() => setViewDetails({ id: viewDetails.id })}
-                onKeyDown={(event) => {
-                  if (event.code === "Space")
-                    setViewDetails({ id: viewDetails.id });
-                }}
+                onKeyDown={handleSpacePressed}
               />
               <AgentDetailsRow agent={props.element.agentCode} />
             </td>
@@ -174,12 +172,10 @@ function OrderTable(props: { username: string; role: Role }) {
             <td colSpan={nCol} className="interactableTd">
               <IoCloseSharp
                 className="closeIcon"
-                size="50px"
+                size={closeIconSize}
+                tabIndex={0}
                 onClick={() => setViewDetails({ id: viewDetails.id })}
-                onKeyDown={(event) => {
-                  if (event.code === "Space")
-                    setViewDetails({ id: viewDetails.id });
-                }}
+                onKeyDown={handleSpacePressed}
               />
               <CustomerDetailsRow customer={props.element.custCode} />
             </td>
@@ -193,12 +189,10 @@ function OrderTable(props: { username: string; role: Role }) {
               <td colSpan={nCol} className="interactableTd">
                 <IoCloseSharp
                   className="closeIcon"
-                  size="50px"
+                  size={closeIconSize}
+                  tabIndex={0}
                   onClick={() => setViewDetails({ id: viewDetails.id })}
-                  onKeyDown={(event) => {
-                    if (event.code === "Space")
-                      setViewDetails({ id: viewDetails.id });
-                  }}
+                  onKeyDown={handleSpacePressed}
                 />
                 <OrderEditRow order={props.element} reloadData={refetch} />
               </td>
@@ -218,9 +212,7 @@ function OrderTable(props: { username: string; role: Role }) {
               role="columnheader"
               tabIndex={0}
               onClick={() => changeOrder("ordNum")}
-              onKeyDown={(event) => {
-                if (event.code === "Space") changeOrder("ordNum");
-              }}
+              onKeyDown={handleSpacePressed}
             >
               Order number {showArrow("ordNum")}
             </th>
@@ -228,9 +220,7 @@ function OrderTable(props: { username: string; role: Role }) {
               role="columnheader"
               tabIndex={0}
               onClick={() => changeOrder("ordAmount")}
-              onKeyDown={(event) => {
-                if (event.code === "Space") changeOrder("ordAmount");
-              }}
+              onKeyDown={handleSpacePressed}
             >
               Order amount {showArrow("ordAmount")}
             </th>
@@ -238,9 +228,7 @@ function OrderTable(props: { username: string; role: Role }) {
               role="columnheader"
               tabIndex={0}
               onClick={() => changeOrder("advanceAmount")}
-              onKeyDown={(event) => {
-                if (event.code === "Space") changeOrder("advanceAmount");
-              }}
+              onKeyDown={handleSpacePressed}
             >
               Advance amount {showArrow("advanceAmount")}
             </th>
@@ -248,9 +236,7 @@ function OrderTable(props: { username: string; role: Role }) {
               role="columnheader"
               tabIndex={0}
               onClick={() => changeOrder("ordDate")}
-              onKeyDown={(event) => {
-                if (event.code === "Space") changeOrder("ordDate");
-              }}
+              onKeyDown={handleSpacePressed}
             >
               Order date {showArrow("ordDate")}
             </th>
@@ -259,9 +245,7 @@ function OrderTable(props: { username: string; role: Role }) {
                 role="columnheader"
                 tabIndex={0}
                 onClick={() => changeOrder("custCode")}
-                onKeyDown={(event) => {
-                  if (event.code === "Space") changeOrder("custCode");
-                }}
+                onKeyDown={handleSpacePressed}
               >
                 Customer {showArrow("custCode")}
               </th>
@@ -271,9 +255,7 @@ function OrderTable(props: { username: string; role: Role }) {
                 role="columnheader"
                 tabIndex={0}
                 onClick={() => changeOrder("agentCode")}
-                onKeyDown={(event) => {
-                  if (event.code === "Space") changeOrder("agentCode");
-                }}
+                onKeyDown={handleSpacePressed}
               >
                 Agent {showArrow("agentCode")}
               </th>
@@ -282,9 +264,7 @@ function OrderTable(props: { username: string; role: Role }) {
               role="columnheader"
               tabIndex={0}
               onClick={() => changeOrder("ordDescription")}
-              onKeyDown={(event) => {
-                if (event.code === "Space") changeOrder("ordDescription");
-              }}
+              onKeyDown={handleSpacePressed}
             >
               Order description {showArrow("ordDescription")}
             </th>
