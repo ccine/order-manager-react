@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import "../Assets/Home.css";
-import { IoCaretUp, IoCaretDown } from "react-icons/io5";
+import { IoCaretUp, IoCaretDown, IoCloseSharp } from "react-icons/io5";
 import { useQuery } from "@apollo/client";
 import { Order, Role } from "../types";
 import AgentDetailsRow from "./AgentDetailsRow";
 import CustomerDetailsRow from "./CustomerDetailsRow";
+import OrderEditRow from "./OrderEditRow";
 import {
   GET_ALL_ORDERS,
   GET_ORDERS_BY_AGENT,
   GET_ORDERS_BY_CUSTOMER,
 } from "../Graphql/query";
-import { IoCloseSharp } from "react-icons/io5";
-import OrderEditRow from "./OrderEditRow";
 
 function OrderTable(props: { username: string; role: Role }) {
   /** Number of column in the table  */
@@ -97,48 +96,56 @@ function OrderTable(props: { username: string; role: Role }) {
     ) : null;
   }
 
-  function TableRow(props: { element: Order; role: Role; index: number }) {
+  function TableRow(props: { element: Order; role: Role }) {
     return (
       <>
         <tr>
-          <td tabIndex={100 * props.index + 1}>{props.element.ordNum}</td>
-          <td tabIndex={100 * props.index + 2}>{props.element.ordAmount}</td>
-          <td tabIndex={100 * props.index + 3}>
-            {props.element.advanceAmount}
-          </td>
-          <td tabIndex={100 * props.index + 4}>{props.element.ordDate}</td>
+          <td tabIndex={0}>{props.element.ordNum}</td>
+          <td tabIndex={0}>{props.element.ordAmount}</td>
+          <td tabIndex={0}>{props.element.advanceAmount}</td>
+          <td tabIndex={0}>{props.element.ordDate}</td>
           {props.role !== "customer" && (
             <td
-              tabIndex={100 * props.index + 5}
+              tabIndex={0}
               className="handPointer"
               onClick={() =>
                 setViewDetails({ id: props.element.ordNum, customer: true })
               }
+              onKeyDown={(event) => {
+                if (event.code === "Space")
+                  setViewDetails({ id: props.element.ordNum, customer: true });
+              }}
             >
               {props.element.custCode.custCode}
             </td>
           )}
           {props.role !== "agent" && (
             <td
-              tabIndex={100 * props.index + 6}
+              tabIndex={0}
               className="handPointer"
               onClick={() =>
                 setViewDetails({ id: props.element.ordNum, agent: true })
               }
+              onKeyDown={(event) => {
+                if (event.code === "Space")
+                  setViewDetails({ id: props.element.ordNum, agent: true });
+              }}
             >
               {props.element.agentCode.agentCode}
             </td>
           )}
-          <td tabIndex={100 * props.index + 7}>
-            {props.element.ordDescription}
-          </td>
+          <td tabIndex={0}>{props.element.ordDescription}</td>
           {props.role === "manager" && (
             <td
-              tabIndex={100 * props.index + 1}
+              tabIndex={0}
               className="handPointer"
               onClick={() =>
                 setViewDetails({ id: props.element.ordNum, edit: true })
               }
+              onKeyDown={(event) => {
+                if (event.code === "Space")
+                  setViewDetails({ id: props.element.ordNum, edit: true });
+              }}
             >
               Edit
             </td>
@@ -152,6 +159,10 @@ function OrderTable(props: { username: string; role: Role }) {
                 className="closeIcon"
                 size="50px"
                 onClick={() => setViewDetails({ id: viewDetails.id })}
+                onKeyDown={(event) => {
+                  if (event.code === "Space")
+                    setViewDetails({ id: viewDetails.id });
+                }}
               />
               <AgentDetailsRow agent={props.element.agentCode} />
             </td>
@@ -165,6 +176,10 @@ function OrderTable(props: { username: string; role: Role }) {
                 className="closeIcon"
                 size="50px"
                 onClick={() => setViewDetails({ id: viewDetails.id })}
+                onKeyDown={(event) => {
+                  if (event.code === "Space")
+                    setViewDetails({ id: viewDetails.id });
+                }}
               />
               <CustomerDetailsRow customer={props.element.custCode} />
             </td>
@@ -180,6 +195,10 @@ function OrderTable(props: { username: string; role: Role }) {
                   className="closeIcon"
                   size="50px"
                   onClick={() => setViewDetails({ id: viewDetails.id })}
+                  onKeyDown={(event) => {
+                    if (event.code === "Space")
+                      setViewDetails({ id: viewDetails.id });
+                  }}
                 />
                 <OrderEditRow order={props.element} reloadData={refetch} />
               </td>
@@ -194,43 +213,98 @@ function OrderTable(props: { username: string; role: Role }) {
       <table id="orderList" border={2} align="center">
         <thead>
           <tr>
-            <th id="orderNumberId" role="columnheader" tabIndex={14} onClick={() => changeOrder("ordNum")} onKeyDown={(event) => {if(event.keyCode === 13) changeOrder("ordNum")}}>
+            <th
+              id="orderNumberId"
+              role="columnheader"
+              tabIndex={0}
+              onClick={() => changeOrder("ordNum")}
+              onKeyDown={(event) => {
+                if (event.code === "Space") changeOrder("ordNum");
+              }}
+            >
               Order number {showArrow("ordNum")}
             </th>
-            <th role="columnheader" tabIndex={15} onClick={() => changeOrder("ordAmount")} onKeyDown={(event) => {if(event.keyCode === 13) changeOrder("ordAmount")}}>
+            <th
+              role="columnheader"
+              tabIndex={0}
+              onClick={() => changeOrder("ordAmount")}
+              onKeyDown={(event) => {
+                if (event.code === "Space") changeOrder("ordAmount");
+              }}
+            >
               Order amount {showArrow("ordAmount")}
             </th>
-            <th role="columnheader" tabIndex={16} onClick={() => changeOrder("advanceAmount")} onKeyDown={(event) => {if(event.keyCode === 13) changeOrder("advanceAmount")}}>
+            <th
+              role="columnheader"
+              tabIndex={0}
+              onClick={() => changeOrder("advanceAmount")}
+              onKeyDown={(event) => {
+                if (event.code === "Space") changeOrder("advanceAmount");
+              }}
+            >
               Advance amount {showArrow("advanceAmount")}
             </th>
-            <th role="columnheader" tabIndex={17} onClick={() => changeOrder("ordDate")} onKeyDown={(event) => {if(event.keyCode === 13) changeOrder("ordDate")}}>
+            <th
+              role="columnheader"
+              tabIndex={0}
+              onClick={() => changeOrder("ordDate")}
+              onKeyDown={(event) => {
+                if (event.code === "Space") changeOrder("ordDate");
+              }}
+            >
               Order date {showArrow("ordDate")}
             </th>
             {props.role !== "customer" && (
-              <th role="columnheader" tabIndex={18} onClick={() => changeOrder("custCode")} onKeyDown={(event) => {if(event.keyCode === 13) changeOrder("custCode")}}>
+              <th
+                role="columnheader"
+                tabIndex={0}
+                onClick={() => changeOrder("custCode")}
+                onKeyDown={(event) => {
+                  if (event.code === "Space") changeOrder("custCode");
+                }}
+              >
                 Customer {showArrow("custCode")}
               </th>
             )}
             {props.role !== "agent" && (
-              <th role="columnheader" tabIndex={19} onClick={() => changeOrder("agentCode")} onKeyDown={(event) => {if(event.keyCode === 13) changeOrder("agentCode")}}>
+              <th
+                role="columnheader"
+                tabIndex={0}
+                onClick={() => changeOrder("agentCode")}
+                onKeyDown={(event) => {
+                  if (event.code === "Space") changeOrder("agentCode");
+                }}
+              >
                 Agent {showArrow("agentCode")}
               </th>
             )}
-            <th role="columnheader" tabIndex={20} onClick={() => changeOrder("ordDescription")} onKeyDown={(event) => {if(event.keyCode === 13) changeOrder("ordDescription")}}>
+            <th
+              role="columnheader"
+              tabIndex={0}
+              onClick={() => changeOrder("ordDescription")}
+              onKeyDown={(event) => {
+                if (event.code === "Space") changeOrder("ordDescription");
+              }}
+            >
               Order description {showArrow("ordDescription")}
             </th>
             {props.role === "manager" && (
-              <th role="columnheader" tabIndex={21} className="modifyColumnHeader">Edit</th>
+              <th
+                role="columnheader"
+                tabIndex={0}
+                className="modifyColumnHeader"
+              >
+                Edit
+              </th>
             )}
           </tr>
         </thead>
         <tbody>
-        {sortedItems.map((element: Order, index: number) => (
+          {sortedItems.map((element: Order) => (
             <TableRow
               key={element.ordNum}
               element={element}
               role={props.role}
-              index={index + 1}
             />
           ))}
         </tbody>

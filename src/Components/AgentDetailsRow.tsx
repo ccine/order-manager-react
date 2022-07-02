@@ -3,16 +3,16 @@ import { Agent } from "../types";
 function AgentDetailsRow(props: { agent: Agent }) {
   return (
     <>
-      <h2 className="padding_left divTitle">Agent Details</h2>
+      <h2 className="padding_left divTitle" tabIndex={0}>Agent Details</h2>
               <ul>
-                <li>Code: {props.agent.agentCode}</li>
-                <li>Name: {props.agent.agentName}</li>
-                <li>
+                <li tabIndex={0}>Code: {props.agent.agentCode}</li>
+                <li tabIndex={0}>Name: {props.agent.agentName}</li>
+                <li tabIndex={0}>
                   Commission: {props.agent.commission}
                 </li>
-                <li>Country: {props.agent.country}</li>
-                <li>Phone Number: {props.agent.phoneNo}</li>
-                <li>Working Area: {props.agent.workingArea}</li>
+                <li tabIndex={0}>Country: {props.agent.country}</li>
+                <li tabIndex={0}>Phone Number: {props.agent.phoneNo}</li>
+                <li tabIndex={0}>Working Area: {props.agent.workingArea}</li>
               </ul>
     </>
   );

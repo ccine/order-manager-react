@@ -38,16 +38,16 @@ function Home() {
     return (
         <div className="containerPageHome">
             <header className="homeHeader" aria-labelledby="homeTitle">
-                <h2 id="homeTitle" className="divTitle" tabIndex={1}>Welcome {auth.user?.username}</h2>
+                <h2 id="homeTitle" className="divTitle" tabIndex={0}>Welcome {auth.user?.username}</h2>
 
                 {/* highContrastMode button */}
-                <button id="styleSwitcherHome" aria-label="high contrast mode button" onClick={changeContrast} tabIndex={2}><strong>
+                <button id="styleSwitcherHome" aria-label="high contrast mode button" onClick={changeContrast} tabIndex={0}><strong>
                     High Contrast Mode: {highConstrastMode ? "ON" : "OFF"}
                     </strong>
                 </button>
 
                 <button
-                    tabIndex={3}
+                    tabIndex={0}
                     aria-label="logout button"
                     id="logoutButton"
                     onClick={() => {
@@ -59,28 +59,28 @@ function Home() {
             </header>
 
             <div className="homeContainer">
-                <div className="keyColumn" role="region" aria-labelledby="keyColumnTitle" tabIndex={4}>
-                    <h2 id="keyColumnTitle" className="padding_left divTitle" tabIndex={5}>
+                <div className="keyColumn" role="region">
+                    <h2 id="keyColumnTitle" className="padding_left divTitle" tabIndex={0}>
                         Instructions:
                     </h2>
-                    <ul tabIndex={6} aria-label="instructions list">
-                        <li tabIndex={7}>
+                    <ul>
+                        <li tabIndex={0}>
                             On the right side of the page you can see your list
                             of orders in a table
                         </li>
-                        <li tabIndex={8}>
+                        <li tabIndex={0}>
                             You can sort the rows of the table by clicking on
                             the name of the column you want to sort by (the order of sorting is showd by an icon
                             which points up for ascending order, down for descending)
                         </li>
-                        <li tabIndex={9}>
+                        <li tabIndex={0}>
                             Each agent and customer can be clicked to see his
                             details
                         </li>
-                        <li tabIndex={10}>
+                        <li tabIndex={0}>
                             Click the "Log out" button to exit from this page
                         </li>
-                        <li tabIndex={11}>
+                        <li tabIndex={0}>
                             In small width screen the function of the table
                             headers to follow the scrolling of the page is
                             disabled
@@ -88,8 +88,8 @@ function Home() {
                     </ul>
                 </div>
 
-                <div className="tableColumn" role="region" aria-labelledby="tableColumnTitle" tabIndex={12}>
-                    <h2 id="tableColumnTitle" className="padding_left divTitle" tabIndex={13}>
+                <div className="tableColumn" role="region">
+                    <h2 id="tableColumnTitle" className="padding_left divTitle" tabIndex={0}>
                         List of orders:
                     </h2>
                     {auth.user && (

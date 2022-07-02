@@ -72,21 +72,21 @@ function Login() {
         {/* LOGIN HEADER */}
         <header className="loginHeader">
           {/* highContrastMode button */}
-          <button id="styleSwitcherLogin" className="buttonLogin" onClick={changeContrast} tabIndex={8} aria-label="high contrast mode button">High Contrast Mode: {highConstrastMode ? "ON" : "OFF"}</button>
+          <button id="styleSwitcherLogin" className="buttonLogin" onClick={changeContrast} tabIndex={0} aria-label="high contrast mode button">High Contrast Mode: {highConstrastMode ? "ON" : "OFF"}</button>
         </header>
 
         {/* LOGIN BODY */}
         <div className="loginBody">
           {/* login Box */}
         <div className="loginBox" role="region" aria-labelledby="loginBoxTitle">
-          <h1 id="loginBoxTitle" className="marginBottom" tabIndex={1}>LOGIN</h1>
+          <h1 id="loginBoxTitle" className="marginBottom" tabIndex={0}>LOGIN</h1>
           {/* Login form */}
           <form className="loginForm" onSubmit={handleSubmit}>
             {/* Username */}
-            <label htmlFor="usernameInput" className="labelLogin" tabIndex={2}>Username:</label>
+            <label htmlFor="usernameInput" className="labelLogin" tabIndex={0}>Username:</label>
             <br />
             <input
-              tabIndex={3}
+              tabIndex={0}
               className="marginBottom inputLogin"
               type="text"
               id="usernameInput"
@@ -98,10 +98,10 @@ function Login() {
             />
             <br />
             {/* Password */}
-            <label htmlFor="passwordInput" className="labelLogin" tabIndex={4}>Password:</label>
+            <label htmlFor="passwordInput" className="labelLogin" tabIndex={0}>Password:</label>
             <br />
             <input
-              tabIndex={5}
+              tabIndex={0}
               className="inputLogin"
               type="password"
               id="passwordInput"
@@ -114,9 +114,9 @@ function Login() {
             <br />
             <br />
             {/* Submit button */}
-            <button type="submit" id="submitLoginButton" className="buttonLogin" tabIndex={6} aria-label="submit button"><strong>Log in</strong></button>
+            <button type="submit" id="submitLoginButton" className="buttonLogin" tabIndex={0} aria-label="submit button"><strong>Log in</strong></button>
             {/* Error div */}
-            {error && <div className="error" role="alert" tabIndex={7}><p><strong>Error: </strong>{error}</p></div>}
+            {error && <div className="error" role="alert" tabIndex={0}><p><strong>Error: </strong>{error}</p></div>}
           </form>
         </div>
         </div>
