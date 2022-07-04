@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Components/Auth";
 
 function Login() {
-  document.querySelector('title')!.textContent = "LoginPage";                         // Change the page's title
+  document.querySelector('title')!.textContent = "OrderManager - LoginPage";                         // Change the page's title
   const usernameRef = useRef<HTMLInputElement>(null);                                 // Reference to usernameInput          
   const passwordRef = useRef<HTMLInputElement>(null);                                 // Reference to passwordInput
   const [error, setError] = useState<undefined | "Server error" | "The username or password is incorrect">(undefined);  // State of error
@@ -72,55 +72,58 @@ function Login() {
         {/* LOGIN HEADER */}
         <header className="loginHeader">
           {/* highContrastMode button */}
-          <button id="styleSwitcherLogin" className="buttonLogin" onClick={changeContrast} tabIndex={0} aria-label="high contrast mode button">High Contrast Mode: {highConstrastMode ? "ON" : "OFF"}</button>
+          <button id="styleSwitcherLogin" className="buttonLogin" onClick={changeContrast} tabIndex={0}>High Contrast Mode: {highConstrastMode ? "ON" : "OFF"}</button>
         </header>
 
-        {/* LOGIN BODY */}
-        <div className="loginBody">
-          {/* login Box */}
-        <div className="loginBox" role="region" aria-labelledby="loginBoxTitle">
-          <h1 id="loginBoxTitle" className="marginBottom" tabIndex={0}>LOGIN</h1>
-          {/* Login form */}
-          <form className="loginForm" onSubmit={handleSubmit}>
-            {/* Username */}
-            <label htmlFor="usernameInput" className="labelLogin" tabIndex={0}>Username:</label>
-            <br />
-            <input
-              tabIndex={0}
-              className="marginBottom inputLogin"
-              type="text"
-              id="usernameInput"
-              name="usernameInput"
-              placeholder="Enter your username"
-              autoComplete="username"
-              ref={usernameRef}
-              required
-            />
-            <br />
-            {/* Password */}
-            <label htmlFor="passwordInput" className="labelLogin" tabIndex={0}>Password:</label>
-            <br />
-            <input
-              tabIndex={0}
-              className="inputLogin"
-              type="password"
-              id="passwordInput"
-              name="passwordInput"
-              placeholder="Enter your password"
-              autoComplete="current-password"
-              ref={passwordRef}
-              required
-            />
-            <br />
-            <br />
-            {/* Submit button */}
-            <button type="submit" id="submitLoginButton" className="buttonLogin" tabIndex={0} aria-label="submit button"><strong>Log in</strong></button>
-            {/* Error div */}
-            {error && <div className="error" role="alert" tabIndex={0}><p><strong>Error: </strong>{error}</p></div>}
-          </form>
-        </div>
-        </div>
-      </div>
+        <main>
+
+          {/* LOGIN BODY */}
+          <div className="loginBody">
+            {/* login Box */}
+            <div className="loginBox" role="region" aria-labelledby="loginBoxTitle">
+              <h1 id="loginBoxTitle" className="marginBottom" tabIndex={0}>LOGIN</h1>
+              {/* Login form */}
+              <form className="loginForm" onSubmit={handleSubmit}>
+                {/* Username */}
+                <label htmlFor="usernameInput" className="labelLogin" tabIndex={0}>Username:</label>
+                <br />
+                <input
+                  tabIndex={0}
+                  className="marginBottom inputLogin"
+                  type="text"
+                  id="usernameInput"
+                  name="usernameInput"
+                  placeholder="Enter your username"
+                  autoComplete="username"
+                  ref={usernameRef}
+                  required
+                />
+                <br />
+                {/* Password */}
+                <label htmlFor="passwordInput" className="labelLogin" tabIndex={0}>Password:</label>
+                <br />
+                <input
+                  tabIndex={0}
+                  className="inputLogin"
+                  type="password"
+                  id="passwordInput"
+                  name="passwordInput"
+                  placeholder="Enter your password"
+                  autoComplete="current-password"
+                  ref={passwordRef}
+                  required
+                />
+                <br />
+                <br />
+                {/* Submit button */}
+                <button type="submit" id="submitLoginButton" className="buttonLogin" tabIndex={0}><strong>Log in</strong></button>
+                {/* Error div */}
+                {error && <div className="error" role="alert" tabIndex={0}><p><strong>Error: </strong>{error}</p></div>}
+              </form>
+            </div>
+          </div>
+        </main>
+    </div>
   );
 }
 export default Login;
