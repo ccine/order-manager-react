@@ -96,7 +96,6 @@ function AgentDetailsRow(props: { order: Order; reloadData: VoidFunction }) {
         <button
           type="submit"
           id="submitHomeButton"
-          aria-label="submit button"
           title="submit button"
           tabIndex={0}
         >

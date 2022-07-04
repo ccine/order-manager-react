@@ -89,9 +89,9 @@ function OrderTable(props: { username: string; role: Role }) {
   function showArrow(key: string) {
     return order?.key === key ? (
       order.asc ? (
-        <IoCaretUp />
+        <IoCaretUp aria-label="ascending order"/>
       ) : (
-        <IoCaretDown />
+        <IoCaretDown aria-label="descending order"/>
       )
     ) : null;
   }
@@ -155,13 +155,14 @@ function OrderTable(props: { username: string; role: Role }) {
         {viewDetails.id === props.element.ordNum && viewDetails.agent && (
           <tr>
             <td colSpan={nCol} className="interactableTd">
-              <IoCloseSharp
-                className="closeIcon"
-                size={closeIconSize}
-                tabIndex={0}
-                onClick={() => setViewDetails({ id: viewDetails.id })}
-                onKeyDown={handleSpacePressed}
-              />
+                <IoCloseSharp
+                  aria-label="close icon"
+                  className="closeIcon"
+                  size={closeIconSize}
+                  tabIndex={0}
+                  onClick={() => setViewDetails({ id: viewDetails.id })}
+                  onKeyDown={handleSpacePressed}
+                />
               <AgentDetailsRow agent={props.element.agentCode} />
             </td>
           </tr>
@@ -171,6 +172,7 @@ function OrderTable(props: { username: string; role: Role }) {
           <tr>
             <td colSpan={nCol} className="interactableTd">
               <IoCloseSharp
+                aria-label="close icon"
                 className="closeIcon"
                 size={closeIconSize}
                 tabIndex={0}
@@ -209,7 +211,6 @@ function OrderTable(props: { username: string; role: Role }) {
           <tr>
             <th
               id="orderNumberId"
-              role="columnheader"
               tabIndex={0}
               onClick={() => changeOrder("ordNum")}
               onKeyDown={handleSpacePressed}
@@ -217,7 +218,6 @@ function OrderTable(props: { username: string; role: Role }) {
               Order number {showArrow("ordNum")}
             </th>
             <th
-              role="columnheader"
               tabIndex={0}
               onClick={() => changeOrder("ordAmount")}
               onKeyDown={handleSpacePressed}
@@ -225,7 +225,6 @@ function OrderTable(props: { username: string; role: Role }) {
               Order amount {showArrow("ordAmount")}
             </th>
             <th
-              role="columnheader"
               tabIndex={0}
               onClick={() => changeOrder("advanceAmount")}
               onKeyDown={handleSpacePressed}
@@ -233,7 +232,6 @@ function OrderTable(props: { username: string; role: Role }) {
               Advance amount {showArrow("advanceAmount")}
             </th>
             <th
-              role="columnheader"
               tabIndex={0}
               onClick={() => changeOrder("ordDate")}
               onKeyDown={handleSpacePressed}
@@ -242,7 +240,6 @@ function OrderTable(props: { username: string; role: Role }) {
             </th>
             {props.role !== "customer" && (
               <th
-                role="columnheader"
                 tabIndex={0}
                 onClick={() => changeOrder("custCode")}
                 onKeyDown={handleSpacePressed}
@@ -252,7 +249,6 @@ function OrderTable(props: { username: string; role: Role }) {
             )}
             {props.role !== "agent" && (
               <th
-                role="columnheader"
                 tabIndex={0}
                 onClick={() => changeOrder("agentCode")}
                 onKeyDown={handleSpacePressed}
@@ -261,7 +257,6 @@ function OrderTable(props: { username: string; role: Role }) {
               </th>
             )}
             <th
-              role="columnheader"
               tabIndex={0}
               onClick={() => changeOrder("ordDescription")}
               onKeyDown={handleSpacePressed}
@@ -270,7 +265,6 @@ function OrderTable(props: { username: string; role: Role }) {
             </th>
             {props.role === "manager" && (
               <th
-                role="columnheader"
                 tabIndex={0}
                 className="modifyColumnHeader"
               >
