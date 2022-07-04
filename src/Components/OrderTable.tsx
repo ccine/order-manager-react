@@ -70,8 +70,8 @@ function OrderTable(props: { username: string; role: Role }) {
     return sortableItems;
   }, [data, order]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error loading data</p>;
+  if (loading) return <p tabIndex={0} className="loadingParagraph elementHoverFocus"><strong>Loading data from server...</strong></p>;
+  if (error) return <p role="alert" tabIndex={0} className="loadingParagraph elementHoverFocus"><strong>Error loading data</strong></p>;
 
   /**
    * Change the order state.

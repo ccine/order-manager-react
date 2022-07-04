@@ -27,6 +27,7 @@
     color: white;
     flex-grow: 2;
     margin-right: var(--small-margin);
+    font-size: 3ex;
 }
 
 /* highContrastMode button*/
@@ -64,6 +65,11 @@
 .tableColumn {
     background-color: #ff8a8a;
     width: 100%; /* fill the rest of the page */
+}
+
+.loadingParagraph{
+    text-align: center;
+    font-size: large;
 }
 
 /* table */
@@ -305,7 +311,7 @@ svg:hover,
 
     /* font-size of all h2 */
     .divTitle {
-        font-size: 6vw;
+        font-size: 6vw !important;
     }
 
     /* font-size of table and list */
