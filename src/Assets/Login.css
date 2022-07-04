@@ -1,11 +1,16 @@
- /* CONTAINER OF THE WHOLE PAGE */
+@import "variables.css";
+
+/* container of the whole page */
 .containerPageLogin {
     height: 100vh;                      /* size of the entire viewport */
     width: 100vw;
     background-color: #919191;
 }
 
-/* HEADER*/
+main{
+    height: 90%;
+}
+
 /* Login header */
 .loginHeader{
     display: block;
@@ -15,16 +20,15 @@
 
 /* High contrast button */
 #styleSwitcherLogin{
-    margin-top: 10px;
-    margin-right: 10px;
+    margin-top: var(--small-margin);
+    margin-right: var(--small-margin);
     color: white;
     height: 42px;
     background-color: black;
     border: 1px solid transparent;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
 }
 
-/* BODY */
 /* Login body */
 .loginBody{
     display: flex;                                                /* enables a flex context */
@@ -37,11 +41,11 @@
 .loginBox{
     width: 400px;
     height: 370px;                                                 /* necessary for showing error correctly */
-    padding-top: 10px;
-    padding-bottom: 20px;
+    padding-top: var(--small-padding);
+    padding-bottom: var(--large-padding);
     background-color: white;
 
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     box-shadow: 1px 2px 3px 4px rgba(12, 12, 12, 0.2);            /* horizontal length, vertical length, blur radius, spread, color */
 }
 
@@ -54,18 +58,18 @@
 /* form */
 .loginForm{
     display: block;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 10px;                                           /* Necessary when screen hegiht is too short */
+    padding-left: var(--large-padding);
+    padding-right: var(--large-padding);
+    padding-bottom: var(--small-padding);                                           /* Necessary when screen hegiht is too short */
 }
 
 /* input */
 .inputLogin{
-    padding-left: 10px;
+    padding-left: var(--small-padding);
     width: 100%;
-    height: 42px;
+    height: var(--form-elements-height);
     box-sizing: border-box;                                        /* take count of padding and border when setting dimensions */
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     border: 2px solid;                                             /* solid border */
 }
 
@@ -74,22 +78,22 @@
     width: 100%;
     height: 55px;
     color: white;
-    background-color: #008DEB;
+    background-color: var(--log-button-color);
     border: transparent;                                           /* trasparent border */
-    border-radius: 5px;
+    border-radius: var(--border-radius);
 }
 
 /* error div, MUST BE CHANGED WHEN RESIZE THE PAGE */
 .error{
-    padding-left: 10px;
+    padding-left: var(--small-padding);
     background-color: #B7311F;
     color: white;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     height: 60px;
     display: flex;              /* enables a flex context*/
     align-items: center;        /* vertically center */
     justify-content: center;    /* horizontally center */
-    margin-top: 10px;
+    margin-top: var(--small-margin);
     resize: vertical;
 }
 
@@ -100,13 +104,18 @@
 }
 
 /* coloring when element is focused */
-.inputLogin:focus, .labelLogin:focus, h1:focus{
-    background-color: #FBFF00;
+.inputLogin:focus-visible, .labelLogin:focus-visible, h1:focus-visible{
+    background-color: var(--color-on-focus);
+}
+
+/* coloring when element is hovered */
+.inputLogin:hover, .labelLogin:hover, h1:hover{
+    background-color: var(--color-on-focus);
 }
 
 /* css class for setting margin-bottom 10px */
 .marginBottom {
-    margin-bottom: 10px;
+    margin-bottom: var(--small-margin);
 }
 
 /* cursor pointer for buttonLogin class */
@@ -115,8 +124,13 @@
 }
 
 /* color the text of button adn error when focused */
-.buttonLogin:focus, .error:focus{
-    color: #FBFF00 !important;
+.buttonLogin:focus-visible, .error:focus-visible{
+    color: var(--color-on-focus) !important;
+}
+
+/* color the text of button adn error when hovered */
+.buttonLogin:hover, .error:hover{
+    color: var(--color-on-focus) !important;
 }
 
 /* placeholder */
@@ -126,7 +140,6 @@
 }
 
 /* WIDTH SMALL */
-/* media query that starts when screen width goes below 400px */
 /* loginBox takes up the whole width and height, loginBox hides its box-shadow, font will resize based on the screen width */
 @media only screen and (max-width: 400px){
 
@@ -138,12 +151,13 @@
     /* Resize font of the loginbox's title, aslo apply padding-top */
     #loginBoxTitle{
         font-size: 10vw;
-        padding-top: 10px;
+        padding-top: var(--small-padding);
     }
 
     /* display loginBody as block and no more as flex */
     .loginBody{
         display: block;
+        height: 100%;
     }
 
     /* loginBox now takes all the screen and has no more shadow, radius, margin and padding*/
@@ -160,7 +174,6 @@
 }
 
 /* SMALL */
-/* media query that starts when screen height and width goes below 550px and 400px respectively  */
 /* highConstrastButton moved to the top-right of the screen, header with a fixed height, height of the container managed automatically */
 @media only screen and (max-height: 550px) and (max-width: 400px){
     /* the highContrastButton will move to the top right */
@@ -173,17 +186,12 @@
     .loginHeader{
         height: 50px;
     }
-
-    .loginBody{
-        height: 100%;
-    }
 }
 
 /* HEIGHT SMALL, WIDE LARGE */
-/* media query that starts when screen height goes below 460px and width is over 400px */
 /* height of the container managed automatically, highConstrastButton moved to the top-right of the screen */
 /* header with a fixed height */
-@media (max-height: 460px) and (min-width: 400px){
+@media only screen and (max-height: 510px) and (min-width: 400px){
 
     /* the highContrastButton will move to the top right */
     #styleSwitcherLogin{
@@ -193,18 +201,18 @@
 
     /* height of the container managed automatically */
     .containerPageLogin{
-        height: auto;
+        min-height: 510px;
     }
 
     /* the header will take a fixed height */
     .loginHeader{
-        min-height: 50px;
+        height: 50px;
     }
 
     /* display loginBody as block and no more as flex, also add some padding-bottom */
     .loginBody{
         display: block;
-        padding-bottom: 10px;
+        padding-bottom: var(--small-padding);
     }
 
     /* loginBox moved to the center of the screen */
@@ -215,12 +223,15 @@
 }
 
 /* HEIGHT SMALL */
-/* media query that starts when screen height goes below 430px */
 /* loginBox height managed automatically, necessary when scrolling down, it prevents seeing white screen in highContrastMode */
-@media only screen and (max-height: 430px) {
+@media only screen and (max-height: 370px) {
 
-    /* loginBox height managed automatically */
+
     .loginBox{
-        min-height: 430px;
+        min-height: 370px;
+    }
+
+    .containerPageLogin{
+        height: auto;
     }
 }

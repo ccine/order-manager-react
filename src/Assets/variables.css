@@ -1,0 +1,33 @@
+/* variables */
+:root{
+    --simple-border: 2px solid black;
+    --border-radius: 5px;
+    --small-small-margin: 5px;
+    --small-small-padding: 5px;
+    --small-margin: 10px;
+    --small-padding: 10px;
+    --large-padding: 20px;
+    --button-height: 40px;
+    --header-height: 80px;
+    --form-elements-height: 42px;
+    --form-elements-width: 57%;
+    --color-on-focus: #FBFF00;
+    --log-button-color: #0074C2;
+}
+
+/* highContrastMode button */
+.styleSwitcher{
+    margin-top: var(--small-margin);
+    margin-right: var(--small-margin);
+    border: transparent;
+    border-radius: var(--border-radius);
+}
+
+/* logIn & logOut buttons*/
+.logButton{
+    color: white;
+    background-color: var(--log-button-color);
+    border: transparent;
+    border-radius: var(--border-radius);
+}
+

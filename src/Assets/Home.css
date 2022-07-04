@@ -1,13 +1,15 @@
-/* CONTAINER OF THE WHOLE PAGE */
+@import "variables.css";
+
+/* container of the whole page */
 .containerPageHome {
     height: 100%;
     width: 100%;
 }
 
-/* HEADER */
+/* header */
 .homeHeader {
     top: 0px;
-    height: 80px;
+    height: var(--header-height);
     background-color: #292929;
     width: 100%;
     position: fixed;
@@ -15,71 +17,71 @@
     justify-content: flex-end;
     align-items: center;
     box-sizing: border-box;
-    padding-left: 10px;
-    padding-right: 20px;
+    padding-left: var(--small-padding);
+    padding-right: var(--large-padding);
     z-index: 2;
 }
 
-/* WELCOME TITLE */
+/* welcome title */
 #homeTitle {
     margin: 0;
     color: white;
     flex-grow: 2;
-    margin-right: 10px;
+    margin-right: var(--small-margin);
 }
 
-/* HIGH_CONTRAST_MODE BUTTON*/
+/* highContrastMode button*/
 #styleSwitcherHome {
     color: black;
-    height: 40px;
+    height: var(--button-height);
     background-color: white;
     border: 1px solid transparent;
-    border-radius: 5px;
-    margin-right: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    border-radius: var(--border-radius);
+    margin-right: var(--small-margin);
+    margin-top: var(--small-margin);
+    margin-bottom: var(--small-margin);
 }
 
-/* LOGOUT BUTTTON */
+/* logOut button */
 #logoutButton {
     width: 120px;
-    height: 40px;
+    height: var(--button-height);
     color: white;
-    background-color: #008deb;
+    background-color: var(--log-button-color);
     border: transparent;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
 }
 
-/* BODY */
+/* body of the page */
 .homeContainer {
     min-height: 100vh;
-    padding-top: 80px; /* height of homeHeader */
+    padding-top: var(--header-height);
     display: flex;
     flex-direction: row;
     height: 100%;
     box-sizing: border-box;
 }
 
-/* LEFT SIDE OF THE PAGE, CONTAINS THE KEY LINE */
+/* left side of the page, contains the key line */
 .keyColumn {
     width: 25%;
-    background-color: #2EFF46;
+    background-color: #2eff46;
     word-wrap: break-word;
 }
 
-/* RIGHT SIDE OF THE PAGE, CONTAINS THE TABLE */
+/* right side of the page, contains the table */
 .tableColumn {
-    background-color: #FF8A8A;
-    width: 100%;                        /* fill the rest of the page */
+    background-color: #ff8a8a;
+    width: 100%; /* fill the rest of the page */
 }
 
-/* TABLE */
+/* table */
 table {
-    width: 100%;                        /* fill all the div width */
+    width: 100%; /* fill all the div width */
     background-color: white;
 }
 
-/* CURSOR FOR INTERACTIVE CONTENT (handPointer = edit column)*/
+/* cursor for interactive content (handPointer = edit column)*/
 th:hover,
 .handPointer:hover,
 .closeIcon:hover,
@@ -89,7 +91,7 @@ th:hover,
     cursor: pointer;
 }
 
-/* Cursor for modify column header */
+/* cursor for modify column header */
 .modifyColumnHeader:hover {
     cursor: default;
 }
@@ -101,7 +103,7 @@ th:hover,
 
 /* titles of the page columns */
 .padding_left {
-    padding-left: 10px;
+    padding-left: var(--small-padding);
 }
 
 /* alternate color of table rows */
@@ -110,26 +112,26 @@ tbody tr:nth-child(odd) {
 }
 
 /* style the border of the table and align text to the center */
-table, th
-td {
+table,
+th td {
     border: 1px solid black;
     border-collapse: separate; /* Don't collapse */
     border-spacing: 0;
     text-align: center;
 }
 
-th{
-    border: 2px solid black;
+th {
+    border: var(--simple-border);
     position: -webkit-sticky; /* Safari */
     position: sticky;
-    top: 80px;
+    top: var(--header-height);
     background-color: white;
 }
 
 /* put some padding on ul */
 ul {
     padding-left: 30px;
-    padding-right: 10px;
+    padding-right: var(--small-padding);
 }
 
 /* Editor div */
@@ -149,9 +151,9 @@ ul {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    padding-left: 10px;
-    padding-bottom: 10px;
-    padding-right: 10px;
+    padding-left: var(--small-padding);
+    padding-bottom: var(--small-padding);
+    padding-right: var(--small-padding);
 }
 
 /* formLabel div */
@@ -168,20 +170,20 @@ ul {
 .formLabels > label {
     display: block;
     padding-left: 17vw;
-    height: 42px;
-    padding-top: 5px;
+    height: var(--form-elements-height);
+    padding-top: var(--small-small-padding);
 }
 
 /* all the input of the form */
 .formInputs > input {
     display: block;
-    padding-left: 10px;
-    width: 57%;
-    height: 42px;
+    padding-left: var(--small-padding);
+    width: var(--form-elements-width);
+    height: var(--form-elements-height);
     box-sizing: border-box; /* take count of padding and border when setting dimensions */
-    border-radius: 5px;
-    border: 2px solid; /* solid border */
-    margin-bottom: 5px;
+    border-radius: var(--border-radius);
+    border: var(--simple-border);
+    margin-bottom: var(--small-small-margin);
 }
 
 /* color disabled input as grey */
@@ -189,30 +191,55 @@ ul {
     background-color: #c4c4c4;
 }
 
-/* EditorDiv save button */
+/* editorDiv save button */
 #submitHomeButton {
-    margin-top: 5px;
-    width: 57%;
+    margin-top: var(--small-small-margin);
+    width: var(--form-elements-width);
     height: 55px;
     color: white;
     background-color: #008deb;
     border: transparent; /* trasparent border */
-    border-radius: 5px;
+    border-radius: var(--border-radius);
 }
 
-
 /* color elementes when focused */
-#homeTitle:focus, #keyColumnTitle:focus, ul:focus, li:focus, #tableColumnTitle:focus, #styleSwitcherHome:focus, .keyColumn:focus, .tableColumn:focus, th:focus, td:focus{
-    background-color: #FBFF00;
-    color: black;
+li:focus-visible,
+#styleSwitcherHome:focus-visible,
+th:focus-visible,
+td:focus-visible,
+.divTitle:focus-visible,
+svg:focus-visible {
+    background-color: var(--color-on-focus);
+    color: black !important;
+}
+
+/* color elementes when hovered */
+li:hover,
+#styleSwitcherHome:hover,
+th:hover,
+td:hover,
+.divTitle:hover,
+svg:hover {
+    background-color: var(--color-on-focus);
+    color: black !important;
+}
+
+/* mantain white background for the details td */
+.interactableTd:hover {
+    background-color: white;
 }
 
 /* change text color of logout button when focused */
-#logoutButton:focus{
-    color: #FBFF00;
+#logoutButton:focus-visible {
+    color: var(--color-on-focus);
 }
 
-/* media query when screen is under 1000px */
+/* change text color of logout button when hovered */
+#logoutButton:hover {
+    color: var(--color-on-focus);
+}
+
+/* when the screen is to small to see the instructions */
 @media only screen and (max-width: 1000px) {
     /* manage contents in column order */
     .homeContainer {
@@ -222,20 +249,21 @@ ul {
 
     /* keyColumn takes the entire width space */
     .keyColumn {
-        width: 100%;    /* fill the rest of the page */
+        width: 100%; /* fill the rest of the page */
     }
 
     /* title of the columns moved to center */
-    #keyColumnTitle, #tableColumnTitle{
+    #keyColumnTitle,
+    #tableColumnTitle {
         text-align: center;
-        margin-top: 5px;
-        margin-bottom: 5px;
+        margin-top: var(--small-small-margin);
+        margin-bottom: var(--small-small-margin);
     }
 
     /* allow to scroll horizontally the table, also no artifacts of the page*/
-    .tableColumn{
+    .tableColumn {
         overflow-x: auto;
-        flex-grow: 2;                               /* fill teh rest of the space in height */
+        flex-grow: 2; /* fill teh rest of the space in height */
     }
 
     /* th regain default position */
@@ -249,11 +277,8 @@ ul {
     .formLabels > label {
         padding-left: 21vw;
     }
-
 }
 
-
-/* media query when screen is under 620px */
 /* when the table doesn't shrink anymore */
 @media only screen and (max-width: 620px) {
     /* X icon fixed at right side */
@@ -263,7 +288,7 @@ ul {
     }
 
     /* title of edit div moved to the left */
-    #editHeader{
+    #editHeader {
         text-align: left;
     }
 
@@ -293,12 +318,11 @@ ul {
     }
 }
 
-/* media query when screen is under 450px */
 /* when screen is too small */
 @media only screen and (max-width: 450px) {
-
     /* height and font managed automatically */
-    #styleSwitcherHome, #logoutButton {
+    #styleSwitcherHome,
+    #logoutButton {
         font-size: 3vw;
         height: 60%;
     }
@@ -309,7 +333,11 @@ ul {
     }
 
     /* font-size of table and list */
-    ul, table, .formInputs > input, #submitHomeButton{
+    ul, .formInputs > input, #submitHomeButton{
+        font-size: 4vw;
+    }
+
+    table{
         font-size: 5vw;
     }
 
@@ -319,5 +347,4 @@ ul {
         width: 10vw;
     }
     */
-
 }
