@@ -56,11 +56,11 @@ function OrderTable(props: { username: string; role: Role }) {
   const sortedItems = React.useMemo(() => {
     if (
       !data ||
-      (!data.getAllOrders && !data.getCustomerOrders && !data.getAgentOrders)
+      (!data.getAllOrders && !data.getOrdersByCustomer && !data.getOrdersByAgent)
     )
       return [];
     let listItem =
-      data.getAllOrders || data.getCustomerOrders || data.getAgentOrders;
+      data.getAllOrders || data.getOrdersByCustomer || data.getOrdersByAgent;
     let sortableItems = [...listItem];
     let elementKey = (element: Order) =>
       order.key === "custCode"
