@@ -101,6 +101,7 @@ function AgentDetailsRow(props: { order: Order; reloadData: VoidFunction }) {
           type="submit"
           id="submitHomeButton"
           title="submit button"
+          className="logButton"
           tabIndex={0}
         >
           <strong>Save</strong>

@@ -20,13 +20,9 @@ main{
 
 /* High contrast button */
 #styleSwitcherLogin{
-    margin-top: var(--small-margin);
-    margin-right: var(--small-margin);
     color: white;
     height: 42px;
     background-color: black;
-    border: 1px solid transparent;
-    border-radius: var(--border-radius);
 }
 
 /* Login body */
@@ -58,9 +54,7 @@ main{
 /* form */
 .loginForm{
     display: block;
-    padding-left: var(--large-padding);
-    padding-right: var(--large-padding);
-    padding-bottom: var(--small-padding);                                           /* Necessary when screen hegiht is too short */
+    padding: 0 var(--large-padding) var(--large-padding);
 }
 
 /* input */
@@ -77,10 +71,6 @@ main{
 #submitLoginButton{
     width: 100%;
     height: 55px;
-    color: white;
-    background-color: var(--log-button-color);
-    border: transparent;                                           /* trasparent border */
-    border-radius: var(--border-radius);
 }
 
 /* error div, MUST BE CHANGED WHEN RESIZE THE PAGE */
@@ -99,38 +89,13 @@ main{
 
 
 /* font-size */
-.inputLogin, .labelLogin, .buttonLogin{
+.inputLogin, .labelLogin, .buttons{
     font-size: large;
-}
-
-/* coloring when element is focused */
-.inputLogin:focus-visible, .labelLogin:focus-visible, h1:focus-visible{
-    background-color: var(--color-on-focus);
-}
-
-/* coloring when element is hovered */
-.inputLogin:hover, .labelLogin:hover, h1:hover{
-    background-color: var(--color-on-focus);
 }
 
 /* css class for setting margin-bottom 10px */
 .marginBottom {
     margin-bottom: var(--small-margin);
-}
-
-/* cursor pointer for buttonLogin class */
-.buttonLogin:hover{
-    cursor: pointer;
-}
-
-/* color the text of button adn error when focused */
-.buttonLogin:focus-visible, .error:focus-visible{
-    color: var(--color-on-focus) !important;
-}
-
-/* color the text of button adn error when hovered */
-.buttonLogin:hover, .error:hover{
-    color: var(--color-on-focus) !important;
 }
 
 /* placeholder */
@@ -139,12 +104,16 @@ main{
     opacity: 1; /* Firefox */
 }
 
+.error:focus-visible, .error:hover, #styleSwitcherLogin:focus-visible, #styleSwitcherLogin:hover{
+    color: var(--color-on-focus) !important;
+}
+
 /* WIDTH SMALL */
 /* loginBox takes up the whole width and height, loginBox hides its box-shadow, font will resize based on the screen width */
 @media only screen and (max-width: 400px){
 
     /* Resize font of all elements with some text, except loginBoxTitle */
-    .inputLogin, .labelLogin, .buttonLogin, .error{
+    .inputLogin, .labelLogin, .buttons, .error{
         font-size: 5vw;
     }
 
@@ -166,10 +135,7 @@ main{
         height: 100%;
         box-shadow: none;
         border-radius: 0;
-        margin-bottom: 0;
-        margin-top: 0;
-        padding-bottom: 0;
-        padding-top: 0;
+        padding: 0;
     }   
 }
 

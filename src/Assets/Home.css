@@ -17,7 +17,6 @@
     justify-content: flex-end;
     align-items: center;
     box-sizing: border-box;
-    padding-left: var(--small-padding);
     padding-right: var(--large-padding);
     z-index: 2;
 }
@@ -35,10 +34,6 @@
     color: black;
     height: var(--button-height);
     background-color: white;
-    border: 1px solid transparent;
-    border-radius: var(--border-radius);
-    margin-right: var(--small-margin);
-    margin-top: var(--small-margin);
     margin-bottom: var(--small-margin);
 }
 
@@ -46,10 +41,6 @@
 #logoutButton {
     width: 120px;
     height: var(--button-height);
-    color: white;
-    background-color: var(--log-button-color);
-    border: transparent;
-    border-radius: var(--border-radius);
 }
 
 /* body of the page */
@@ -81,13 +72,9 @@ table {
     background-color: white;
 }
 
-/* cursor for interactive content (handPointer = edit column)*/
+/* cursor for interactive content*/
 th:hover,
-.handPointer:hover,
-.closeIcon:hover,
-#logoutButton:hover,
-#styleSwitcherHome:hover,
-#submitHomeButton:hover {
+.closeIcon:hover {
     cursor: pointer;
 }
 
@@ -99,11 +86,6 @@ th:hover,
 /* X icon */
 .closeIcon {
     float: right;
-}
-
-/* titles of the page columns */
-.padding_left {
-    padding-left: var(--small-padding);
 }
 
 /* alternate color of table rows */
@@ -202,24 +184,28 @@ ul {
     border-radius: var(--border-radius);
 }
 
+.divTitle{
+    padding-left: var(--small-padding);
+}
+
 /* color elementes when focused */
 li:focus-visible,
-#styleSwitcherHome:focus-visible,
 th:focus-visible,
 td:focus-visible,
 .divTitle:focus-visible,
-svg:focus-visible {
+svg:focus-visible,
+#styleSwitcherHome:focus-visible {
     background-color: var(--color-on-focus);
     color: black !important;
 }
 
 /* color elementes when hovered */
 li:hover,
-#styleSwitcherHome:hover,
 th:hover,
 td:hover,
 .divTitle:hover,
-svg:hover {
+svg:hover,
+#styleSwitcherHome:hover {
     background-color: var(--color-on-focus);
     color: black !important;
 }
@@ -227,16 +213,6 @@ svg:hover {
 /* mantain white background for the details td */
 .interactableTd:hover {
     background-color: white;
-}
-
-/* change text color of logout button when focused */
-#logoutButton:focus-visible {
-    color: var(--color-on-focus);
-}
-
-/* change text color of logout button when hovered */
-#logoutButton:hover {
-    color: var(--color-on-focus);
 }
 
 /* when the screen is to small to see the instructions */

@@ -20,6 +20,7 @@ function Home(props: {
         </h1>
 
         <HighContrastModeButton
+          id="styleSwitcherHome"
           highContrastMode={props.highContrastMode}
           setHighContrastMode={props.setHighContrastMode}
         />
@@ -27,6 +28,7 @@ function Home(props: {
         <button
           tabIndex={0}
           id="logoutButton"
+          className="logButton"
           onClick={() => {
             auth.signout(() => navigate("/"));
           }}
@@ -44,7 +46,7 @@ function Home(props: {
           >
             <h2
               id="keyColumnTitle"
-              className="padding_left divTitle"
+              className="divTitle"
               tabIndex={0}
             >
               Instructions:
@@ -85,7 +87,7 @@ function Home(props: {
           >
             <h2
               id="tableColumnTitle"
-              className="padding_left divTitle"
+              className="divTitle"
               tabIndex={0}
             >
               List of orders:

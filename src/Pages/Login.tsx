@@ -47,7 +47,7 @@ function Login(props: {
     <div className="containerPageLogin">
       {/* LOGIN HEADER */}
       <header className="loginHeader">
-        <HighContrastModeButton highContrastMode={props.highContrastMode} setHighContrastMode={props.setHighContrastMode}/>
+        <HighContrastModeButton id="styleSwitcherLogin" highContrastMode={props.highContrastMode} setHighContrastMode={props.setHighContrastMode}/>
       </header>
 
       <main>
@@ -59,7 +59,7 @@ function Login(props: {
             role="region"
             aria-labelledby="loginBoxTitle"
           >
-            <h1 id="loginBoxTitle" className="marginBottom" tabIndex={0}>
+            <h1 id="loginBoxTitle" className="marginBottom elementHoverFocus" tabIndex={0}>
               LOGIN
             </h1>
             {/* Login form */}
@@ -67,7 +67,7 @@ function Login(props: {
               {/* Username */}
               <label
                 htmlFor="usernameInput"
-                className="labelLogin"
+                className="labelLogin elementHoverFocus"
                 tabIndex={0}
               >
                 Username:
@@ -75,7 +75,7 @@ function Login(props: {
               <br />
               <input
                 tabIndex={0}
-                className="marginBottom inputLogin"
+                className="marginBottom inputLogin elementHoverFocus"
                 type="text"
                 id="usernameInput"
                 name="usernameInput"
@@ -88,7 +88,7 @@ function Login(props: {
               {/* Password */}
               <label
                 htmlFor="passwordInput"
-                className="labelLogin"
+                className="labelLogin elementHoverFocus"
                 tabIndex={0}
               >
                 Password:
@@ -96,7 +96,7 @@ function Login(props: {
               <br />
               <input
                 tabIndex={0}
-                className="inputLogin"
+                className="inputLogin elementHoverFocus"
                 type="password"
                 id="passwordInput"
                 name="passwordInput"
@@ -111,14 +111,14 @@ function Login(props: {
               <button
                 type="submit"
                 id="submitLoginButton"
-                className="buttonLogin"
+                className="buttons logButton"
                 tabIndex={0}
               >
                 <strong>Log in</strong>
               </button>
               {/* Error div */}
               {error && (
-                <div className="error" role="alert" tabIndex={0}>
+                <div className="error textHoverFocus" role="alert" tabIndex={0}>
                   <p>
                     <strong>Error: </strong>
                     {error}

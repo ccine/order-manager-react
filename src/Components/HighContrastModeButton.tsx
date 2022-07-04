@@ -1,4 +1,5 @@
 function HighContrastModeButton(props: {
+    id: string,
     highContrastMode: boolean;
     setHighContrastMode: (arg0: boolean) => void;
   }) {
@@ -29,7 +30,7 @@ function HighContrastModeButton(props: {
   }
 
   return (
-    <button id="styleSwitcherHome" onClick={changeContrast} tabIndex={0}>
+    <button id={props.id} className="styleSwitcher" onClick={changeContrast} tabIndex={0}>
       <strong>
         High Contrast Mode: {props.highContrastMode ? "ON" : "OFF"}
       </strong>

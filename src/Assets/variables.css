@@ -31,3 +31,17 @@
     border-radius: var(--border-radius);
 }
 
+/* logButton color its text when on hover or focused */
+.logButton:focus-visible, .logButton:hover{
+    color: var(--color-on-focus) !important;
+}
+
+/* class for coloring the element when on hover or focused */
+.elementHoverFocus:focus-visible, .elementHoverFocus:hover{
+    background-color: var(--color-on-focus);
+}
+
+/* class for pointer cursor, and it appliers also on all buttons */
+.handPointer:hover, button:hover{
+    cursor: pointer;
+}
