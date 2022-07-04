@@ -24,7 +24,7 @@ function OrderTable(props: { username: string; role: Role }) {
   });
 
   /** Number of column in the table  */
-  const nCol = props.role === "manager" ? 8 : 6;
+  const nCol = props.role === "customer" ? 6 : 8;
 
   /** Contains the key used to order the table and if it is ascendent or descendet order */
   const [order, setOrder] = useState<{ key: keyof Order; asc: boolean }>({
@@ -56,7 +56,9 @@ function OrderTable(props: { username: string; role: Role }) {
   const sortedItems = React.useMemo(() => {
     if (
       !data ||
-      (!data.getAllOrders && !data.getOrdersByCustomer && !data.getOrdersByAgent)
+      (!data.getAllOrders &&
+        !data.getOrdersByCustomer &&
+        !data.getOrdersByAgent)
     )
       return [];
     let listItem =
@@ -166,7 +168,7 @@ function OrderTable(props: { username: string; role: Role }) {
             </td>
           )}
           <td tabIndex={0}>{props.element.ordDescription}</td>
-          {props.role === "manager" && (
+          {props.role !== "customer" && (
             <td
               tabIndex={0}
               className="handPointer"
@@ -176,6 +178,16 @@ function OrderTable(props: { username: string; role: Role }) {
               onKeyDown={handleSpacePressed}
             >
               Edit
+            </td>
+          )}
+          {props.role === "agent" && (
+            <td
+              tabIndex={0}
+              className="handPointer"
+              /*onClick={}                      TODO
+              onKeyDown={handleSpacePressed}*/
+            >
+              Delete
             </td>
           )}
         </tr>
@@ -222,27 +234,25 @@ function OrderTable(props: { username: string; role: Role }) {
           </tr>
         )}
         {/** View and modify Order Details in the next row */}
-        {viewDetails.id === props.element.ordNum &&
-          viewDetails.edit &&
-          props.role === "manager" && (
-            <tr>
-              <td colSpan={nCol} className="interactableTd">
-                <div
-                  tabIndex={0}
-                  onClick={() => setViewDetails({ id: viewDetails.id })}
-                  onKeyDown={handleSpacePressed}
-                  ref={focusRef}
-                >
-                  <IoCloseSharp
-                    aria-label="close icon"
-                    className="closeIcon"
-                    size={closeIconSize}
-                  />
-                </div>
-                <OrderEditRow order={props.element} reloadData={refetch} />
-              </td>
-            </tr>
-          )}
+        {viewDetails.id === props.element.ordNum && viewDetails.edit && (
+          <tr>
+            <td colSpan={nCol} className="interactableTd">
+              <div
+                tabIndex={0}
+                onClick={() => setViewDetails({ id: viewDetails.id })}
+                onKeyDown={handleSpacePressed}
+                ref={focusRef}
+              >
+                <IoCloseSharp
+                  aria-label="close icon"
+                  className="closeIcon"
+                  size={closeIconSize}
+                />
+              </div>
+              <OrderEditRow order={props.element} reloadData={refetch} />
+            </td>
+          </tr>
+        )}
       </>
     );
   }
@@ -306,9 +316,15 @@ function OrderTable(props: { username: string; role: Role }) {
             >
               Order description {showArrow("ordDescription")}
             </th>
-            {props.role === "manager" && (
+            {props.role !== "customer" && (
               <th tabIndex={0} className="modifyColumnHeader">
                 Edit
+              </th>
+            )}
+            {props.role === "agent" && (
+              <th tabIndex={0} className="deleteColumnHeader">
+                {/*TODO*/}
+                Delete
               </th>
             )}
           </tr>

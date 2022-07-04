@@ -31,12 +31,16 @@ export const GET_ALL_ORDERS = gql`
 export const GET_ORDERS_BY_AGENT = gql`
   ${ORDER_FIELDS}
   ${CUSTOMER_FIELDS}
+  ${AGENT_FIELDS}
   query getOrders($agent: String) {
-    getOrdersByAgent(agent: $agent) {
+    getOrdersByAgent(agentCode: $agent) {
       ordNum
       ...OrderFields
       custCode {
         ...CustomerFields
+      }
+      agentCode {
+        ...AgentFields
       }
     }
   }
@@ -46,12 +50,23 @@ export const GET_ORDERS_BY_CUSTOMER = gql`
   ${ORDER_FIELDS}
   ${AGENT_FIELDS}
   query getOrders($customer: String) {
-    getOrdersByCustomer(customer: $customer) {
+    getOrdersByCustomer(custCode: $customer) {
       ordNum
       ...OrderFields
       agentCode {
         ...AgentFields
       }
+    }
+  }
+`;
+
+
+
+export const GET_CUSTOMERS_BY_AGENT = gql`
+  ${CUSTOMER_FIELDS}
+  query getCustomer($agent: String!) {
+    getCustomersByAgent(agentCode: $agent) {
+      ...CustomerFields
     }
   }
 `;

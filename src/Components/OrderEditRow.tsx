@@ -1,12 +1,21 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
 import { UPDATE_ORDER } from "../Graphql/mutation";
+import { GET_CUSTOMERS_BY_AGENT } from "../Graphql/query";
 import { Order } from "../types";
 
 function AgentDetailsRow(props: { order: Order; reloadData: VoidFunction }) {
-  const [updateOrder, { data, loading, error }] = useMutation(UPDATE_ORDER);
+  const [updateOrder] = useMutation(UPDATE_ORDER);
+  const { loading, error, data } = useQuery(
+    GET_CUSTOMERS_BY_AGENT,
+    {
+      variables: { agent: props.order.agentCode.agentCode },
+    }
+  );
   const [order, setOrder] = useState<Order>(props.order);
   let tempOrder = { ...order };
+  
+  if (data) console.log(data)
 
   /**
    * Save the order with modified data and refetch all the data
@@ -30,7 +39,7 @@ function AgentDetailsRow(props: { order: Order; reloadData: VoidFunction }) {
   return (
     <>
       <h2 id="editHeader" className="padding_left" tabIndex={0}>
-        Editor div
+        Edit order
       </h2>
       <form onSubmit={handleSubmit} className="homeForm">
         {/* label div */}
