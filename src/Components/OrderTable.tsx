@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "../Assets/Home.css";
 import { IoCaretUp, IoCaretDown, IoCloseSharp } from "react-icons/io5";
 import { useQuery } from "@apollo/client";
@@ -11,8 +11,18 @@ import {
   GET_ORDERS_BY_AGENT,
   GET_ORDERS_BY_CUSTOMER,
 } from "../Graphql/query";
+import { useEffect } from "react";
 
 function OrderTable(props: { username: string; role: Role }) {
+  const focusRef = useRef<HTMLDivElement>(null); // Reference to opened details row
+
+  /**
+   * If the reference has changed then a datails row has been opened, focus on the opened row
+   */
+  useEffect(() => {
+    if (focusRef.current) focusRef.current.focus();
+  });
+
   /** Number of column in the table  */
   const nCol = props.role === "manager" ? 8 : 6;
 
@@ -70,8 +80,22 @@ function OrderTable(props: { username: string; role: Role }) {
     return sortableItems;
   }, [data, order]);
 
-  if (loading) return <p tabIndex={0} className="loadingParagraph elementHoverFocus"><strong>Loading data from server...</strong></p>;
-  if (error) return <p role="alert" tabIndex={0} className="loadingParagraph elementHoverFocus"><strong>Error loading data</strong></p>;
+  if (loading)
+    return (
+      <p tabIndex={0} className="loadingParagraph elementHoverFocus">
+        <strong>Loading data from server...</strong>
+      </p>
+    );
+  if (error)
+    return (
+      <p
+        role="alert"
+        tabIndex={0}
+        className="loadingParagraph elementHoverFocus"
+      >
+        <strong>Error loading data</strong>
+      </p>
+    );
 
   /**
    * Change the order state.
@@ -159,19 +183,20 @@ function OrderTable(props: { username: string; role: Role }) {
         {viewDetails.id === props.element.ordNum && viewDetails.agent && (
           <tr>
             <td colSpan={nCol} className="interactableTd">
-              <IoCloseSharp
-                aria-label="close icon"
-                className="closeIcon"
-                size={closeIconSize}
+              <div
                 tabIndex={0}
-                onClick={() => setViewDetails({ id: viewDetails.id })}
-                onKeyDown={(e) => {
-                  if (e.code === "Space") {
-                    e.preventDefault();
-                    setViewDetails({ id: viewDetails.id });
-                  }
+                onClick={() => {
+                  setViewDetails({ id: viewDetails.id });
                 }}
-              />
+                onKeyDown={handleSpacePressed}
+                ref={focusRef}
+              >
+                <IoCloseSharp
+                  aria-label="close icon"
+                  className="closeIcon"
+                  size={closeIconSize}
+                />
+              </div>
               <AgentDetailsRow agent={props.element.agentCode} />
             </td>
           </tr>
@@ -180,19 +205,18 @@ function OrderTable(props: { username: string; role: Role }) {
         {viewDetails.id === props.element.ordNum && viewDetails.customer && (
           <tr>
             <td colSpan={nCol} className="interactableTd">
-              <IoCloseSharp
-                aria-label="close icon"
-                className="closeIcon"
-                size={closeIconSize}
+              <div
                 tabIndex={0}
                 onClick={() => setViewDetails({ id: viewDetails.id })}
-                onKeyDown={(e) => {
-                  if (e.code === "Space") {
-                    e.preventDefault();
-                    setViewDetails({ id: viewDetails.id });
-                  }
-                }}
-              />
+                onKeyDown={handleSpacePressed}
+                ref={focusRef}
+              >
+                <IoCloseSharp
+                  aria-label="close icon"
+                  className="closeIcon"
+                  size={closeIconSize}
+                />
+              </div>
               <CustomerDetailsRow customer={props.element.custCode} />
             </td>
           </tr>
@@ -203,18 +227,18 @@ function OrderTable(props: { username: string; role: Role }) {
           props.role === "manager" && (
             <tr>
               <td colSpan={nCol} className="interactableTd">
-                <IoCloseSharp
-                  className="closeIcon"
-                  size={closeIconSize}
+                <div
                   tabIndex={0}
                   onClick={() => setViewDetails({ id: viewDetails.id })}
-                  onKeyDown={(e) => {
-                    if (e.code === "Space") {
-                      e.preventDefault();
-                      setViewDetails({ id: viewDetails.id });
-                    }
-                  }}
-                />
+                  onKeyDown={handleSpacePressed}
+                  ref={focusRef}
+                >
+                  <IoCloseSharp
+                    aria-label="close icon"
+                    className="closeIcon"
+                    size={closeIconSize}
+                  />
+                </div>
                 <OrderEditRow order={props.element} reloadData={refetch} />
               </td>
             </tr>
