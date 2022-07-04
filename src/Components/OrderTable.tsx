@@ -89,16 +89,20 @@ function OrderTable(props: { username: string; role: Role }) {
   function showArrow(key: string) {
     return order?.key === key ? (
       order.asc ? (
-        <IoCaretUp aria-label="ascending order"/>
+        <IoCaretUp aria-label="ascending order" />
       ) : (
-        <IoCaretDown aria-label="descending order"/>
+        <IoCaretDown aria-label="descending order" />
       )
     ) : null;
   }
 
+  /**
+   * If the user press the spacebar on a Element it invokes the click on the same element
+   * @param event Event that store the Element on which the user pressed the spacebar
+   */
   function handleSpacePressed(event: React.KeyboardEvent) {
     if (event.code === "Space" && event.target instanceof HTMLElement) {
-      event.preventDefault();
+      event.preventDefault(); // Prevent default event of spacebar go down into the page
       event.target.click();
     }
   }
@@ -155,14 +159,19 @@ function OrderTable(props: { username: string; role: Role }) {
         {viewDetails.id === props.element.ordNum && viewDetails.agent && (
           <tr>
             <td colSpan={nCol} className="interactableTd">
-                <IoCloseSharp
-                  aria-label="close icon"
-                  className="closeIcon"
-                  size={closeIconSize}
-                  tabIndex={0}
-                  onClick={() => setViewDetails({ id: viewDetails.id })}
-                  onKeyDown={handleSpacePressed}
-                />
+              <IoCloseSharp
+                aria-label="close icon"
+                className="closeIcon"
+                size={closeIconSize}
+                tabIndex={0}
+                onClick={() => setViewDetails({ id: viewDetails.id })}
+                onKeyDown={(e) => {
+                  if (e.code === "Space") {
+                    e.preventDefault();
+                    setViewDetails({ id: viewDetails.id });
+                  }
+                }}
+              />
               <AgentDetailsRow agent={props.element.agentCode} />
             </td>
           </tr>
@@ -177,7 +186,12 @@ function OrderTable(props: { username: string; role: Role }) {
                 size={closeIconSize}
                 tabIndex={0}
                 onClick={() => setViewDetails({ id: viewDetails.id })}
-                onKeyDown={handleSpacePressed}
+                onKeyDown={(e) => {
+                  if (e.code === "Space") {
+                    e.preventDefault();
+                    setViewDetails({ id: viewDetails.id });
+                  }
+                }}
               />
               <CustomerDetailsRow customer={props.element.custCode} />
             </td>
@@ -194,7 +208,12 @@ function OrderTable(props: { username: string; role: Role }) {
                   size={closeIconSize}
                   tabIndex={0}
                   onClick={() => setViewDetails({ id: viewDetails.id })}
-                  onKeyDown={handleSpacePressed}
+                  onKeyDown={(e) => {
+                    if (e.code === "Space") {
+                      e.preventDefault();
+                      setViewDetails({ id: viewDetails.id });
+                    }
+                  }}
                 />
                 <OrderEditRow order={props.element} reloadData={refetch} />
               </td>
@@ -264,10 +283,7 @@ function OrderTable(props: { username: string; role: Role }) {
               Order description {showArrow("ordDescription")}
             </th>
             {props.role === "manager" && (
-              <th
-                tabIndex={0}
-                className="modifyColumnHeader"
-              >
+              <th tabIndex={0} className="modifyColumnHeader">
                 Edit
               </th>
             )}

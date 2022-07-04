@@ -23,6 +23,9 @@ interface AuthContextType {
 
 let AuthContext = React.createContext<AuthContextType>(null!);
 
+/**
+ * Implements signin and signout method with GraphQl query
+ */
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   let savedUserNull = localStorage.getItem("user");
   let savedUser = savedUserNull ? JSON.parse(savedUserNull) : null;
@@ -78,10 +81,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
+/** Return authentication context with user state and login/logout function */
 export function useAuth() {
   return React.useContext(AuthContext);
 }
 
+/**
+ * If the user is not logged in navigate to login page
+ */
 export function RequireAuth({ children }: { children: JSX.Element }) {
   let auth = useAuth();
 

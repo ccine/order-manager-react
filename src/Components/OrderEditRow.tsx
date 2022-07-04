@@ -8,6 +8,10 @@ function AgentDetailsRow(props: { order: Order; reloadData: VoidFunction }) {
   const [order, setOrder] = useState<Order>(props.order);
   let tempOrder = { ...order };
 
+  /**
+   * Save the order with modified data and refetch all the data
+   * @param event Event that invoked the function
+   */
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     let orderInput = {
