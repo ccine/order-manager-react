@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UPDATE_ORDER } from "../Graphql/mutation";
 import { GET_ALL_CUSTOMERS, GET_CUSTOMERS_BY_AGENT } from "../Graphql/query";
 import { Customer, Order } from "../types";
@@ -16,12 +16,22 @@ function AgentDetailsRow(props: {
       variables: { agent: props.order.agentCode.agentCode },
     }
   );
+
   let tempOrder = {
     ...props.order,
     agentCode: props.order.agentCode.agentCode,
     custCode: props.order.custCode.custCode,
   };
+
   const [order, setOrder] = useState<typeof tempOrder>(tempOrder);
+
+  useEffect(() => {
+    setOrder({
+      ...props.order,
+      agentCode: props.order.agentCode.agentCode,
+      custCode: props.order.custCode.custCode,
+    });
+  }, [props.order]);
 
   /**
    * Save the order with modified data and refetch all the data
@@ -121,6 +131,7 @@ function AgentDetailsRow(props: {
             <div className="formInputs">
               <select
                 id="inputCustCode"
+                className="elementHoverFocus"
                 tabIndex={0}
                 required
                 defaultValue={order.custCode}
@@ -147,11 +158,15 @@ function AgentDetailsRow(props: {
             <div className="formInputs">
               <select
                 id="inputCustCode"
+                className="elementHoverFocus"
                 tabIndex={0}
                 required
                 defaultValue={order.custCode}
                 onChange={(event) => {
                   tempOrder.custCode = event.target.value;
+                  tempOrder.agentCode = data.getAllCustomers.find(
+                    (c: typeof tempOrder) => c.custCode === tempOrder.custCode
+                  ).agentCode.agentCode;
                   setOrder(tempOrder);
                 }}
               >
@@ -165,50 +180,19 @@ function AgentDetailsRow(props: {
           </div>
         )}
 
-        {props.role === "agent" && (
-          <div>
-            <div className="formLabels">
-              <label htmlFor="inputAgentCode">Agent:</label>
-            </div>
-            <div className="formInputs">
-              <input
-                id="inputAgentCode"
-                value={order.agentCode}
-                tabIndex={0}
-                disabled
-              />
-            </div>
+        <div>
+          <div className="formLabels">
+            <label htmlFor="inputAgentCode">Agent:</label>
           </div>
-        )}
-
-        {props.role === "manager" && data && data.getAllCustomers && (
-          <div>
-            <div className="formLabels">
-              <label htmlFor="inputAgentCode">Agent:</label>
-            </div>
-            <div className="formInputs">
-              <select
-                id="inputAgentCode"
-                tabIndex={0}
-                required
-                defaultValue={order.agentCode}
-                onChange={(event) => {
-                  tempOrder.agentCode = event.target.value;
-                  setOrder(tempOrder);
-                }}
-              >
-                <option value={order.agentCode}>
-                    {order.agentCode}
-                  </option>
-                {/*data.getAllCustomers.map((element: Customer) => (
-                  <option key={element.custCode} value={element.custCode}>TODO
-                    {element.custCode}
-                  </option>
-                ))*/}
-              </select>
-            </div>
+          <div className="formInputs">
+            <input
+              id="inputAgentCode"
+              value={order.agentCode}
+              tabIndex={0}
+              disabled
+            />
           </div>
-        )}
+        </div>
 
         <div>
           <div className="formLabels">
