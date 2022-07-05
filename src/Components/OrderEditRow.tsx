@@ -17,13 +17,11 @@ function AgentDetailsRow(props: {
     }
   );
 
-  let tempOrder = {
+  const [order, setOrder] = useState<any>({
     ...props.order,
     agentCode: props.order.agentCode.agentCode,
     custCode: props.order.custCode.custCode,
-  };
-
-  const [order, setOrder] = useState<typeof tempOrder>(tempOrder);
+  });
 
   useEffect(() => {
     setOrder({
@@ -82,8 +80,7 @@ function AgentDetailsRow(props: {
               value={order.ordAmount}
               tabIndex={0}
               onChange={(event) => {
-                tempOrder.ordAmount = parseInt(event.target.value);
-                setOrder(tempOrder);
+                setOrder({ ...order, ordAmount: parseInt(event.target.value) });
               }}
             />
           </div>
@@ -99,8 +96,10 @@ function AgentDetailsRow(props: {
               value={order.advanceAmount}
               tabIndex={0}
               onChange={(event) => {
-                tempOrder.advanceAmount = parseInt(event.target.value);
-                setOrder(tempOrder);
+                setOrder({
+                  ...order,
+                  advanceAmount: parseInt(event.target.value),
+                });
               }}
             />
           </div>
@@ -116,8 +115,7 @@ function AgentDetailsRow(props: {
               value={order.ordDate}
               tabIndex={0}
               onChange={(event) => {
-                tempOrder.ordDate = event.target.value;
-                setOrder(tempOrder);
+                setOrder({ ...order, ordDate: event.target.value });
               }}
             />
           </div>
@@ -136,8 +134,7 @@ function AgentDetailsRow(props: {
                 required
                 defaultValue={order.custCode}
                 onChange={(event) => {
-                  tempOrder.custCode = event.target.value;
-                  setOrder(tempOrder);
+                  setOrder({ ...order, custCode: event.target.value });
                 }}
               >
                 {data.getCustomersByAgent.map((element: Customer) => (
@@ -163,11 +160,15 @@ function AgentDetailsRow(props: {
                 required
                 defaultValue={order.custCode}
                 onChange={(event) => {
-                  tempOrder.custCode = event.target.value;
-                  tempOrder.agentCode = data.getAllCustomers.find(
-                    (c: typeof tempOrder) => c.custCode === tempOrder.custCode
+                  let newCustCode = event.target.value;
+                  let newAgentCode = data.getAllCustomers.find(
+                    (c: { custCode: string }) => c.custCode === newCustCode
                   ).agentCode.agentCode;
-                  setOrder(tempOrder);
+                  setOrder({
+                    ...order,
+                    custCode: newCustCode,
+                    agentCode: newAgentCode,
+                  });
                 }}
               >
                 {data.getAllCustomers.map((element: Customer) => (
@@ -204,8 +205,7 @@ function AgentDetailsRow(props: {
               value={order.ordDescription}
               tabIndex={0}
               onChange={(event) => {
-                tempOrder.ordDescription = event.target.value;
-                setOrder(tempOrder);
+                setOrder({ ...order, ordDescription: event.target.value });
               }}
             />
           </div>
