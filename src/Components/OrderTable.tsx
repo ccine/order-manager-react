@@ -196,7 +196,7 @@ function OrderTable(props: { username: string; role: Role }) {
           <tr>
             <td colSpan={nCol} className="interactableTd">
               <div
-                className="elementHoverFocus"
+                className="closeIconDiv elementHoverFocus handPointer"
                 tabIndex={0}
                 onClick={() => {
                   setViewDetails({ id: viewDetails.id });
@@ -206,7 +206,6 @@ function OrderTable(props: { username: string; role: Role }) {
               >
                 <IoCloseSharp
                   aria-label="close icon"
-                  className="closeIcon"
                   size={closeIconSize}
                 />
               </div>
@@ -219,7 +218,7 @@ function OrderTable(props: { username: string; role: Role }) {
           <tr>
             <td colSpan={nCol} className="interactableTd">
               <div
-                className="elementHoverFocus"
+                className="closeIconDiv elementHoverFocus handPointer"
                 tabIndex={0}
                 onClick={() => setViewDetails({ id: viewDetails.id })}
                 onKeyDown={handleSpacePressed}
@@ -227,7 +226,6 @@ function OrderTable(props: { username: string; role: Role }) {
               >
                 <IoCloseSharp
                   aria-label="close icon"
-                  className="closeIcon"
                   size={closeIconSize}
                 />
               </div>
@@ -240,7 +238,7 @@ function OrderTable(props: { username: string; role: Role }) {
           <tr>
             <td colSpan={nCol} className="interactableTd">
               <div
-                className="elementHoverFocus"
+                className="closeIconDiv elementHoverFocus handPointer"
                 tabIndex={0}
                 onClick={() => setViewDetails({ id: viewDetails.id })}
                 onKeyDown={handleSpacePressed}
@@ -248,7 +246,6 @@ function OrderTable(props: { username: string; role: Role }) {
               >
                 <IoCloseSharp
                   aria-label="close icon"
-                  className="closeIcon"
                   size={closeIconSize}
                 />
               </div>

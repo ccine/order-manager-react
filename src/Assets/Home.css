@@ -79,13 +79,14 @@ table {
 }
 
 /* X icon */
-.closeIcon {
+.closeIconDiv {
+    height: 50px;
+    width: 50px;
     float: right;
 }
 
 /* cursor for interactive content*/
-th:hover,
-.closeIcon:hover {
+th:hover {
     cursor: pointer;
 }
 
@@ -161,7 +162,7 @@ ul {
 }
 
 /* inputs of the from */
-.formInputs > input {
+.formInputs > input, .formInputs > select {
     display: block;
     padding-left: var(--small-padding);
     width: 100%;
@@ -173,7 +174,7 @@ ul {
 }
 
 /* color disabled input as grey */
-.formInputs > input[disabled] {
+.formInputs > input[disabled], .formInputs > select[disabled] {
     background-color: #c4c4c4;
 }
 
@@ -254,7 +255,7 @@ input:hover,
 /* when the table doesn't shrink anymore */
 @media only screen and (max-width: 620px) {
     /* X icon fixed at right side */
-    .closeIcon {
+    .closeIconDiv {
         position: sticky;
         right: 0;
     }
@@ -307,7 +308,7 @@ input:hover,
     }
 
     /*
-    .closeIcon{
+    .closeIconDiv{
         height: 50px;
         width: 10vw;
     }
