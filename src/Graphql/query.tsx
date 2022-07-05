@@ -60,13 +60,21 @@ export const GET_ORDERS_BY_CUSTOMER = gql`
   }
 `;
 
-
+export const GET_ALL_CUSTOMERS = gql`
+  query getCustomers {
+    getAllCustomers {
+      custCode
+      agentCode{
+        agentCode
+      }
+    }
+  }
+`;
 
 export const GET_CUSTOMERS_BY_AGENT = gql`
-  ${CUSTOMER_FIELDS}
-  query getCustomer($agent: String!) {
+  query getCustomers($agent: String!) {
     getCustomersByAgent(agentCode: $agent) {
-      ...CustomerFields
+      custCode
     }
   }
 `;

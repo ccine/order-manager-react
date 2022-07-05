@@ -7,6 +7,15 @@ export const UPDATE_ORDER = gql`
     updateOrder(ordNum: $ordNum, order: $order) {
       ordNum
       ...OrderFields
+      custCode {
+        custCode
+      }
     }
+  }
+`;
+
+export const DELETE_ORDER = gql`
+  mutation deleteOrder($ordNum: ID!) {
+    deleteOrder(ordNum: $ordNum)
   }
 `;

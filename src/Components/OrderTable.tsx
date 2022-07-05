@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import "../Assets/Home.css";
 import { IoCaretUp, IoCaretDown, IoCloseSharp } from "react-icons/io5";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { Order, Role } from "../types";
 import AgentDetailsRow from "./AgentDetailsRow";
 import CustomerDetailsRow from "./CustomerDetailsRow";
@@ -12,6 +12,7 @@ import {
   GET_ORDERS_BY_CUSTOMER,
 } from "../Graphql/query";
 import { useEffect } from "react";
+import { DELETE_ORDER } from "../Graphql/mutation";
 
 function OrderTable(props: { username: string; role: Role }) {
   const focusRef = useRef<HTMLDivElement>(null); // Reference to opened details row
@@ -51,6 +52,7 @@ function OrderTable(props: { username: string; role: Role }) {
       variables: { customer: props.username, agent: props.username },
     }
   );
+  const [deleteOrder] = useMutation(DELETE_ORDER);
 
   /** When data or order is modified this function is called. Sort the table by the specified order. */
   const sortedItems = React.useMemo(() => {
@@ -184,8 +186,13 @@ function OrderTable(props: { username: string; role: Role }) {
             <td
               tabIndex={0}
               className="handPointer"
-              /*onClick={}                      TODO
-              onKeyDown={handleSpacePressed}*/
+              onClick={() => {
+                if (window.confirm(`Delete order number: ${props.element.ordNum}?`))
+                  deleteOrder({
+                    variables: { ordNum: props.element.ordNum },
+                  }).then(() => refetch());
+              }}
+              onKeyDown={handleSpacePressed}
             >
               Delete
             </td>
@@ -249,7 +256,11 @@ function OrderTable(props: { username: string; role: Role }) {
                   size={closeIconSize}
                 />
               </div>
-              <OrderEditRow order={props.element} reloadData={refetch} />
+              <OrderEditRow
+                order={props.element}
+                reloadData={refetch}
+                role={props.role}
+              />
             </td>
           </tr>
         )}
@@ -323,7 +334,6 @@ function OrderTable(props: { username: string; role: Role }) {
             )}
             {props.role === "agent" && (
               <th tabIndex={0} className="deleteColumnHeader">
-                {/*TODO*/}
                 Delete
               </th>
             )}
