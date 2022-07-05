@@ -78,6 +78,11 @@ table {
     background-color: white;
 }
 
+/* X icon */
+.closeIcon {
+    float: right;
+}
+
 /* cursor for interactive content*/
 th:hover,
 .closeIcon:hover {
@@ -89,11 +94,6 @@ th:hover,
     cursor: default;
 }
 
-/* X icon */
-.closeIcon {
-    float: right;
-}
-
 /* alternate color of table rows */
 tbody tr:nth-child(odd) {
     background-color: #c4c4c4;
@@ -101,7 +101,7 @@ tbody tr:nth-child(odd) {
 
 /* style the border of the table and align text to the center */
 table,
-th td {
+th, td {
     border: 1px solid black;
     border-collapse: separate; /* Don't collapse */
     border-spacing: 0;
@@ -122,56 +122,54 @@ ul {
     padding-right: var(--small-padding);
 }
 
-/* Editor div */
+/* EditorTd */
 .interactableTd {
-    text-align: left;
     background-color: white;
+    text-align: left;
 }
 
-/* EditorDiv title */
+/* EditorTd title */
 #editHeader {
     text-align: center;
 }
 
-/* form of EditorDiv */
+/* form of EditorTD */
 .homeForm {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding-left: var(--small-padding);
-    padding-bottom: var(--small-padding);
-    padding-right: var(--small-padding);
-}
-
-/* formLabel div */
-.formLabels {
-    width: 50%;
-}
-
-/* fomrInputs div*/
-.formInputs {
-    width: 50%;
-}
-
-/* all the label of the form */
-.formLabels > label {
     display: block;
-    padding-left: 17vw;
-    height: var(--form-elements-height);
-    padding-top: var(--small-small-padding);
+    margin: auto;
+    width: 60%;
+    padding: 0 var(--small-padding) var(--small-padding);
+    box-sizing: border-box;
 }
 
-/* all the input of the form */
+/* labels div of the form */
+.formLabels {
+    float: left;
+    width: 50%;
+    height: var(--form-elements-height);
+    margin-top: var(--small-margin);
+    display: flex;
+    align-items: center;
+}
+
+/* inputs div of the form */
+.formInputs {
+    float: left;
+    width: 50%;
+    margin-top: var(--small-margin);
+    box-sizing: border-box;
+}
+
+/* inputs of the from */
 .formInputs > input {
     display: block;
     padding-left: var(--small-padding);
-    width: var(--form-elements-width);
+    width: 100%;
     height: var(--form-elements-height);
     box-sizing: border-box; /* take count of padding and border when setting dimensions */
     border-radius: var(--border-radius);
     border: var(--simple-border);
-    margin-bottom: var(--small-small-margin);
+    box-sizing: border-box;
 }
 
 /* color disabled input as grey */
@@ -182,14 +180,11 @@ ul {
 /* editorDiv save button */
 #submitHomeButton {
     margin-top: var(--small-small-margin);
-    width: var(--form-elements-width);
+    width: 100%;
     height: 55px;
-    color: white;
-    background-color: #008deb;
-    border: transparent; /* trasparent border */
-    border-radius: var(--border-radius);
 }
 
+/* title of every div */
 .divTitle{
     padding-left: var(--small-padding);
 }
@@ -198,9 +193,9 @@ ul {
 li:focus-visible,
 th:focus-visible,
 td:focus-visible,
-.divTitle:focus-visible,
-svg:focus-visible,
-#styleSwitcherHome:focus-visible {
+input:focus-visible,
+#styleSwitcherHome:focus-visible,
+#homeTitle:focus-visible {
     background-color: var(--color-on-focus);
     color: black !important;
 }
@@ -209,15 +204,15 @@ svg:focus-visible,
 li:hover,
 th:hover,
 td:hover,
-.divTitle:hover,
-svg:hover,
-#styleSwitcherHome:hover {
+input:hover,
+#styleSwitcherHome:hover,
+#homeTitle:hover {
     background-color: var(--color-on-focus);
     color: black !important;
 }
 
 /* mantain white background for the details td */
-.interactableTd:hover {
+.interactableTd:hover{
     background-color: white;
 }
 
@@ -254,11 +249,6 @@ svg:hover,
         top: 0;
         border-collapse: collapse;
     }
-
-    /* to allign all the labels with the save button */
-    .formLabels > label {
-        padding-left: 21vw;
-    }
 }
 
 /* when the table doesn't shrink anymore */
@@ -274,29 +264,22 @@ svg:hover,
         text-align: left;
     }
 
-    /* all labels padding-left return normal */
-    .formLabels > label {
-        padding-left: initial;
-    }
-
-    /* resizing formLabels */
-    .formLabels {
-        width: 30%;
-    }
-
-    /* resizing formInputs */
-    .formInputs {
-        width: 70%;
-    }
-
-    /* all inputs take the whole wodth */
-    .formInputs > input {
-        width: 100%;
-    }
-
     /* save button take the whole width */
+    
     #submitHomeButton {
+        margin-top: var(--small-margin);
+    }
+
+    .homeForm{
+        margin: 0;
+        box-sizing: border-box;
+        width: 100vw;
+    }
+    
+    .formLabels, .formInputs{
         width: 100%;
+        margin-top: 0;
+        box-sizing: border-box;
     }
 }
 

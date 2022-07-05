@@ -196,6 +196,7 @@ function OrderTable(props: { username: string; role: Role }) {
           <tr>
             <td colSpan={nCol} className="interactableTd">
               <div
+                className="elementHoverFocus"
                 tabIndex={0}
                 onClick={() => {
                   setViewDetails({ id: viewDetails.id });
@@ -218,6 +219,7 @@ function OrderTable(props: { username: string; role: Role }) {
           <tr>
             <td colSpan={nCol} className="interactableTd">
               <div
+                className="elementHoverFocus"
                 tabIndex={0}
                 onClick={() => setViewDetails({ id: viewDetails.id })}
                 onKeyDown={handleSpacePressed}
@@ -238,6 +240,7 @@ function OrderTable(props: { username: string; role: Role }) {
           <tr>
             <td colSpan={nCol} className="interactableTd">
               <div
+                className="elementHoverFocus"
                 tabIndex={0}
                 onClick={() => setViewDetails({ id: viewDetails.id })}
                 onKeyDown={handleSpacePressed}

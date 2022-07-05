@@ -38,73 +38,116 @@ function AgentDetailsRow(props: { order: Order; reloadData: VoidFunction }) {
 
   return (
     <>
-      <h2 id="editHeader" className="padding_left" tabIndex={0}>
-        Edit order
+      <h2 id="editHeader" className="divTitle elementHoverFocus" tabIndex={0}>
+        Editor order
       </h2>
       <form onSubmit={handleSubmit} className="homeForm">
-        {/* label div */}
-        <div className="formLabels">
-          <label htmlFor="inputOrdNum">Order number:</label>
-          <label htmlFor="inputOrdAmount">Order amount:</label>
-          <label htmlFor="inputAdvanceAmount">Advance amount:</label>
-          <label htmlFor="inputOrdDate">Order date:</label>
-          <label htmlFor="inputCustCode">Customer:</label>
-          <label htmlFor="inputAgentCode">Agent:</label>
-          <label htmlFor="inputOrderDescription">Order description:</label>
+        
+        <div>
+          <div className="formLabels">
+            <label htmlFor="inputOrdNum">Order number:</label>
+          </div>
+          <div className="formInputs">
+            <input id="inputOrdNum" value={order.ordNum} tabIndex={0} disabled />
+          </div>
         </div>
 
-        {/* input div */}
-        <div className="formInputs">
-          <input id="inputOrdNum" value={order.ordNum} tabIndex={0} disabled />
-          <input
-            id="inputOrdAmount"
-            value={order.ordAmount}
-            tabIndex={0}
-            onChange={(event) => {
-              tempOrder.ordAmount = parseInt(event.target.value);
-              setOrder(tempOrder);
-            }}
-          />
-          <input
-            id="inputAdvanceAmount"
-            value={order.advanceAmount}
-            tabIndex={0}
-            onChange={(event) => {
-              tempOrder.advanceAmount = parseInt(event.target.value);
-              setOrder(tempOrder);
-            }}
-          />
-          <input
-            id="inputOrdDate"
-            value={order.ordDate}
-            tabIndex={0}
-            onChange={(event) => {
-              tempOrder.ordDate = event.target.value;
-              setOrder(tempOrder);
-            }}
-          />
-          <input
-            id="inputCustCode"
-            value={order.custCode.custCode}
-            tabIndex={0}
-            disabled
-          />
-          <input
-            id="inputAgentCode"
-            value={order.agentCode.agentCode}
-            tabIndex={0}
-            disabled
-          />
-          <input
-            id="inputOrderDescription"
-            value={order.ordDescription}
-            tabIndex={0}
-            onChange={(event) => {
-              tempOrder.ordDescription = event.target.value;
-              setOrder(tempOrder);
-            }}
-          />
+        <div>
+          <div className="formLabels">
+            <label htmlFor="inputOrdAmount">Order amount:</label>
+          </div>
+          <div className="formInputs">
+            <input
+              id="inputOrdAmount"
+              value={order.ordAmount}
+              tabIndex={0}
+              onChange={(event) => {
+                tempOrder.ordAmount = parseInt(event.target.value);
+                setOrder(tempOrder);
+              }}
+            />
+          </div>
         </div>
+
+        <div>
+          <div className="formLabels">
+            <label htmlFor="inputAdvanceAmount">Advance amount:</label>
+          </div>
+          <div className="formInputs">
+            <input
+              id="inputAdvanceAmount"
+              value={order.advanceAmount}
+              tabIndex={0}
+              onChange={(event) => {
+                tempOrder.advanceAmount = parseInt(event.target.value);
+                setOrder(tempOrder);
+              }}
+            />
+          </div>
+        </div>
+          
+        <div>
+          <div className="formLabels">
+            <label htmlFor="inputOrdDate">Order date:</label>
+          </div>
+          <div className="formInputs">
+            <input
+              id="inputOrdDate"
+              value={order.ordDate}
+              tabIndex={0}
+              onChange={(event) => {
+                tempOrder.ordDate = event.target.value;
+                setOrder(tempOrder);
+              }}
+            />
+          </div>
+        </div>
+
+        <div>
+          <div className="formLabels">
+            <label htmlFor="inputCustCode">Customer:</label>
+          </div>
+          <div className="formInputs">
+            <input
+              id="inputCustCode"
+              value={order.custCode.custCode}
+              tabIndex={0}
+              disabled
+            />
+          </div>
+        </div>
+
+        <div>
+          <div className="formLabels">
+            <label htmlFor="inputAgentCode">Agent:</label>
+          </div>
+          <div className="formInputs">
+            <input
+              id="inputAgentCode"
+              value={order.agentCode.agentCode}
+              tabIndex={0}
+              disabled
+            />
+          </div>
+        </div>
+
+        <div>
+          <div className="formLabels">
+            <label htmlFor="inputOrderDescription">Order description:</label>
+          </div>
+          <div className="formInputs">
+            <input
+              id="inputOrderDescription"
+              value={order.ordDescription}
+              tabIndex={0}
+              onChange={(event) => {
+                tempOrder.ordDescription = event.target.value;
+                setOrder(tempOrder);
+              }}
+            />
+          </div>
+        </div>
+
         {/* Submit button */}
         <button
           type="submit"

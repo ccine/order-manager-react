@@ -28,7 +28,7 @@ function Home(props: {
         <button
           tabIndex={0}
           id="logoutButton"
-          className="logButton"
+          className="logButton textHoverFocus"
           onClick={() => {
             auth.signout(() => navigate("/"));
           }}
@@ -46,7 +46,7 @@ function Home(props: {
           >
             <h2
               id="keyColumnTitle"
-              className="divTitle"
+              className="divTitle elementHoverFocus"
               tabIndex={0}
             >
               Instructions:
@@ -87,7 +87,7 @@ function Home(props: {
           >
             <h2
               id="tableColumnTitle"
-              className="divTitle"
+              className="divTitle elementHoverFocus"
               tabIndex={0}
             >
               List of orders:

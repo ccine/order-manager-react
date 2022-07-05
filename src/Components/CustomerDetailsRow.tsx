@@ -3,7 +3,7 @@ import { Customer } from "../types";
 function CustomerDetailsRow(props: { customer: Customer }) {
   return (
     <>
-      <h2 className="padding_left divTitle" tabIndex={0}>
+      <h2 className="divTitle elementHoverFocus" tabIndex={0}>
         Customer Details
       </h2>
       <ul>
