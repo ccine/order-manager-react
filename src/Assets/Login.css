@@ -7,42 +7,42 @@
     background-color: #919191;
 }
 
-main{
-    height: 90%;
-}
-
-/* Login header */
+/* login header */
 .loginHeader{
     display: block;
     text-align: right;
     height: 10%;
+    padding-bottom: var(--small-padding);
+    box-sizing: border-box;
 }
 
-/* High contrast button */
+/* highContrastMode button */
 #styleSwitcherLogin{
     color: white;
-    height: 42px;
+    height: var(--button-height);
+    max-height: var(--button-height);             /* useful when page width become too small and this allows to keep the button small too*/
     background-color: black;
+    margin-left: var(--small-margin);
 }
 
-/* Login body */
+/* login body */
 .loginBody{
-    display: flex;                                                /* enables a flex context */
-    align-items: center;                                          /* vertically center */
-    justify-content: center;                                      /* horizontally center */
-    height: 90%;                                                  /* takes the remaining percentage of the page */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90%;                                 /* takes the remaining percentage of the page */
 }
 
 /* loginBox */
 .loginBox{
     width: 400px;
-    height: 370px;                                                 /* necessary for showing error correctly */
+    height: 400px;                                                 /* necessary for showing error correctly */
     padding-top: var(--small-padding);
     padding-bottom: var(--large-padding);
     background-color: white;
-
     border-radius: var(--border-radius);
     box-shadow: 1px 2px 3px 4px rgba(12, 12, 12, 0.2);            /* horizontal length, vertical length, blur radius, spread, color */
+    box-sizing: border-box;
 }
 
 /* loginBox Title */
@@ -54,131 +54,137 @@ main{
 /* form */
 .loginForm{
     display: block;
-    padding: 0 var(--large-padding) var(--large-padding);
-}
-
-/* input */
-.inputLogin{
-    padding-left: var(--small-padding);
-    width: 100%;
-    height: var(--form-elements-height);
-    box-sizing: border-box;                                        /* take count of padding and border when setting dimensions */
-    border-radius: var(--border-radius);
-    border: 2px solid;                                             /* solid border */
+    padding: 0 var(--large-padding);
 }
 
 /* login button */
 #submitLoginButton{
     width: 100%;
-    height: 55px;
+    height: var(--big--button-height);
 }
 
-/* error div, MUST BE CHANGED WHEN RESIZE THE PAGE */
+/* error div */
 .error{
     padding-left: var(--small-padding);
     background-color: #B7311F;
     color: white;
     border-radius: var(--border-radius);
     height: 60px;
-    display: flex;              /* enables a flex context*/
-    align-items: center;        /* vertically center */
-    justify-content: center;    /* horizontally center */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-top: var(--small-margin);
-    resize: vertical;
 }
 
-
 /* font-size */
-.inputLogin, .labelLogin, .buttons{
+#usernameInput, #passwordInput, .labelLogin, #submitLoginButton{
     font-size: large;
 }
 
+/* CHECK */
 /* css class for setting margin-bottom 10px */
 .marginBottom {
     margin-bottom: var(--small-margin);
 }
 
 /* placeholder */
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+::placeholder {
     color: #0F0FFF;
-    opacity: 1; /* Firefox */
 }
 
+/* color text of error and Hihg Contrast button when hovered or focused */
 .error:focus-visible, .error:hover, #styleSwitcherLogin:focus-visible, #styleSwitcherLogin:hover{
     color: var(--color-on-focus) !important;
 }
 
 /* WIDTH SMALL */
-/* loginBox takes up the whole width and height, loginBox hides its box-shadow, font will resize based on the screen width */
+/* 400px because of the width of the loginBox */
 @media only screen and (max-width: 400px){
 
-    /* Resize font of all elements with some text, except loginBoxTitle */
-    .inputLogin, .labelLogin, .buttons, .error{
+    /* put the highContrastMode button near the top right corner */
+    #styleSwitcherLogin{
+        margin-top: var(--small-small-margin);
+        margin-right: var(--small-small-margin);
+    }
+
+    /* resize font of all elements with some text, except loginBoxTitle */
+    .labelLogin, #submitLoginButton, .error, #styleSwitcherLogin, #usernameInput, #passwordInput {
         font-size: 5vw;
     }
 
-    /* Resize font of the loginbox's title, aslo apply padding-top */
+    /* resize font of the loginbox's title, aslo apply padding-top */
     #loginBoxTitle{
         font-size: 10vw;
         padding-top: var(--small-padding);
     }
 
-    /* display loginBody as block and no more as flex */
+    /* display loginBody as block and no more as flexbox */
     .loginBody{
         display: block;
-        height: 100%;
     }
 
-    /* loginBox now takes all the screen and has no more shadow, radius, margin and padding*/
+    /* loginBox now takes all the screen and has no more shadow, radius and padding*/
     .loginBox{
         width: 100%;
         height: 100%;
         box-shadow: none;
         border-radius: 0;
         padding: 0;
-    }   
+    }
+
+    /* all buttons and inputs now will scale based on the viewport width */
+    #styleSwitcherLogin, #submitLoginButton, #usernameInput, #passwordInput{
+        height: var(--inputs-buttons-responsive);
+    }
 }
 
 /* SMALL */
-/* highConstrastButton moved to the top-right of the screen, header with a fixed height, height of the container managed automatically */
+/* 550px because of the loginBox too near to the highContrastMode button, 400px because of the width of the loginBox */
 @media only screen and (max-height: 550px) and (max-width: 400px){
-    /* the highContrastButton will move to the top right */
+
+    /* put the highContrastMode button near the top right corner */
     #styleSwitcherLogin{
-        margin-top: 1px;
-        margin-right: 1px;
+        margin-top: var(--small-small-margin);
+        margin-right: var(--small-small-margin);
     }
 
-    /* the header will take a fixed height */
-    .loginHeader{
-        height: 50px;
+    /* TODO */
+    .loginBox{
+        min-height: 400px;
     }
+
+    /* TODO */
+    .containerPageLogin{
+        height: auto;
+    }
+
+    /* TODO */
+    .loginBody{
+        height: 100vh;
+    }
+
 }
 
 /* HEIGHT SMALL, WIDE LARGE */
-/* height of the container managed automatically, highConstrastButton moved to the top-right of the screen */
-/* header with a fixed height */
-@media only screen and (max-height: 510px) and (min-width: 400px){
+/* 460px because of the loginBox too near to the highContrastMode button, 400px because of the width of the loginBox*/
+@media only screen and (max-height: 460px) and (min-width: 400px){
 
-    /* the highContrastButton will move to the top right */
+    /* put the highContrastMode button near the top right corner */
     #styleSwitcherLogin{
-        margin-top: 1px;
-        margin-right: 1px;
+        margin-top: var(--small-small-margin);
+        margin-right: var(--small-small-margin);
     }
 
-    /* height of the container managed automatically */
+    /* TODO */
     .containerPageLogin{
-        min-height: 510px;
+        height: 100%;
+        
     }
 
-    /* the header will take a fixed height */
-    .loginHeader{
-        height: 50px;
-    }
-
-    /* display loginBody as block and no more as flex, also add some padding-bottom */
+    /* display loginBody as block and no more as flex */
     .loginBody{
         display: block;
-        padding-bottom: var(--small-padding);
+        padding-bottom: var(--small-margin);
     }
 
     /* loginBox moved to the center of the screen */
@@ -186,18 +192,4 @@ main{
         margin: auto;
     }
 
-}
-
-/* HEIGHT SMALL */
-/* loginBox height managed automatically, necessary when scrolling down, it prevents seeing white screen in highContrastMode */
-@media only screen and (max-height: 370px) {
-
-
-    .loginBox{
-        min-height: 370px;
-    }
-
-    .containerPageLogin{
-        height: auto;
-    }
 }

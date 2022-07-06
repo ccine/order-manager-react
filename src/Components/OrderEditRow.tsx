@@ -2,9 +2,9 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { UPDATE_ORDER } from "../Graphql/mutation";
 import { GET_ALL_CUSTOMERS, GET_CUSTOMERS_BY_AGENT } from "../Graphql/query";
-import { Customer, Order } from "../types";
+import { Customer, Order, OrderInput } from "../types";
 
-function AgentDetailsRow(props: {
+function OrderEditRow(props: {
   order: Order;
   reloadData: VoidFunction;
   role: string;
@@ -17,7 +17,7 @@ function AgentDetailsRow(props: {
     }
   );
 
-  const [order, setOrder] = useState<any>({
+  const [order, setOrder] = useState<OrderInput>({
     ...props.order,
     agentCode: props.order.agentCode.agentCode,
     custCode: props.order.custCode.custCode,
@@ -52,7 +52,7 @@ function AgentDetailsRow(props: {
 
   return (
     <>
-      <h2 id="editHeader" className="divTitle elementHoverFocus" tabIndex={0}>
+      <h2 className="tdTitle elementHoverFocus" tabIndex={0}>
         Editor order
       </h2>
       <form onSubmit={handleSubmit} className="homeForm">
@@ -63,6 +63,7 @@ function AgentDetailsRow(props: {
           <div className="formInputs">
             <input
               id="inputOrdNum"
+              className="customInput"
               value={order.ordNum}
               tabIndex={0}
               disabled
@@ -77,6 +78,7 @@ function AgentDetailsRow(props: {
           <div className="formInputs">
             <input
               id="inputOrdAmount"
+              className="customInput"
               value={order.ordAmount}
               tabIndex={0}
               onChange={(event) => {
@@ -93,6 +95,7 @@ function AgentDetailsRow(props: {
           <div className="formInputs">
             <input
               id="inputAdvanceAmount"
+              className="customInput"
               value={order.advanceAmount}
               tabIndex={0}
               onChange={(event) => {
@@ -112,6 +115,7 @@ function AgentDetailsRow(props: {
           <div className="formInputs">
             <input
               id="inputOrdDate"
+              className="customInput"
               value={order.ordDate}
               tabIndex={0}
               onChange={(event) => {
@@ -129,7 +133,7 @@ function AgentDetailsRow(props: {
             <div className="formInputs">
               <select
                 id="inputCustCode"
-                className="elementHoverFocus"
+                className="elementHoverFocus customInput"
                 tabIndex={0}
                 required
                 defaultValue={order.custCode}
@@ -155,7 +159,7 @@ function AgentDetailsRow(props: {
             <div className="formInputs">
               <select
                 id="inputCustCode"
-                className="elementHoverFocus"
+                className="elementHoverFocus customInput"
                 tabIndex={0}
                 required
                 defaultValue={order.custCode}
@@ -188,6 +192,7 @@ function AgentDetailsRow(props: {
           <div className="formInputs">
             <input
               id="inputAgentCode"
+              className="customInput"
               value={order.agentCode}
               tabIndex={0}
               disabled
@@ -202,6 +207,7 @@ function AgentDetailsRow(props: {
           <div className="formInputs">
             <input
               id="inputOrderDescription"
+              className="customInput"
               value={order.ordDescription}
               tabIndex={0}
               onChange={(event) => {
@@ -215,7 +221,6 @@ function AgentDetailsRow(props: {
         <button
           type="submit"
           id="submitHomeButton"
-          title="submit button"
           className="logButton"
           tabIndex={0}
         >
@@ -226,4 +231,4 @@ function AgentDetailsRow(props: {
   );
 }
 
-export default AgentDetailsRow;
+export default OrderEditRow;

@@ -19,7 +19,6 @@ function HighContrastModeButton(props: {
     }
 
     const style = document.createElement("style");
-    style.type = "text/css";
     if (style.sheet) {
       style.sheet.insertRule(css, 0);
     } else {

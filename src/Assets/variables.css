@@ -8,9 +8,11 @@
     --small-padding: 10px;
     --large-padding: 20px;
     --button-height: 40px;
+    --big--button-height: 55px;
     --header-height: 80px;
+    --header-height-responsive: 15vw;
+    --inputs-buttons-responsive: 15vw;
     --form-elements-height: 42px;
-    --form-elements-width: 57%;
     --color-on-focus: #FBFF00;
     --log-button-color: #0074C2;
 }
@@ -31,7 +33,17 @@
     border-radius: var(--border-radius);
 }
 
-/* logButton color its text when on hover or focused */
+/* form inputs */
+.customInput{
+    padding-left: var(--small-padding);
+    width: 100%;
+    height: var(--form-elements-height);
+    box-sizing: border-box;                     /* take count of padding and border when setting dimensions */
+    border-radius: var(--border-radius);
+    border: var(--simple-border);
+}
+
+/* logButton colors its text when on hover or focused */
 .logButton:focus-visible, .logButton:hover{
     color: var(--color-on-focus) !important;
 }
@@ -41,7 +53,7 @@
     background-color: var(--color-on-focus);
 }
 
-/* class for pointer cursor, and it appliers also on all buttons */
+/* class for pointer cursor, and it applies also on all buttons */
 .handPointer:hover, button:hover{
     cursor: pointer;
 }

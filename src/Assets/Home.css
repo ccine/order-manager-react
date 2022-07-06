@@ -8,7 +8,6 @@
 
 /* header */
 .homeHeader {
-    top: 0px;
     height: var(--header-height);
     background-color: #292929;
     width: 100%;
@@ -25,9 +24,9 @@
 #homeTitle {
     margin: 0;
     color: white;
-    flex-grow: 2;
+    flex-grow: 2;                                   /* move to the left, because bigger than the other elements */
     margin-right: var(--small-margin);
-    font-size: 3ex;
+    font-size: 30px;
 }
 
 /* highContrastMode button*/
@@ -46,27 +45,26 @@
 
 /* body of the page */
 .homeContainer {
-    min-height: 100vh;
+    min-height: 100vh;                                  /* need when too few elements */
     padding-top: var(--header-height);
     display: flex;
     flex-direction: row;
-    height: 100%;
-    box-sizing: border-box;
+    box-sizing: border-box;                             /* takes in count of the padding top */
 }
 
-/* left side of the page, contains the key line */
+/* left side of the page, contains the instructions */
 .keyColumn {
     width: 25%;
     background-color: #2eff46;
-    word-wrap: break-word;
 }
 
 /* right side of the page, contains the table */
 .tableColumn {
     background-color: #ff8a8a;
-    width: 100%; /* fill the rest of the page */
+    width: 100%;                                        /* fill the rest of the page */
 }
 
+/* loading and errorLoading paragraph */
 .loadingParagraph{
     text-align: center;
     font-size: large;
@@ -74,44 +72,38 @@
 
 /* table */
 table {
-    width: 100%; /* fill all the div width */
+    width: 100%;                                        /* fill all the div width */
     background-color: white;
+    border: 1px solid black;
+    border-spacing: 0;
+    text-align: center;
 }
 
-/* X icon */
+/* X icon div */
 .closeIconDiv {
     height: 50px;
     width: 50px;
     float: right;
 }
 
-/* cursor for interactive content*/
+/* cursor for interactive content */
 th:hover {
     cursor: pointer;
 }
 
-/* cursor for modify column header */
-.modifyColumnHeader:hover {
+/* cursor for modify and delete column header */
+.modifyColumnHeader:hover, .deleteColumnHeader:hover {
     cursor: default;
 }
 
 /* alternate color of table rows */
-tbody tr:nth-child(odd) {
+tr:nth-child(odd) {
     background-color: #c4c4c4;
 }
 
-/* style the border of the table and align text to the center */
-table,
-th, td {
-    border: 1px solid black;
-    border-collapse: separate; /* Don't collapse */
-    border-spacing: 0;
-    text-align: center;
-}
-
+/* all the table headers have their own borders for being seen despite the sticky position */
 th {
     border: var(--simple-border);
-    position: -webkit-sticky; /* Safari */
     position: sticky;
     top: var(--header-height);
     background-color: white;
@@ -123,24 +115,17 @@ ul {
     padding-right: var(--small-padding);
 }
 
-/* EditorTd */
+/* openable td */
 .interactableTd {
     background-color: white;
-    text-align: left;
 }
 
-/* EditorTd title */
-#editHeader {
-    text-align: center;
-}
-
-/* form of EditorTD */
+/* form of editor order */
 .homeForm {
     display: block;
     margin: auto;
     width: 60%;
     padding: 0 var(--small-padding) var(--small-padding);
-    box-sizing: border-box;
 }
 
 /* labels div of the form */
@@ -155,22 +140,9 @@ ul {
 
 /* inputs div of the form */
 .formInputs {
-    float: left;
+    float: right;
     width: 50%;
     margin-top: var(--small-margin);
-    box-sizing: border-box;
-}
-
-/* inputs of the from */
-.formInputs > input, .formInputs > select {
-    display: block;
-    padding-left: var(--small-padding);
-    width: 100%;
-    height: var(--form-elements-height);
-    box-sizing: border-box; /* take count of padding and border when setting dimensions */
-    border-radius: var(--border-radius);
-    border: var(--simple-border);
-    box-sizing: border-box;
 }
 
 /* color disabled input as grey */
@@ -178,11 +150,11 @@ ul {
     background-color: #c4c4c4;
 }
 
-/* editorDiv save button */
+/* editor order save button */
 #submitHomeButton {
-    margin-top: var(--small-small-margin);
+    margin-top: var(--small-margin);
     width: 100%;
-    height: 55px;
+    height: var(--big--button-height);
 }
 
 /* title of every div */
@@ -190,18 +162,13 @@ ul {
     padding-left: var(--small-padding);
 }
 
-/* color elementes when focused */
+/* color elementes when focused or hovered */
 li:focus-visible,
 th:focus-visible,
 td:focus-visible,
 input:focus-visible,
 #styleSwitcherHome:focus-visible,
-#homeTitle:focus-visible {
-    background-color: var(--color-on-focus);
-    color: black !important;
-}
-
-/* color elementes when hovered */
+#homeTitle:focus-visible,
 li:hover,
 th:hover,
 td:hover,
@@ -212,22 +179,107 @@ input:hover,
     color: black !important;
 }
 
-/* mantain white background for the details td */
+/* mantain white background for the interactableTd */
 .interactableTd:hover{
     background-color: white;
 }
 
-/* when the screen is to small to see the instructions */
+/* div of the details of the customer or agent */
+.detailsDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--small-margin);                                   /* space gab between the elements of the flexbox */
+    padding: 0 var(--small-padding) var(--small-padding);
+}
+
+/*
+.detailsLabel{
+    width: 40%;
+    border: var(--simple-border);
+    margin: 0 var(--small-margin) var(--small-margin);
+    height: 100%;
+}
+
+.detailsLabelContainer{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    min-height: var(--form-elements-height);
+}
+
+.detailsNameSpan{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #8A00E6;
+    color: white;
+    width: 50%;
+    box-sizing: border-box;
+    padding: var(--small-small-margin);
+}
+
+.detailsDataSpan{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 50%;
+    box-sizing: border-box;
+    padding: var(--small-small-margin);
+}
+*/
+
+/* labels of the details */
+.detailsLabel{
+    width: 45%;                         /* need to be specified here and not in the following class */
+}
+
+/* container of the elements inside the label of the details */
+.detailsLabelContainer{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    min-height: var(--form-elements-height);
+}
+
+/* cummon properties between the classes */
+.detailsNameSpan, .detailsDataSpan{
+    border: var(--simple-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 50%;
+    box-sizing: border-box;
+    padding: var(--small-small-margin);
+}
+
+/* span of the detail names */
+.detailsNameSpan{
+    background-color: #8A00E6;
+    color: white;
+    border-right: none;
+}
+
+/* span of the detail values */
+.detailsDataSpan{
+    border-left: none;
+}
+
+/* 1000px because of screen too small to see the instructions */
 @media only screen and (max-width: 1000px) {
+
     /* manage contents in column order */
     .homeContainer {
         flex-direction: column;
-        box-sizing: border-box;
     }
 
     /* keyColumn takes the entire width space */
     .keyColumn {
-        width: 100%; /* fill the rest of the page */
+        width: 100%;
     }
 
     /* title of the columns moved to center */
@@ -241,76 +293,113 @@ input:hover,
     /* allow to scroll horizontally the table, also no artifacts of the page*/
     .tableColumn {
         overflow-x: auto;
-        flex-grow: 2; /* fill teh rest of the space in height */
+        flex-grow: 2;                   /* fill teh rest of the space in height */
     }
 
     /* th regain default position */
     th {
         position: static;
         top: 0;
-        border-collapse: collapse;
     }
 }
 
-/* when the table doesn't shrink anymore */
+/* 620px because of table doesn't shrink anymore */
 @media only screen and (max-width: 620px) {
-    /* X icon fixed at right side */
+
+    /* X icon div fixed at right side */
     .closeIconDiv {
         position: sticky;
         right: 0;
     }
 
-    /* title of edit div moved to the left */
-    #editHeader {
+    /* titles of interactableTd */
+    .tdTitle {
         text-align: left;
+        padding-left: var(--small-padding);
     }
 
-    /* save button take the whole width */
-    
-    #submitHomeButton {
-        margin-top: var(--small-margin);
-    }
-
+    /* form now takes the whole width */
     .homeForm{
         margin: 0;
         box-sizing: border-box;
         width: 100vw;
     }
     
+    /* all labels and inputs takes the whole width */
     .formLabels, .formInputs{
         width: 100%;
         margin-top: 0;
-        box-sizing: border-box;
+    }
+
+    /* detailsDiv is no more a flexbox */
+    .detailsDiv{
+        display: block;
+    }
+
+    /* all labels will now take a line */
+    .detailsLabel{
+        display: block;
+        margin-top: var(--small-margin);
+    }
+
+    /* change min-heihgt of label containers */
+    .detailsLabelContainer{
+        min-height: 10%;
+    }
+
+    /* homeHeader will now resize according to the viewport width */
+    .homeHeader{
+        height: var(--header-height-responsive);
+    }
+
+    /* homeCointainer padding based on the header height */
+    .homeContainer{
+        padding-top: var(--header-height-responsive);
     }
 }
 
-/* when screen is too small */
+/* 450px because of screen is too small to see the customer or agent details correctly */
 @media only screen and (max-width: 450px) {
+
     /* height and font managed automatically */
-    #styleSwitcherHome,
-    #logoutButton {
+    #logoutButton, #styleSwitcherHome {
         font-size: 3vw;
         height: 60%;
     }
 
-    /* font-size of all h2 */
-    .divTitle {
+    /* font-size of all title headers */
+    .divTitle, .tdTitle {
         font-size: 6vw !important;
     }
 
-    /* font-size of table and list */
-    ul, .formInputs > input, #submitHomeButton{
+    /* font-size of list, formInputs and the save button */
+    ul, .formInputs > input, .formInputs > select, #submitHomeButton{
         font-size: 4vw;
     }
 
+    /* resize formInputs and save button according to the viewport height */
+    .formInputs > input, .formInputs > select, #submitHomeButton{
+        height: var(--inputs-buttons-responsive);
+    }
+
+    /* font-size of table */
     table{
         font-size: 5vw;
     }
 
-    /*
-    .closeIconDiv{
-        height: 50px;
+    /* resize closeIcon */
+    .closeIcon{
+        float: right;
+        height: auto;
         width: 10vw;
     }
-    */
+}
+
+/* 260px because of the highContrastMode button's text to be too long to stay inside the button */
+@media only screen and (max-width: 260px){
+
+    /* font-size of highContrastMode button */
+    #styleSwitcherHome{
+        font-size: 2vw;
+    }
 }

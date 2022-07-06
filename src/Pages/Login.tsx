@@ -50,9 +50,8 @@ function Login(props: {
         <HighContrastModeButton id="styleSwitcherLogin" highContrastMode={props.highContrastMode} setHighContrastMode={props.setHighContrastMode}/>
       </header>
 
-      <main>
-        {/* LOGIN BODY */}
-        <div className="loginBody">
+      {/* LOGIN HEADER */}
+      <main className="loginBody">
           {/* login Box */}
           <div
             className="loginBox"
@@ -75,7 +74,7 @@ function Login(props: {
               <br />
               <input
                 tabIndex={0}
-                className="marginBottom inputLogin elementHoverFocus"
+                className="marginBottom customInput elementHoverFocus"
                 type="text"
                 id="usernameInput"
                 name="usernameInput"
@@ -96,7 +95,7 @@ function Login(props: {
               <br />
               <input
                 tabIndex={0}
-                className="inputLogin elementHoverFocus"
+                className="customInput elementHoverFocus"
                 type="password"
                 id="passwordInput"
                 name="passwordInput"
@@ -111,7 +110,7 @@ function Login(props: {
               <button
                 type="submit"
                 id="submitLoginButton"
-                className="buttons logButton"
+                className="logButton"
                 tabIndex={0}
               >
                 <strong>Log in</strong>
@@ -127,7 +126,6 @@ function Login(props: {
               )}
             </form>
           </div>
-        </div>
       </main>
     </div>
   );

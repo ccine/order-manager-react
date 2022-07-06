@@ -18,7 +18,7 @@ function OrderTable(props: { username: string; role: Role }) {
   const focusRef = useRef<HTMLDivElement>(null); // Reference to opened details row
 
   /**
-   * If the reference has changed then a datails row has been opened, focus on the opened row
+   * If the reference has changed then a details row has been opened, focus on the opened row
    */
   useEffect(() => {
     if (focusRef.current) focusRef.current.focus();
@@ -114,7 +114,7 @@ function OrderTable(props: { username: string; role: Role }) {
    * @param key The key that represent the column data
    * @returns Return the icon element if the passed column is focused (the icon depends if is ascendent or descender order), null if it is not.
    */
-  function showArrow(key: string) {
+  function showArrow(key: keyof Order) {
     return order?.key === key ? (
       order.asc ? (
         <IoCaretUp aria-label="ascending order" />
@@ -213,6 +213,7 @@ function OrderTable(props: { username: string; role: Role }) {
               >
                 <IoCloseSharp
                   aria-label="close icon"
+                  className="closeIcon"
                   size={closeIconSize}
                 />
               </div>
@@ -233,6 +234,7 @@ function OrderTable(props: { username: string; role: Role }) {
               >
                 <IoCloseSharp
                   aria-label="close icon"
+                  className="closeIcon"
                   size={closeIconSize}
                 />
               </div>
@@ -253,6 +255,7 @@ function OrderTable(props: { username: string; role: Role }) {
               >
                 <IoCloseSharp
                   aria-label="close icon"
+                  className="closeIcon"
                   size={closeIconSize}
                 />
               </div>
