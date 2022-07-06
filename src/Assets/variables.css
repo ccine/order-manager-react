@@ -13,6 +13,7 @@
     --header-height-responsive: 15vw;
     --inputs-buttons-responsive: 15vw;
     --form-elements-height: 42px;
+    --login-size: 400px;
     --color-on-focus: #FBFF00;
     --log-button-color: #0074C2;
 }
@@ -38,7 +39,7 @@
     padding-left: var(--small-padding);
     width: 100%;
     height: var(--form-elements-height);
-    box-sizing: border-box;                     /* take count of padding and border when setting dimensions */
+    box-sizing: border-box;                                     /* take count of padding and border when setting dimensions */
     border-radius: var(--border-radius);
     border: var(--simple-border);
 }
