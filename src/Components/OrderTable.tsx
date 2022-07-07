@@ -1,6 +1,12 @@
 import React, { useRef, useState } from "react";
 import "../Assets/Home.css";
-import { IoCaretUp, IoCaretDown, IoCloseSharp } from "react-icons/io5";
+import {
+  IoCaretUp,
+  IoCaretDown,
+  IoCloseSharp,
+  IoChevronDownSharp,
+  IoChevronUpSharp
+} from "react-icons/io5";
 import { useMutation, useQuery } from "@apollo/client";
 import { Order, Role } from "../types";
 import AgentDetailsRow from "./AgentDetailsRow";
@@ -155,6 +161,8 @@ function OrderTable(props: { username: string; role: Role }) {
               onKeyDown={handleSpacePressed}
             >
               {props.element.custCode.custCode}
+              {(viewDetails.id !== props.element.ordNum || !viewDetails.customer) && <IoChevronDownSharp />}
+              {viewDetails.id === props.element.ordNum && viewDetails.customer && <IoChevronUpSharp />}
             </td>
           )}
           {props.role !== "agent" && (
@@ -167,6 +175,8 @@ function OrderTable(props: { username: string; role: Role }) {
               onKeyDown={handleSpacePressed}
             >
               {props.element.agentCode.agentCode}
+              {(viewDetails.id !== props.element.ordNum || !viewDetails.agent) && <IoChevronDownSharp />}
+              {viewDetails.id === props.element.ordNum && viewDetails.agent && <IoChevronUpSharp />}
             </td>
           )}
           <td tabIndex={0}>{props.element.ordDescription}</td>
@@ -187,7 +197,11 @@ function OrderTable(props: { username: string; role: Role }) {
               tabIndex={0}
               className="handPointer"
               onClick={() => {
-                if (window.confirm(`Delete order number: ${props.element.ordNum}?`))
+                if (
+                  window.confirm(
+                    `Delete order number: ${props.element.ordNum}?`
+                  )
+                )
                   deleteOrder({
                     variables: { ordNum: props.element.ordNum },
                   }).then(() => refetch());
