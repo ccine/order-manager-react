@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { UPDATE_ORDER } from "../Graphql/mutation";
 import { GET_ALL_CUSTOMERS, GET_CUSTOMERS_BY_AGENT } from "../Graphql/query";
-import { Customer, Order, OrderInput } from "../types";
+import { Customer, Order } from "../types";
 
 function OrderEditRow(props: {
   order: Order;
@@ -17,19 +17,7 @@ function OrderEditRow(props: {
     }
   );
 
-  const [order, setOrder] = useState<OrderInput>({
-    ...props.order,
-    agentCode: props.order.agentCode.agentCode,
-    custCode: props.order.custCode.custCode,
-  });
-
-  useEffect(() => {
-    setOrder({
-      ...props.order,
-      agentCode: props.order.agentCode.agentCode,
-      custCode: props.order.custCode.custCode,
-    });
-  }, [props.order]);
+  const [newAgent, setNewAgent] = useState<string>();
 
   /**
    * Save the order with modified data and refetch all the data
@@ -37,16 +25,17 @@ function OrderEditRow(props: {
    */
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    let formData = new FormData(event.currentTarget);
     let orderInput = {
-      ordAmount: order.ordAmount,
-      advanceAmount: order.advanceAmount,
-      ordDate: order.ordDate,
-      custCode: order.custCode,
-      agentCode: order.agentCode,
-      ordDescription: order.ordDescription,
+      ordAmount: formData.get("inputOrdAmount"),
+      advanceAmount: formData.get("inputAdvanceAmount"),
+      ordDate: formData.get("inputOrdDate"),
+      custCode: formData.get("inputCustCode"),
+      agentCode: newAgent || props.order.agentCode.agentCode,
+      ordDescription: formData.get("inputOrderDescription"),
     };
     updateOrder({
-      variables: { ordNum: order.ordNum, order: orderInput },
+      variables: { ordNum: props.order.ordNum, order: orderInput },
     }).then(() => props.reloadData());
   }
 
@@ -64,7 +53,7 @@ function OrderEditRow(props: {
             <input
               id="inputOrdNum"
               className="customInput"
-              value={order.ordNum}
+              value={props.order.ordNum}
               tabIndex={0}
               disabled
             />
@@ -78,12 +67,10 @@ function OrderEditRow(props: {
           <div className="formInputs">
             <input
               id="inputOrdAmount"
+              name="inputOrdAmount"
               className="customInput"
-              value={order.ordAmount}
+              defaultValue={props.order.ordAmount}
               tabIndex={0}
-              onChange={(event) => {
-                setOrder({ ...order, ordAmount: parseInt(event.target.value) });
-              }}
             />
           </div>
         </div>
@@ -95,15 +82,10 @@ function OrderEditRow(props: {
           <div className="formInputs">
             <input
               id="inputAdvanceAmount"
+              name="inputAdvanceAmount"
               className="customInput"
-              value={order.advanceAmount}
+              defaultValue={props.order.advanceAmount}
               tabIndex={0}
-              onChange={(event) => {
-                setOrder({
-                  ...order,
-                  advanceAmount: parseInt(event.target.value),
-                });
-              }}
             />
           </div>
         </div>
@@ -115,12 +97,10 @@ function OrderEditRow(props: {
           <div className="formInputs">
             <input
               id="inputOrdDate"
+              name="inputOrdDate"
               className="customInput"
-              value={order.ordDate}
+              defaultValue={props.order.ordDate}
               tabIndex={0}
-              onChange={(event) => {
-                setOrder({ ...order, ordDate: event.target.value });
-              }}
             />
           </div>
         </div>
@@ -133,13 +113,11 @@ function OrderEditRow(props: {
             <div className="formInputs">
               <select
                 id="inputCustCode"
+                name="inputCustCode"
                 className="elementHoverFocus customInput"
                 tabIndex={0}
                 required
-                defaultValue={order.custCode}
-                onChange={(event) => {
-                  setOrder({ ...order, custCode: event.target.value });
-                }}
+                defaultValue={props.order.custCode.custCode}
               >
                 {data.getCustomersByAgent.map((element: Customer) => (
                   <option key={element.custCode} value={element.custCode}>
@@ -159,20 +137,17 @@ function OrderEditRow(props: {
             <div className="formInputs">
               <select
                 id="inputCustCode"
+                name="inputCustCode"
                 className="elementHoverFocus customInput"
                 tabIndex={0}
                 required
-                defaultValue={order.custCode}
+                defaultValue={props.order.custCode.custCode}
                 onChange={(event) => {
                   let newCustCode = event.target.value;
                   let newAgentCode = data.getAllCustomers.find(
                     (c: { custCode: string }) => c.custCode === newCustCode
                   ).agentCode.agentCode;
-                  setOrder({
-                    ...order,
-                    custCode: newCustCode,
-                    agentCode: newAgentCode,
-                  });
+                  setNewAgent(newAgentCode);
                 }}
               >
                 {data.getAllCustomers.map((element: Customer) => (
@@ -192,8 +167,9 @@ function OrderEditRow(props: {
           <div className="formInputs">
             <input
               id="inputAgentCode"
+              name="inputAgentCode"
               className="customInput"
-              value={order.agentCode}
+              value={newAgent || props.order.agentCode.agentCode}
               tabIndex={0}
               disabled
             />
@@ -207,12 +183,10 @@ function OrderEditRow(props: {
           <div className="formInputs">
             <input
               id="inputOrderDescription"
+              name="inputOrderDescription"
               className="customInput"
-              value={order.ordDescription}
+              defaultValue={props.order.ordDescription}
               tabIndex={0}
-              onChange={(event) => {
-                setOrder({ ...order, ordDescription: event.target.value });
-              }}
             />
           </div>
         </div>

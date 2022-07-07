@@ -32,14 +32,4 @@ export type Order = {
   ordDescription: string;
 };
 
-export type OrderInput = {
-  ordNum: number;
-  ordAmount: number;
-  advanceAmount: number;
-  ordDate: string;
-  custCode: string;
-  agentCode: string;
-  ordDescription: string;
-};
-
 export type Role = "manager" | "agent" | "customer";
