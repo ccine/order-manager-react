@@ -3,7 +3,7 @@ import { ORDER_FIELDS } from "./fragments";
 
 export const UPDATE_ORDER = gql`
   ${ORDER_FIELDS}
-  mutation updateOrder($ordNum: ID!, $order: orderInput!) {
+  mutation updateOrder($ordNum: Int!, $order: orderInput!) {
     updateOrder(ordNum: $ordNum, order: $order) {
       ordNum
       ...OrderFields
@@ -15,7 +15,7 @@ export const UPDATE_ORDER = gql`
 `;
 
 export const DELETE_ORDER = gql`
-  mutation deleteOrder($ordNum: ID!) {
+  mutation deleteOrder($ordNum: Int!) {
     deleteOrder(ordNum: $ordNum)
   }
 `;
