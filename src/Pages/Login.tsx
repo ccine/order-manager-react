@@ -67,7 +67,6 @@ function Login(props: {
               <label
                 htmlFor="usernameInput"
                 className="labelLogin elementHoverFocus"
-                tabIndex={0}
               >
                 Username:
               </label>
@@ -88,7 +87,6 @@ function Login(props: {
               <label
                 htmlFor="passwordInput"
                 className="labelLogin elementHoverFocus"
-                tabIndex={0}
               >
                 Password:
               </label>
