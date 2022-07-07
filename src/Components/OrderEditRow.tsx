@@ -69,6 +69,8 @@ function OrderEditRow(props: {
               id="inputOrdAmount"
               name="inputOrdAmount"
               className="customInput"
+              type="number"
+              step="0.01"
               defaultValue={props.order.ordAmount}
               tabIndex={0}
             />
@@ -84,6 +86,8 @@ function OrderEditRow(props: {
               id="inputAdvanceAmount"
               name="inputAdvanceAmount"
               className="customInput"
+              type="number"
+              step="0.01"
               defaultValue={props.order.advanceAmount}
               tabIndex={0}
             />
@@ -99,6 +103,7 @@ function OrderEditRow(props: {
               id="inputOrdDate"
               name="inputOrdDate"
               className="customInput"
+              type="date"
               defaultValue={props.order.ordDate}
               tabIndex={0}
             />
@@ -185,6 +190,7 @@ function OrderEditRow(props: {
               id="inputOrderDescription"
               name="inputOrderDescription"
               className="customInput"
+              type="text"
               defaultValue={props.order.ordDescription}
               tabIndex={0}
             />
