@@ -79,7 +79,6 @@
     font-size: large;
 }
 
-/* CHECK */
 /* css class for setting margin-bottom 10px */
 .marginBottom {
     margin-bottom: var(--small-margin);

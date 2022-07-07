@@ -161,8 +161,8 @@ function OrderTable(props: { username: string; role: Role }) {
               onKeyDown={handleSpacePressed}
             >
               {props.element.custCode.custCode}
-              {(viewDetails.id !== props.element.ordNum || !viewDetails.customer) && <IoChevronDownSharp />}
-              {viewDetails.id === props.element.ordNum && viewDetails.customer && <IoChevronUpSharp />}
+              {(viewDetails.id !== props.element.ordNum || !viewDetails.customer) && <IoChevronDownSharp aria-label="down arrow"/>}
+              {viewDetails.id === props.element.ordNum && viewDetails.customer && <IoChevronUpSharp aria-label="up arrow"/>}
             </td>
           )}
           {props.role !== "agent" && (
@@ -175,8 +175,8 @@ function OrderTable(props: { username: string; role: Role }) {
               onKeyDown={handleSpacePressed}
             >
               {props.element.agentCode.agentCode}
-              {(viewDetails.id !== props.element.ordNum || !viewDetails.agent) && <IoChevronDownSharp />}
-              {viewDetails.id === props.element.ordNum && viewDetails.agent && <IoChevronUpSharp />}
+              {(viewDetails.id !== props.element.ordNum || !viewDetails.agent) && <IoChevronDownSharp aria-label="down arrow"/>}
+              {viewDetails.id === props.element.ordNum && viewDetails.agent && <IoChevronUpSharp aria-label="up arrow"/>}
             </td>
           )}
           <td tabIndex={0}>{props.element.ordDescription}</td>

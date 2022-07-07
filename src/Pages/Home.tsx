@@ -65,10 +65,13 @@ function Home(props: {
                 is Order number.
               </li>
               <li tabIndex={0}>
-                Each agent and customer cell can be clicked. This will add a row
+                Each agent cell can be clicked. This will add a row
                 to the table, that will take all the columns, in which you will
-                see the information about the customer or agent pressed. This
-                new row can be closed by pressing the close icon.
+                see the information about the agent pressed. This
+                new row can be closed by pressing the close icon. Near each
+                customer code there is an arrow icon which points down when the details
+                are hidden, it instead points up when the details of the corresponding agent is
+                showing
               </li>
               <li tabIndex={0}>
                 Click the logout button to exit from this page.
