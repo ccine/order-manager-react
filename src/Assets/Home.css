@@ -154,7 +154,7 @@ ul {
 #submitHomeButton {
     margin-top: var(--small-margin);
     width: 100%;
-    height: var(--big--button-height);
+    height: var(--big-button-height);
 }
 
 /* title of every div */
@@ -193,44 +193,6 @@ input:hover,
     gap: var(--small-margin);                                   /* space gab between the elements of the flexbox */
     padding: 0 var(--small-padding) var(--small-padding);
 }
-
-/*
-.detailsLabel{
-    width: 40%;
-    border: var(--simple-border);
-    margin: 0 var(--small-margin) var(--small-margin);
-    height: 100%;
-}
-
-.detailsLabelContainer{
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    min-height: var(--form-elements-height);
-}
-
-.detailsNameSpan{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background-color: #8A00E6;
-    color: white;
-    width: 50%;
-    box-sizing: border-box;
-    padding: var(--small-small-margin);
-}
-
-.detailsDataSpan{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    width: 50%;
-    box-sizing: border-box;
-    padding: var(--small-small-margin);
-}
-*/
 
 /* labels of the details */
 .detailsLabel{

@@ -6,18 +6,6 @@ function AgentDetailsRow(props: { agent: Agent }) {
             <h2 className="tdTitle elementHoverFocus" tabIndex={0}>
                 Agent Details
             </h2>
-            {/*
-              <ul>
-                <li tabIndex={0}>Code: {props.agent.agentCode}</li>
-                <li tabIndex={0}>Name: {props.agent.agentName}</li>
-                <li tabIndex={0}>
-                  Commission: {props.agent.commission}
-                </li>
-                <li tabIndex={0}>Country: {props.agent.country}</li>
-                <li tabIndex={0}>Phone Number: {props.agent.phoneNo}</li>
-                <li tabIndex={0}>Working Area: {props.agent.workingArea}</li>
-              </ul>
-      */}
 
             <div className="detailsDiv">
                 <label tabIndex={0} className="detailsLabel elementHoverFocus">

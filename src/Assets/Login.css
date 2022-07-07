@@ -58,7 +58,7 @@
 /* login button */
 #submitLoginButton{
     width: 100%;
-    height: var(--big--button-height);
+    height: var(--big-button-height);
 }
 
 /* error div */
