@@ -163,12 +163,12 @@ ul {
 }
 
 /* color elementes when focused or hovered */
-li:focus-visible,
-th:focus-visible,
-td:focus-visible,
-input:focus-visible,
-#styleSwitcherHome:focus-visible,
-#homeTitle:focus-visible,
+li:focus,
+th:focus,
+td:focus,
+input:focus,
+#styleSwitcherHome:focus,
+#homeTitle:focus,
 li:hover,
 th:hover,
 td:hover,

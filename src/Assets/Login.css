@@ -90,7 +90,7 @@
 }
 
 /* color text of error and Hihg Contrast button when hovered or focused */
-.error:focus-visible, .error:hover, #styleSwitcherLogin:focus-visible, #styleSwitcherLogin:hover{
+.error:focus, .error:hover, #styleSwitcherLogin:focus, #styleSwitcherLogin:hover{
     color: var(--color-on-focus) !important;
 }
 

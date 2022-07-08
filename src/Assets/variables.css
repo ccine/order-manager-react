@@ -45,12 +45,12 @@
 }
 
 /* logButton colors its text when on hover or focused */
-.logButton:focus-visible, .logButton:hover{
+.logButton:focus, .logButton:hover{
     color: var(--color-on-focus) !important;
 }
 
 /* class for coloring the element when on hover or focused */
-.elementHoverFocus:focus-visible, .elementHoverFocus:hover{
+.elementHoverFocus:focus, .elementHoverFocus:hover{
     background-color: var(--color-on-focus);
 }
 
